@@ -14,6 +14,6 @@ public class MainWindow extends JFrame {
 
     private void initGUI() {
         JPanel mainPanel = new JPanel(new BorderLayout());
-
+        //TODO
     }
 }
