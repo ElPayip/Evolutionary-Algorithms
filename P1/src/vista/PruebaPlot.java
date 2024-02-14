@@ -1,3 +1,6 @@
+package vista;
+
+import javax.swing.JFrame;
 
 public class PruebaPlot {
 	public static void main(String[] args) {

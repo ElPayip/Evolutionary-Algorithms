@@ -3,43 +3,57 @@ package modelo;
 import java.util.List;
 
 import modelo.cruce.Cruce;
+import modelo.fitness.Fitness;
 import modelo.seleccion.Seleccion;
 
 public abstract class AlgGenetico<T> {
 
-	private List<Individuo<T>> poblacion;
-	private Cruce cruce;
-	private Seleccion seleccion;
+	protected List<Individuo<T>> poblacion;
+	protected Individuo<T> mejor;
+	protected Cruce<T> cruce;
+	protected Seleccion<T> seleccion;
+	protected Fitness<T> fitness;
+	
+	private int nGeneraciones;
 	
 	public AlgGenetico() {
-		setParametros();
-	}
-	
-	public void setParametros() {
-		
+		reset();
 	}
 	
 	public void reset() {
 		
 	}
 	
+	public Individuo<T> ejecutar() {
+		initPoblacion();
+		evaluar();
+		for (int i = 0; i < nGeneraciones; ++i)
+			ejecutarGeneracion();
+		return mejor;
+	}
+	
 	private void ejecutarGeneracion() {
-		
+		seleccionar();
+		cruzar();
+		mutar();
+		evaluar();
 	}
 	
-	private void seleccionar() {
-		
+	protected abstract void initPoblacion();
+	
+	protected void seleccionar() {
+		seleccion.seleccionar(poblacion);
 	}
 	
-	private void cruzar() {
-		
+	protected void cruzar() {
+		cruce.cruzar(poblacion);
 	}
 	
-	private void mutar() {
-		
-	}
+	protected abstract void mutar();
 	
-	private void evaluar() {
-		
+	protected void evaluar() {
+		for (Individuo<T> i : poblacion) {
+			fitness.eval(i);
+		}
 	}
 }
