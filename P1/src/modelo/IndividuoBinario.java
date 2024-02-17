@@ -3,10 +3,12 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.cruce.Cruce;
 import modelo.genes.Gen;
 import modelo.genes.GenBinario;
+import utils.Pair;
 
-public abstract class IndividuoBinario<T> extends Individuo<T> {
+public class IndividuoBinario<T> extends Individuo<T> {
 
 	public IndividuoBinario(T[] mins, T[] maxs, T[] precs) {
 		super(mins, maxs, precs);
@@ -27,12 +29,23 @@ public abstract class IndividuoBinario<T> extends Individuo<T> {
 		
 	}
 
-	@SuppressWarnings("unchecked")
 	protected List<Boolean> getCromosomaBinario() {
 		List<Boolean> alelos = new ArrayList<>();
 		for (Gen<T> g : cromosoma) {
-			alelos.addAll(((GenBinario<Boolean>) g).getGenotipo());
+			alelos.addAll(((GenBinario<T>) g).getGenotipo());
 		}
 		return alelos;
+	}
+
+	@Override
+	public T getRandomValue(T min, T max, T precision) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Pair<Individuo<T>, Individuo<T>> cruzar(Individuo<T> otro, Cruce<? extends Gen<T>> cruce) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
