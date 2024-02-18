@@ -11,8 +11,8 @@ import utils.Pair;
 
 public class IndividuoBinario<T> extends Individuo<T,Integer> {
 
-	public IndividuoBinario(T[] mins, T[] maxs, T[] precs) {
-		super(mins, maxs, precs);
+	public IndividuoBinario(T[] mins, T[] maxs, T prec) {
+		super(mins, maxs, prec);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -33,7 +33,7 @@ public class IndividuoBinario<T> extends Individuo<T,Integer> {
 	}
 
 	@Override
-	public T getRandomValue(T min, T max, T precision) {
+	protected T getRandomValue(T min, T max, T precision) {
 		// TODO Auto-generated method stub
 		return null;
 	}

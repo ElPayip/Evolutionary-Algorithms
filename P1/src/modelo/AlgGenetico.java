@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
@@ -21,19 +22,21 @@ public abstract class AlgGenetico<T,C> {
 	protected Mutacion<C> mutacion;
 	
 	protected int nGeneraciones;
+	protected int tamPoblacion;
 	protected double probCruce;
 	protected double probMutacion;
 	
 	protected Random rand;
 	
 	public AlgGenetico(Cruce<C> cruce, Seleccion seleccion, Fitness<T> fitness, Mutacion<C> mutacion,
-			int nGeneraciones, double probCruce, double probMutacion) {
+			int nGeneraciones, int tamPoblacion, double probCruce, double probMutacion) {
 		this.cruce = cruce;
 		this.seleccion = seleccion;
 		this.fitness = fitness;
 		this.mutacion = mutacion;
 		
 		this.nGeneraciones = nGeneraciones;
+		this.tamPoblacion = tamPoblacion;
 		this.probCruce = probCruce;
 		this.probMutacion = probMutacion;
 		
@@ -78,9 +81,11 @@ public abstract class AlgGenetico<T,C> {
 		poblacion.sort(new Comparator<Individuo<T,C>>() {
 			@Override
 			public int compare(Individuo<T,C> o1, Individuo<T,C> o2) {
-				return Double.compare(o1.getFitness(), o2.getFitness());
+				return Double.compare(o2.getFitness(), o1.getFitness());
 			}
 		});
+		if (mejor == null || mejor.getFitness() < poblacion.get(0).getFitness())
+			mejor = poblacion.get(0);
 	}
 	
 	protected void mutar() {
@@ -89,5 +94,11 @@ public abstract class AlgGenetico<T,C> {
 				ind.muta(mutacion);
 	}
 	
-	protected abstract void initPoblacion();
+	protected void initPoblacion() {
+		poblacion = new ArrayList<>();
+		for (int i = 0; i < tamPoblacion; ++i)
+			poblacion.add(generarIndividuo());
+	}
+	
+	protected abstract Individuo<T,C> generarIndividuo();
 }

@@ -18,14 +18,14 @@ public abstract class Individuo<T,C> {
 		this.cromosoma = cromosoma;
 	}
 	
-	public Individuo(T[] mins, T[] maxs, T[] precs) {
-		if (mins.length != maxs.length || maxs.length != precs.length){
+	public Individuo(T[] mins, T[] maxs, T prec) {
+		if (mins.length != maxs.length){
 			throw new IllegalArgumentException("Longitud incorrecta");
 		}
 		cromosoma = new ArrayList<>();
 		for (int i = 0; i < mins.length; ++i)
-			cromosoma.add(new Gen<T>(getRandomValue(mins[i], maxs[i], precs[i]), 
-									 mins[i], maxs[i], precs[i]));
+			cromosoma.add(new Gen<T>(getRandomValue(mins[i], maxs[i], prec), 
+									 mins[i], maxs[i], prec));
 	}
 	
 	public double getFitness() {
@@ -43,5 +43,5 @@ public abstract class Individuo<T,C> {
 	
 	public abstract List<T> getValores();
 	
-	public abstract T getRandomValue(T min, T max, T precision);
+	protected abstract T getRandomValue(T min, T max, T precision);
 }
