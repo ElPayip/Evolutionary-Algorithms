@@ -1,59 +1,93 @@
 package modelo;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 import modelo.cruce.Cruce;
 import modelo.fitness.Fitness;
+import modelo.individuo.Individuo;
+import modelo.mutacion.Mutacion;
 import modelo.seleccion.Seleccion;
+import utils.Pair;
 
-public abstract class AlgGenetico<T> {
+public abstract class AlgGenetico<T,C> {
 
-	protected List<Individuo<T>> poblacion;
-	protected Individuo<T> mejor;
-	protected Cruce<T> cruce;
-	protected Seleccion<T> seleccion;
+	protected List<Individuo<T,C>> poblacion;
+	protected Individuo<T,C> mejor;
+	protected Cruce<C> cruce;
+	protected Seleccion seleccion;
 	protected Fitness<T> fitness;
+	protected Mutacion<C> mutacion;
 	
-	private int nGeneraciones;
+	protected int nGeneraciones;
+	protected double probCruce;
+	protected double probMutacion;
 	
-	public AlgGenetico() {
-		reset();
-	}
+	protected Random rand;
 	
-	public void reset() {
+	public AlgGenetico(Cruce<C> cruce, Seleccion seleccion, Fitness<T> fitness, Mutacion<C> mutacion,
+			int nGeneraciones, double probCruce, double probMutacion) {
+		this.cruce = cruce;
+		this.seleccion = seleccion;
+		this.fitness = fitness;
+		this.mutacion = mutacion;
 		
+		this.nGeneraciones = nGeneraciones;
+		this.probCruce = probCruce;
+		this.probMutacion = probMutacion;
+		
+		rand = new Random();
 	}
 	
-	public Individuo<T> ejecutar() {
+	public Individuo<T,C> ejecutar() {
 		initPoblacion();
 		evaluar();
 		for (int i = 0; i < nGeneraciones; ++i)
-			ejecutarGeneracion();
+			seleccionar();
+			cruzar();
+			mutar();
+			evaluar();
 		return mejor;
 	}
-	
-	private void ejecutarGeneracion() {
-		seleccionar();
-		cruzar();
-		mutar();
-		evaluar();
-	}
-	
-	protected abstract void initPoblacion();
 	
 	protected void seleccionar() {
 		seleccion.seleccionar(poblacion);
 	}
 	
 	protected void cruzar() {
-		cruce.cruzar(poblacion);
+		int pareja = -1;
+		for (int i = 0; i < poblacion.size(); ++i)
+			if (rand.nextDouble() < probCruce) {
+				
+				if (pareja < 0)
+					pareja = i;
+				else {	// Reemplazo de progenitores
+					Pair<Individuo<T,C>,Individuo<T,C>> hijos = poblacion.get(pareja).cruzar(poblacion.get(i), cruce);
+					poblacion.set(pareja, hijos.getFirst());
+					poblacion.set(i, hijos.getSecond());
+					pareja = -1;
+				}
+			}
 	}
-	
-	protected abstract void mutar();
 	
 	protected void evaluar() {
-		for (Individuo<T> i : poblacion) {
+		for (Individuo<T,C> i : poblacion)
 			fitness.eval(i);
-		}
+		
+		poblacion.sort(new Comparator<Individuo<T,C>>() {
+			@Override
+			public int compare(Individuo<T,C> o1, Individuo<T,C> o2) {
+				return Double.compare(o1.getFitness(), o2.getFitness());
+			}
+		});
 	}
+	
+	protected void mutar() {
+		for (Individuo<T,C> ind : poblacion)
+			if (rand.nextDouble() < probMutacion)
+				ind.muta(mutacion);
+	}
+	
+	protected abstract void initPoblacion();
 }

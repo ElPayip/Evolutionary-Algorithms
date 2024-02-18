@@ -1,4 +1,4 @@
-package modelo;
+package modelo.individuo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,10 @@ import java.util.List;
 import modelo.cruce.Cruce;
 import modelo.genes.Gen;
 import modelo.genes.GenBinario;
+import modelo.mutacion.Mutacion;
 import utils.Pair;
 
-public class IndividuoBinario<T> extends Individuo<T> {
+public class IndividuoBinario<T> extends Individuo<T,Integer> {
 
 	public IndividuoBinario(T[] mins, T[] maxs, T[] precs) {
 		super(mins, maxs, precs);
@@ -23,14 +24,8 @@ public class IndividuoBinario<T> extends Individuo<T> {
 		return null;
 	}
 
-	@Override
-	public void muta() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	protected List<Boolean> getCromosomaBinario() {
-		List<Boolean> alelos = new ArrayList<>();
+	protected List<Integer> getCromosomaBinario() {
+		List<Integer> alelos = new ArrayList<>();
 		for (Gen<T> g : cromosoma) {
 			alelos.addAll(((GenBinario<T>) g).getGenotipo());
 		}
@@ -44,8 +39,14 @@ public class IndividuoBinario<T> extends Individuo<T> {
 	}
 
 	@Override
-	public Pair<Individuo<T>, Individuo<T>> cruzar(Individuo<T> otro, Cruce<? extends Gen<T>> cruce) {
+	public Pair<Individuo<T,Integer>, Individuo<T,Integer>> cruzar(Individuo<T,Integer> otro, Cruce<Integer> cruce) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void muta(Mutacion<Integer> mutacion) {
+		// TODO Auto-generated method stub
+		
 	}
 }

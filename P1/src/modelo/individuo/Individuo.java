@@ -1,4 +1,4 @@
-package modelo;
+package modelo.individuo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,10 @@ import java.util.List;
 import modelo.cruce.Cruce;
 import modelo.fitness.Fitness;
 import modelo.genes.Gen;
+import modelo.mutacion.Mutacion;
 import utils.Pair;
 
-public abstract class Individuo<T> {
+public abstract class Individuo<T,C> {
 	
 	protected List<Gen<T>> cromosoma;
 	protected double fitness=-1;
@@ -27,12 +28,6 @@ public abstract class Individuo<T> {
 									 mins[i], maxs[i], precs[i]));
 	}
 	
-	public abstract List<T> getValores();
-	
-	public abstract void muta();
-	
-	public abstract T getRandomValue(T min, T max, T precision);
-	
 	public double getFitness() {
 		return fitness;
 	}
@@ -42,5 +37,11 @@ public abstract class Individuo<T> {
 		return fitness;
 	}
 	
-	public abstract Pair<Individuo<T>,Individuo<T>> cruzar(Individuo<T> otro, Cruce<? extends Gen<T>> cruce);
+	public abstract Pair<Individuo<T,C>,Individuo<T,C>> cruzar(Individuo<T,C> otro, Cruce<C> cruce);
+	
+	public abstract void muta(Mutacion<C> mutacion);
+	
+	public abstract List<T> getValores();
+	
+	public abstract T getRandomValue(T min, T max, T precision);
 }

@@ -2,9 +2,9 @@ package modelo.seleccion;
 
 import java.util.List;
 
-import modelo.Individuo;
+import modelo.individuo.Individuo;
 
 public interface Seleccion {
 	
-	public <T> List<Individuo<T>> seleccionar(List<Individuo<T>> individuos);
+	public <T,C> List<Individuo<T,C>> seleccionar(List<Individuo<T,C>> individuos);
 }

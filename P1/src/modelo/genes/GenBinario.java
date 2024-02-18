@@ -4,13 +4,13 @@ import java.util.List;
 
 public abstract class GenBinario<T> extends Gen<T> {
 	
-	private List<Boolean> alelos;
+	private List<Integer> alelos;
 	
 	public GenBinario(T inicial, T min, T max, T precision) {
 		super(inicial, min, max, precision);
 	}
 
-	public List<Boolean> getGenotipo() {
+	public List<Integer> getGenotipo() {
 		return alelos;
 	}
 
