@@ -4,6 +4,7 @@ import java.util.List;
 
 import modelo.Individuo;
 
-public interface Seleccion<T> {
-	public void seleccionar(List<Individuo<T>> individuos);
+public interface Seleccion {
+	
+	public <T> List<Individuo<T>> seleccionar(List<Individuo<T>> individuos);
 }
