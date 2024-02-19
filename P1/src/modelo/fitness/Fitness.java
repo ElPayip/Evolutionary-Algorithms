@@ -4,5 +4,5 @@ import modelo.individuo.Individuo;
 
 public interface Fitness<T> {
 	
-	public double eval(Individuo<T,?> ind);
+	public double eval(Individuo<T> ind);
 }

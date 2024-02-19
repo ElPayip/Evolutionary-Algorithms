@@ -2,7 +2,9 @@ package modelo.mutacion;
 
 import java.util.List;
 
-public interface Mutacion<T> {
+import modelo.genes.Gen;
 
-	public List<T> mutar(List<T> crom);
+public interface Mutacion {
+
+	public <T> void mutar(List<? extends Gen<T>> crom);
 }

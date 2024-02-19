@@ -3,7 +3,7 @@ package modelo;
 import modelo.cruce.Cruce;
 import modelo.fitness.FitCalibracionPrueba;
 import modelo.individuo.Individuo;
-import modelo.individuo.IndividuoBinario;
+import modelo.individuo.IndividuoBinarioReal;
 import modelo.mutacion.MutacionBinaria;
 import modelo.seleccion.Seleccion;
 
@@ -25,6 +25,6 @@ public class CalibracionYPrueba extends AlgGenetico<Double,Integer> {
 	protected Individuo<Double, Integer> generarIndividuo() {
 		Double[] maxs = {MAX,MAX};
 		Double[] mins = {MIN,MIN};
-		return new IndividuoBinario<Double>(maxs, mins, prec);
+		return new IndividuoBinarioReal<Double>(maxs, mins, prec);
 	}
 }

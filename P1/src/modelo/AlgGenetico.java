@@ -12,14 +12,14 @@ import modelo.mutacion.Mutacion;
 import modelo.seleccion.Seleccion;
 import utils.Pair;
 
-public abstract class AlgGenetico<T,C> {
+public abstract class AlgGenetico<T> {
 
-	protected List<Individuo<T,C>> poblacion;
-	protected Individuo<T,C> mejor;
-	protected Cruce<C> cruce;
+	protected List<Individuo<T>> poblacion;
+	protected Individuo<T> mejor;
+	protected Cruce<T> cruce;
 	protected Seleccion seleccion;
 	protected Fitness<T> fitness;
-	protected Mutacion<C> mutacion;
+	protected Mutacion mutacion;
 	
 	protected int nGeneraciones;
 	protected int tamPoblacion;
@@ -28,7 +28,7 @@ public abstract class AlgGenetico<T,C> {
 	
 	protected Random rand;
 	
-	public AlgGenetico(Cruce<C> cruce, Seleccion seleccion, Fitness<T> fitness, Mutacion<C> mutacion,
+	public AlgGenetico(Cruce<T> cruce, Seleccion seleccion, Fitness<T> fitness, Mutacion mutacion,
 			int nGeneraciones, int tamPoblacion, double probCruce, double probMutacion) {
 		this.cruce = cruce;
 		this.seleccion = seleccion;
@@ -43,7 +43,7 @@ public abstract class AlgGenetico<T,C> {
 		rand = new Random();
 	}
 	
-	public Individuo<T,C> ejecutar() {
+	public Individuo<T> ejecutar() {
 		initPoblacion();
 		evaluar();
 		for (int i = 0; i < nGeneraciones; ++i)
@@ -66,7 +66,7 @@ public abstract class AlgGenetico<T,C> {
 				if (pareja < 0)
 					pareja = i;
 				else {	// Reemplazo de progenitores
-					Pair<Individuo<T,C>,Individuo<T,C>> hijos = poblacion.get(pareja).cruzar(poblacion.get(i), cruce);
+					Pair<Individuo<T>,Individuo<T>> hijos = poblacion.get(pareja).cruzar(poblacion.get(i), cruce);
 					poblacion.set(pareja, hijos.getFirst());
 					poblacion.set(i, hijos.getSecond());
 					pareja = -1;
@@ -75,12 +75,12 @@ public abstract class AlgGenetico<T,C> {
 	}
 	
 	protected void evaluar() {
-		for (Individuo<T,C> i : poblacion)
+		for (Individuo<T> i : poblacion)
 			fitness.eval(i);
 		
-		poblacion.sort(new Comparator<Individuo<T,C>>() {
+		poblacion.sort(new Comparator<Individuo<T>>() {
 			@Override
-			public int compare(Individuo<T,C> o1, Individuo<T,C> o2) {
+			public int compare(Individuo<T> o1, Individuo<T> o2) {
 				return Double.compare(o2.getFitness(), o1.getFitness());
 			}
 		});
@@ -89,7 +89,7 @@ public abstract class AlgGenetico<T,C> {
 	}
 	
 	protected void mutar() {
-		for (Individuo<T,C> ind : poblacion)
+		for (Individuo<T> ind : poblacion)
 			if (rand.nextDouble() < probMutacion)
 				ind.muta(mutacion);
 	}
@@ -100,5 +100,5 @@ public abstract class AlgGenetico<T,C> {
 			poblacion.add(generarIndividuo());
 	}
 	
-	protected abstract Individuo<T,C> generarIndividuo();
+	protected abstract Individuo<T> generarIndividuo();
 }

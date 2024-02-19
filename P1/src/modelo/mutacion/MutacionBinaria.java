@@ -1,17 +1,24 @@
 package modelo.mutacion;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MutacionBinaria implements Mutacion<Integer> {
+import modelo.genes.Gen;
+import modelo.genes.GenBinario;
 
+public class MutacionBinaria implements Mutacion {
+
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Integer> mutar(List<Integer> crom) {
-		List<Integer> nuevo = new ArrayList<>(crom);
-		int idx = new Random().nextInt(crom.size());
-		
-		nuevo.set(idx, (nuevo.get(idx) + 1) % 2);
-		return nuevo;
+	public <T> void mutar(List<? extends Gen<T>> crom) {
+		try {
+			int size = GenBinario.getCromSize((List<GenBinario<T>>) crom);
+			int idx = new Random().nextInt(size);
+			
+			GenBinario.bitFlip((List<GenBinario<T>>) crom, idx);
+		}
+		catch (ClassCastException e) {
+			throw new IllegalArgumentException("MutacionBinaria debe aplicarse sobre GenBinario");
+		}
 	}
 }

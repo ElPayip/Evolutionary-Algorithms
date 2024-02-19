@@ -2,9 +2,11 @@ package modelo.cruce;
 
 import java.util.List;
 
+import modelo.genes.Gen;
 import utils.Pair;
 
 public interface Cruce<T> {
 	
-    public Pair<List<T>,List<T>> cruzar (List<T> crom1, List<T> crom2);
+	public Pair<List<? extends Gen<T>>,List<? extends Gen<T>>> cruzar(
+			List<? extends Gen<T>> crom1, List<? extends Gen<T>> crom2);
 }

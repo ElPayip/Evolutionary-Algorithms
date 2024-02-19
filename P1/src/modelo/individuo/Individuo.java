@@ -9,7 +9,7 @@ import modelo.genes.Gen;
 import modelo.mutacion.Mutacion;
 import utils.Pair;
 
-public abstract class Individuo<T,C> {
+public abstract class Individuo<T> {
 	
 	protected List<Gen<T>> cromosoma;
 	protected double fitness=-1;
@@ -24,8 +24,7 @@ public abstract class Individuo<T,C> {
 		}
 		cromosoma = new ArrayList<>();
 		for (int i = 0; i < mins.length; ++i)
-			cromosoma.add(new Gen<T>(getRandomValue(mins[i], maxs[i], prec), 
-									 mins[i], maxs[i], prec));
+			cromosoma.add(generarGen(mins[i], maxs[i], prec));
 	}
 	
 	public double getFitness() {
@@ -37,11 +36,23 @@ public abstract class Individuo<T,C> {
 		return fitness;
 	}
 	
-	public abstract Pair<Individuo<T,C>,Individuo<T,C>> cruzar(Individuo<T,C> otro, Cruce<C> cruce);
+	public Pair<Individuo<T>,Individuo<T>> cruzar(Individuo<T> otro, Cruce<T> cruce) {
+		Pair<List<? extends Gen<T>>,List<? extends Gen<T>>> croms = cruce.cruzar(cromosoma, otro.cromosoma);
+		return new Pair<>(createInstance(croms.getFirst()), createInstance(croms.getSecond()));
+	}
 	
-	public abstract void muta(Mutacion<C> mutacion);
+	public void muta(Mutacion mutacion) {
+		mutacion.mutar(cromosoma);
+	}
 	
-	public abstract List<T> getValores();
+	public List<T> getValores() {
+		List<T> valores = new ArrayList<>();
+		for (Gen<T> g : cromosoma)
+			valores.add(g.getValor());
+		return valores;
+	}
 	
-	protected abstract T getRandomValue(T min, T max, T precision);
+	protected abstract Gen<T> generarGen(T min, T max, T prec);
+	
+	protected abstract Individuo<T> createInstance(List<? extends Gen<T>> crom);
 }

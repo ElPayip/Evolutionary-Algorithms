@@ -7,7 +7,7 @@ import modelo.individuo.Individuo;
 public class FitCalibracionPrueba implements Fitness<Double> {
 
 	@Override
-	public double eval(Individuo<Double,?> ind) {
+	public double eval(Individuo<Double> ind) {
 		List<Double> vals = ind.getValores();
 		if (vals.size() != 2)
 			throw new IllegalArgumentException("Se esperan 2 valores en FitCalibracionPrueba");

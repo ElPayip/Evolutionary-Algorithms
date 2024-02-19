@@ -6,5 +6,5 @@ import modelo.individuo.Individuo;
 
 public interface Seleccion {
 	
-	public <T,C> List<Individuo<T,C>> seleccionar(List<Individuo<T,C>> individuos);
+	public <T,C> List<Individuo<T>> seleccionar(List<Individuo<T>> individuos);
 }
