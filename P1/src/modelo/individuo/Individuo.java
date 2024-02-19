@@ -41,7 +41,7 @@ public abstract class Individuo<T> {
 		return new Pair<>(createInstance(croms.getFirst()), createInstance(croms.getSecond()));
 	}
 	
-	public void muta(Mutacion mutacion) {
+	public void muta(Mutacion<T> mutacion) {
 		mutacion.mutar(cromosoma);
 	}
 	

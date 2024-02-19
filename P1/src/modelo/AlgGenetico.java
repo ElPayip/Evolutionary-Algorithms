@@ -19,7 +19,7 @@ public abstract class AlgGenetico<T> {
 	protected Cruce<T> cruce;
 	protected Seleccion seleccion;
 	protected Fitness<T> fitness;
-	protected Mutacion mutacion;
+	protected Mutacion<T> mutacion;
 	
 	protected int nGeneraciones;
 	protected int tamPoblacion;
@@ -28,7 +28,7 @@ public abstract class AlgGenetico<T> {
 	
 	protected Random rand;
 	
-	public AlgGenetico(Cruce<T> cruce, Seleccion seleccion, Fitness<T> fitness, Mutacion mutacion,
+	public AlgGenetico(Cruce<T> cruce, Seleccion seleccion, Fitness<T> fitness, Mutacion<T> mutacion,
 			int nGeneraciones, int tamPoblacion, double probCruce, double probMutacion) {
 		this.cruce = cruce;
 		this.seleccion = seleccion;

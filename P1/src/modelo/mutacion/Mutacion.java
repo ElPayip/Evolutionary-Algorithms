@@ -4,7 +4,7 @@ import java.util.List;
 
 import modelo.genes.Gen;
 
-public interface Mutacion {
+public interface Mutacion<T> {
 
-	public <T> void mutar(List<? extends Gen<T>> crom);
+	public void mutar(List<? extends Gen<T>> crom);
 }

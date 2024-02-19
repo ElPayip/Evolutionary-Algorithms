@@ -6,11 +6,11 @@ import java.util.Random;
 import modelo.genes.Gen;
 import modelo.genes.GenBinario;
 
-public class MutacionBinaria implements Mutacion {
+public class MutacionBinaria<T> implements Mutacion<T> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> void mutar(List<? extends Gen<T>> crom) {
+	public void mutar(List<? extends Gen<T>> crom) {
 		try {
 			int size = GenBinario.getCromSize((List<GenBinario<T>>) crom);
 			int idx = new Random().nextInt(size);

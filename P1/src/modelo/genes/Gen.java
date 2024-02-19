@@ -17,7 +17,7 @@ public abstract class Gen<T> {
 		this.min = min;
 		this.max = max;
 		this.precision = precision;
-		valor = initRandomVal();
+		setRandomVal();
 	}
 	
 	public T getValor() {
@@ -28,7 +28,11 @@ public abstract class Gen<T> {
 		valor = val;
 	}
 	
-	protected abstract T initRandomVal();
+	public void setRandomVal() {
+		valor = randomVal();
+	}
+	
+	protected abstract T randomVal();
 	
 	protected abstract Gen<T> clonar();
 }

@@ -18,7 +18,7 @@ public abstract class GenBinario<T> extends Gen<T> {
 	}
 	
 	@Override
-	protected T initRandomVal() {
+	protected T randomVal() {
 		alelos = new ArrayList<Integer>(getSize());
 		Random rnd = new Random();
 		for (int i = 0; i < alelos.size(); ++i)
