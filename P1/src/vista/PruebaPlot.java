@@ -2,6 +2,8 @@ package vista;
 
 import javax.swing.JFrame;
 
+import org.math.plot.Plot2DPanel;
+
 public class PruebaPlot {
 	public static void main(String[] args) {
 		// define your data
