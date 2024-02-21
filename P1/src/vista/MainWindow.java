@@ -21,6 +21,13 @@ public class MainWindow extends JFrame {
 
     private void initGUI() {
         JPanel mainPanel = new JPanel(new BorderLayout());
-        //TODO
+
+        JPanel paramsPanel = new ParamsPanel();
+        JPanel graphPanel = new GraphPanel();
+        
+        mainPanel.add(paramsPanel, BorderLayout.WEST);
+        mainPanel.add(graphPanel, BorderLayout.EAST);
+        
+        setContentPane(mainPanel);
     }
 }

@@ -24,7 +24,7 @@ public class SelRuleta implements Seleccion {
 				acum += individuos.get(j).getFitness() / totalFit;
 			} while(acum < prob);
 			
-			supervs.set(i, individuos.get(j));
+			supervs.set(i, new Individuo<T>(individuos.get(j)));
 		}
 		
 		return supervs;
