@@ -44,7 +44,7 @@ public class MichalewiczReal extends AlgGenetico<Double> {
 	}
 
 	@Override
-	public String getName() {
+	public String toString() {
 		return "Michalewicz (Real)";
 	}
 

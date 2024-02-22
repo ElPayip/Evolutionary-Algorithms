@@ -19,7 +19,8 @@ public class FactoriaSeleccion {
 		selecciones.add(new SelTorneoProb());
 	}
 	
-	public List<Seleccion> getSelecciones() {
-		return selecciones;
+	public Seleccion[] getSelecciones() {
+		Seleccion[] aux = new Seleccion[selecciones.size()];
+		return selecciones.toArray(aux);
 	}
 }

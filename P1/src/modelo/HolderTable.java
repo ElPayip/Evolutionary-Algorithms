@@ -40,7 +40,7 @@ public class HolderTable extends AlgGenetico<Double> {
 	}
 
 	@Override
-	public String getName() {
+	public String toString() {
 		return "Holder Table";
 	}
 

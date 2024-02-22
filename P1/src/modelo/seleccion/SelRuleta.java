@@ -32,7 +32,7 @@ public class SelRuleta implements Seleccion {
 	}
 
 	@Override
-	public String getName() {
+	public String toString() {
 		return "Ruleta";
 	}
 

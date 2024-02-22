@@ -15,6 +15,9 @@ import vista.ConfigPanel.IntegerOption;
 import vista.ConfigPanel.StrategyOption;
 
 public class FactoriaAlgGenetico {
+	
+	int nGeneraciones, tamPoblacion;
+	double probCruce, probMutacion;
 
 	private FactoriaCruce cruces;
 	private FactoriaSeleccion selecciones;
@@ -38,11 +41,32 @@ public class FactoriaAlgGenetico {
 		for (AlgGenetico<?> ag : algPosibles) {
 			config.beginInner((ComplexOption<?,?>) ag.configuracion("alg").get(0));
 			
+			config.addInner(new IntegerOption<>(
+						  "número de generaciones", 		// texto a usar como etiqueta del campo
+						  "número de generaciones",       	// texto a usar como 'tooltip' cuando pasas el puntero
+						  "nGeneraciones",  				// campo (espera que haya un getX y un setX)
+						  1, 1000000))						// min y max (usa Integer.MIN_VALUE /MAX_VALUE para infinitos)
+				  .addInner(new IntegerOption<>(
+						  "tamaño de poblacion", 
+						  "tamaño de poblacion", 
+						  "tamPoblacion", 
+						  1, 1000000))
+				  .addInner(new DoubleOption<>(
+						  "probabilidad de cruce",
+						  "probabilidad de cruce",
+						  "probCruce",
+						  0, 1))
+				  .addInner(new DoubleOption<>(
+						  "probabilidad de mutacion",
+						  "probabilidad de mutacion",
+						  "probMutacion",
+						  0, 1));
+			
 			config.addInner(new StrategyOption<FactoriaAlgGenetico>(
 					"metodo de cruce", 
 					"metodo de cruce", 
 					"cruce",
-					(Cruce<?>[]) cruces.getCruces(ag.getCategoria()).toArray() ));
+					cruces.getCruces(ag.getCategoria()) ));
 			for (Cruce<?> cruce : cruces.getCruces(ag.getCategoria()))
 				innerConfig(config, cruce.configuracion("cruce"));
 			
@@ -50,28 +74,13 @@ public class FactoriaAlgGenetico {
 					"metodo de seleccion", 
 					"metodo de seleccion", 
 					"seleccion",
-					(Seleccion[]) selecciones.getSelecciones().toArray() ));
+					selecciones.getSelecciones() ));
 			for (Seleccion seleccion : selecciones.getSelecciones())
 				innerConfig(config, seleccion.configuracion("seleccion"));
 			
 			config.endInner();
 		}
-		
-		config.addOption(new IntegerOption<>(
-					  "número de generaciones", 		// texto a usar como etiqueta del campo
-					  "número de generaciones",       	// texto a usar como 'tooltip' cuando pasas el puntero
-					  "nGeneraciones",  				// campo (espera que haya un getX y un setX)
-					  1, 1000000))						// min y max (usa Integer.MIN_VALUE /MAX_VALUE para infinitos)
-			  .addOption(new IntegerOption<>(
-					  "tamaño de poblacion", 
-					  "tamaño de poblacion", 
-					  "tamPoblacion", 
-					  1, 1000000))
-			  .addOption(new DoubleOption<>(
-					  "probabilidad de cruce",
-					  "probabilidad de cruce",
-					  "probCruce",
-					  0, 1));
+		config.endOptions();
 	}
 
 	private void innerConfig(ConfigPanel<FactoriaAlgGenetico> config, List<ConfigPanel.Option<FactoriaAlgGenetico>> opts) {
@@ -89,5 +98,37 @@ public class FactoriaAlgGenetico {
 
 	public void setAlg(AlgGenetico<?> alg) {
 		this.alg = alg;
+	}
+
+	public int getnGeneraciones() {
+		return nGeneraciones;
+	}
+
+	public void setnGeneraciones(int nGeneraciones) {
+		this.nGeneraciones = nGeneraciones;
+	}
+
+	public int getTamPoblacion() {
+		return tamPoblacion;
+	}
+
+	public void setTamPoblacion(int tamPoblacion) {
+		this.tamPoblacion = tamPoblacion;
+	}
+
+	public double getProbCruce() {
+		return probCruce;
+	}
+
+	public void setProbCruce(double probCruce) {
+		this.probCruce = probCruce;
+	}
+
+	public double getProbMutacion() {
+		return probMutacion;
+	}
+
+	public void setProbMutacion(double probMutacion) {
+		this.probMutacion = probMutacion;
 	}
 }

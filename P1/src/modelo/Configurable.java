@@ -11,8 +11,8 @@ public interface Configurable {
 	public default <T> List<Option<T>> configuracion(String campo) {
 		List<Option<T>> opts = new ArrayList<>();
 		opts.add(new InnerOption<T,Configurable>(
-	  			  getName(),
-	  			  getName(),
+	  			  toString(),
+	  			  toString(),
 	  			  campo,
 	  			  getClass()));
 		
@@ -21,8 +21,6 @@ public interface Configurable {
 			opts.addAll(extras);
 		return opts;
 	}
-	
-	public String getName();
 	
 	public <T> List<Option<T>> getExtraOpts();
 }

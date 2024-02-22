@@ -10,7 +10,7 @@ import vista.ConfigPanel.Option;
 
 public class SelTorneoProb implements Seleccion {
 	
-	private Integer k;
+	private Integer k = 3;
 
 	@Override
 	public <T> List<Individuo<T>> seleccionar(List<Individuo<T>> individuos) {
@@ -47,7 +47,7 @@ public class SelTorneoProb implements Seleccion {
 	}
 
 	@Override
-	public String getName() {
+	public String toString() {
 		return "Torneo probabilístico";
 	}
 

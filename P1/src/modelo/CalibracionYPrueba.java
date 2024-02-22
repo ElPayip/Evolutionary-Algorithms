@@ -44,7 +44,7 @@ public class CalibracionYPrueba extends AlgGenetico<Double> {
 	}
 
 	@Override
-	public String getName() {
+	public String toString() {
 		return "Calibracion y Prueba";
 	}
 

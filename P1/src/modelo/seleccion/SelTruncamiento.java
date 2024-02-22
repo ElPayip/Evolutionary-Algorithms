@@ -9,7 +9,7 @@ import vista.ConfigPanel.Option;
 
 public class SelTruncamiento implements Seleccion {
 	
-	private Double trunc;
+	private Double trunc = 0.5;
 
 	@Override
 	public <T> List<Individuo<T>> seleccionar(List<Individuo<T>> individuos) {
@@ -23,17 +23,9 @@ public class SelTruncamiento implements Seleccion {
 			
 		return supervs;
 	}
-	
-	public void setTrunc(double trunc) {
-		this.trunc = trunc;
-	}
-	
-	public Double getTrunc() {
-		return trunc;
-	}
 
 	@Override
-	public String getName() {
+	public String toString() {
 		return "Truncamiento";
 	}
 
@@ -42,5 +34,13 @@ public class SelTruncamiento implements Seleccion {
 		List<Option<T>> extras = new ArrayList<>();
 		extras.add(new DoubleOption<T>("% de truncamiento", "% de truncamiento", "trunc", 0, 100, 100));
 		return extras;
+	}
+	
+	public void setTrunc(Double trunc) {
+		this.trunc = trunc;
+	}
+	
+	public Double getTrunc() {
+		return trunc;
 	}
 }

@@ -21,10 +21,10 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	protected Fitness<T> fitness;
 	protected Mutacion<T> mutacion;
 	
-	protected int nGeneraciones;
-	protected int tamPoblacion;
-	protected double probCruce;
-	protected double probMutacion;
+	protected Integer nGeneraciones = 100;
+	protected Integer tamPoblacion = 100;
+	protected Double probCruce = 0.6;
+	protected Double probMutacion = 0.1;
 	
 	protected Random rand;
 	
@@ -150,35 +150,35 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 		this.mutacion = mutacion;
 	}
 
-	public int getNGeneraciones() {
+	public Integer getnGeneraciones() {
 		return nGeneraciones;
 	}
 
-	public void setNGeneraciones(int nGeneraciones) {
+	public void setnGeneraciones(Integer nGeneraciones) {
 		this.nGeneraciones = nGeneraciones;
 	}
 
-	public int getTamPoblacion() {
+	public Integer getTamPoblacion() {
 		return tamPoblacion;
 	}
 
-	public void setTamPoblacion(int tamPoblacion) {
+	public void setTamPoblacion(Integer tamPoblacion) {
 		this.tamPoblacion = tamPoblacion;
 	}
 
-	public double getProbCruce() {
+	public Double getProbCruce() {
 		return probCruce;
 	}
 
-	public void setProbCruce(double probCruce) {
+	public void setProbCruce(Double probCruce) {
 		this.probCruce = probCruce;
 	}
 
-	public double getProbMutacion() {
+	public Double getProbMutacion() {
 		return probMutacion;
 	}
 
-	public void setProbMutacion(double probMutacion) {
+	public void setProbMutacion(Double probMutacion) {
 		this.probMutacion = probMutacion;
 	}
 }

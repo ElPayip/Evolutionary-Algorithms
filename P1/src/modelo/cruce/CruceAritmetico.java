@@ -31,7 +31,7 @@ public class CruceAritmetico implements Cruce<Double> {
 	}
 
 	@Override
-	public String getName() {
+	public String toString() {
 		return "Cruce aritmético";
 	}
 

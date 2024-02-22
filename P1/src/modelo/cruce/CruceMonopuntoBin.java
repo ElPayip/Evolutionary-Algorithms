@@ -48,7 +48,7 @@ public class CruceMonopuntoBin<T> implements Cruce<T> {
 	}
 
 	@Override
-	public String getName() {
+	public String toString() {
 		return "Cruce monopunto (binario)";
 	}
 

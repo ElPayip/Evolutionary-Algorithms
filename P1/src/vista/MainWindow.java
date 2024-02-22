@@ -29,5 +29,8 @@ public class MainWindow extends JFrame {
         mainPanel.add(graphPanel, BorderLayout.EAST);
         
         setContentPane(mainPanel);
+        
+        this.setSize(600, 600);
+        this.setVisible(true);
     }
 }
