@@ -5,17 +5,17 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import control.Controller;
+import modelo.factorias.FactoriaAlgGenetico;
 
 public class MainWindow extends JFrame {
     
 	private static final long serialVersionUID = 1L;
 	
-	Controller ctrl;
+	FactoriaAlgGenetico factoria;
 
-    public MainWindow(Controller ctrl) {
+    public MainWindow(FactoriaAlgGenetico factoria) {
         super ("Programacion Evolutiva - Practica 1");
-        this.ctrl = ctrl;
+        this.factoria = factoria;
         initGUI();
     }
 

@@ -13,6 +13,10 @@ public class HolderTable extends AlgGenetico<Double> {
 	private static final double MIN = -10;
 	private Double prec;
 
+	public HolderTable() {
+		super();
+	}
+
 	public HolderTable(Cruce<Double> cruce, Seleccion seleccion,
 			int nGeneraciones, int tamPoblacion, double probCruce, double probMutacion, double prec) {
 		super(cruce, seleccion, new FitHolderTable(), new MutacionBinaria<Double>(), nGeneraciones, tamPoblacion, probCruce, probMutacion);

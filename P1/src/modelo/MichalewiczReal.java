@@ -15,6 +15,10 @@ public class MichalewiczReal extends AlgGenetico<Double> {
 	private static final double MIN = 0;
 	private int d;
 
+	public MichalewiczReal() {
+		super();
+	}
+
 	public MichalewiczReal(Cruce<Double> cruce, Seleccion seleccion,
 			int nGeneraciones, int tamPoblacion, double probCruce, double probMutacion, int d) {
 		super(cruce, seleccion, new FitMichalewicz(), new MutacionUniforme(), nGeneraciones, tamPoblacion, probCruce, probMutacion);

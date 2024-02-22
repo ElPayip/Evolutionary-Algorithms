@@ -12,7 +12,7 @@ import modelo.mutacion.Mutacion;
 import modelo.seleccion.Seleccion;
 import utils.Pair;
 
-public abstract class AlgGenetico<T> {
+public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 
 	protected List<Individuo<T>> poblacion;
 	protected Individuo<T> mejor;
@@ -28,8 +28,13 @@ public abstract class AlgGenetico<T> {
 	
 	protected Random rand;
 	
+	public AlgGenetico() {
+		rand = new Random();
+	}
+	
 	public AlgGenetico(Cruce<T> cruce, Seleccion seleccion, Fitness<T> fitness, Mutacion<T> mutacion,
 			int nGeneraciones, int tamPoblacion, double probCruce, double probMutacion) {
+		this();
 		this.cruce = cruce;
 		this.seleccion = seleccion;
 		this.fitness = fitness;
@@ -39,8 +44,11 @@ public abstract class AlgGenetico<T> {
 		this.tamPoblacion = tamPoblacion;
 		this.probCruce = probCruce;
 		this.probMutacion = probMutacion;
-		
-		rand = new Random();
+	}
+	
+	public AlgGenetico(AlgGenetico<T> otro) {
+		this(otro.cruce, otro.seleccion, otro.fitness, otro.mutacion, 
+				otro.nGeneraciones, otro.tamPoblacion, otro.probCruce, otro.probMutacion);
 	}
 	
 	public Individuo<T> ejecutar() {
@@ -101,4 +109,74 @@ public abstract class AlgGenetico<T> {
 	}
 	
 	protected abstract Individuo<T> generarIndividuo();
+	
+	/* ----------------------------------------------------
+	 
+	----------		 Getters & Setters			----------
+			
+	---------------------------------------------------- */
+
+	public Cruce<T> getCruce() {
+		return cruce;
+	}
+
+	public void setCruce(Cruce<T> cruce) {
+		this.cruce = cruce;
+	}
+
+	public Seleccion getSeleccion() {
+		return seleccion;
+	}
+
+	public void setSeleccion(Seleccion seleccion) {
+		this.seleccion = seleccion;
+	}
+
+	public Fitness<T> getFitness() {
+		return fitness;
+	}
+
+	public void setFitness(Fitness<T> fitness) {
+		this.fitness = fitness;
+	}
+
+	public Mutacion<T> getMutacion() {
+		return mutacion;
+	}
+
+	public void setMutacion(Mutacion<T> mutacion) {
+		this.mutacion = mutacion;
+	}
+
+	public int getNGeneraciones() {
+		return nGeneraciones;
+	}
+
+	public void setNGeneraciones(int nGeneraciones) {
+		this.nGeneraciones = nGeneraciones;
+	}
+
+	public int getTamPoblacion() {
+		return tamPoblacion;
+	}
+
+	public void setTamPoblacion(int tamPoblacion) {
+		this.tamPoblacion = tamPoblacion;
+	}
+
+	public double getProbCruce() {
+		return probCruce;
+	}
+
+	public void setProbCruce(double probCruce) {
+		this.probCruce = probCruce;
+	}
+
+	public double getProbMutacion() {
+		return probMutacion;
+	}
+
+	public void setProbMutacion(double probMutacion) {
+		this.probMutacion = probMutacion;
+	}
 }
