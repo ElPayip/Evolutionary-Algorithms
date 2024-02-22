@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.Random;
 
 import modelo.individuo.Individuo;
+import vista.ConfigPanel.Option;
 
 public class SelRuleta implements Seleccion {
 
 	@Override
-	public <T,C> List<Individuo<T>> seleccionar(List<Individuo<T>> individuos) {
+	public <T> List<Individuo<T>> seleccionar(List<Individuo<T>> individuos) {
 		Random rnd = new Random();
 		double totalFit = 0, acum = 0;
 		for (Individuo<T> ind : individuos) totalFit += ind.getFitness();
@@ -28,5 +29,15 @@ public class SelRuleta implements Seleccion {
 		}
 		
 		return supervs;
+	}
+
+	@Override
+	public String getName() {
+		return "Ruleta";
+	}
+
+	@Override
+	public <T> List<Option<T>> getExtraOpts() {
+		return null;
 	}
 }

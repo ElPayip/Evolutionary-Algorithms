@@ -5,17 +5,18 @@ import java.util.List;
 import java.util.Random;
 
 import modelo.individuo.Individuo;
+import vista.ConfigPanel.IntegerOption;
+import vista.ConfigPanel.Option;
 
 public class SelTorneoProb implements Seleccion {
 	
-	private int k;
-	
-	public SelTorneoProb(int k) {
-		this.k = k;
-	}
+	private Integer k;
 
 	@Override
-	public <T,C> List<Individuo<T>> seleccionar(List<Individuo<T>> individuos) {
+	public <T> List<Individuo<T>> seleccionar(List<Individuo<T>> individuos) {
+		if (k == null)
+			throw new RuntimeException("Hay que inicializar SelTorneoProb con setK");
+		
 		Random rnd = new Random();
 		List<Individuo<T>> supervs = new ArrayList<>(individuos.size());
 		
@@ -35,5 +36,25 @@ public class SelTorneoProb implements Seleccion {
 			supervs.set(i, individuos.get(j));
 		}
 		return supervs;
+	}
+	
+	public void setK(Integer k) {
+		this.k = k;
+	}
+	
+	public Integer getK() {
+		return k;
+	}
+
+	@Override
+	public String getName() {
+		return "Torneo probabilístico";
+	}
+
+	@Override
+	public <T> List<Option<T>> getExtraOpts() {
+		List<Option<T>> extras = new ArrayList<>();
+		extras.add(new IntegerOption<T>("k", "k", "k", 0, 100));
+		return extras;
 	}
 }

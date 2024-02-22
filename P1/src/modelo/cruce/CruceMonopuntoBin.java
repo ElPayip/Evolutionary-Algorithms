@@ -7,6 +7,7 @@ import java.util.Random;
 import modelo.genes.Gen;
 import modelo.genes.GenBinario;
 import utils.Pair;
+import vista.ConfigPanel.Option;
 
 public class CruceMonopuntoBin<T> implements Cruce<T> {
 	
@@ -44,5 +45,15 @@ public class CruceMonopuntoBin<T> implements Cruce<T> {
 		GenBinario.setGenotipo(hijo2, c2);
 		
 		return new Pair<>(hijo1, hijo2);
+	}
+
+	@Override
+	public String getName() {
+		return "Cruce monopunto (binario)";
+	}
+
+	@Override
+	public <O> List<Option<O>> getExtraOpts() {
+		return null;
 	}
 }

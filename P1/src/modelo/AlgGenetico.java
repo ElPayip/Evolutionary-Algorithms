@@ -28,16 +28,16 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	
 	protected Random rand;
 	
-	public AlgGenetico() {
+	public AlgGenetico(Fitness<T> fit) {
 		rand = new Random();
+		fitness = fit;
 	}
 	
 	public AlgGenetico(Cruce<T> cruce, Seleccion seleccion, Fitness<T> fitness, Mutacion<T> mutacion,
 			int nGeneraciones, int tamPoblacion, double probCruce, double probMutacion) {
-		this();
+		this(fitness);
 		this.cruce = cruce;
 		this.seleccion = seleccion;
-		this.fitness = fitness;
 		this.mutacion = mutacion;
 		
 		this.nGeneraciones = nGeneraciones;
@@ -109,6 +109,8 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	}
 	
 	protected abstract Individuo<T> generarIndividuo();
+	
+	public abstract CategoriaGen getCategoria();
 	
 	/* ----------------------------------------------------
 	 

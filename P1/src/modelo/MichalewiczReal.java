@@ -1,6 +1,8 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import modelo.cruce.Cruce;
 import modelo.fitness.FitMichalewicz;
@@ -8,6 +10,8 @@ import modelo.individuo.Individuo;
 import modelo.individuo.IndividuoReal;
 import modelo.mutacion.MutacionUniforme;
 import modelo.seleccion.Seleccion;
+import vista.ConfigPanel.IntegerOption;
+import vista.ConfigPanel.Option;
 
 public class MichalewiczReal extends AlgGenetico<Double> {
 
@@ -16,7 +20,7 @@ public class MichalewiczReal extends AlgGenetico<Double> {
 	private int d;
 
 	public MichalewiczReal() {
-		super();
+		super(new FitMichalewicz());
 	}
 
 	public MichalewiczReal(Cruce<Double> cruce, Seleccion seleccion,
@@ -32,5 +36,22 @@ public class MichalewiczReal extends AlgGenetico<Double> {
 		Arrays.fill(maxs, MAX);
 		Arrays.fill(mins, MIN);
 		return new IndividuoReal(mins, maxs);
+	}
+
+	@Override
+	public CategoriaGen getCategoria() {
+		return CategoriaGen.REAL;
+	}
+
+	@Override
+	public String getName() {
+		return "Michalewicz (Real)";
+	}
+
+	@Override
+	public <T> List<Option<T>> getExtraOpts() {
+		List<Option<T>> extras = new ArrayList<>();
+		extras.add(new IntegerOption<T>("dimension", "dimension", "d", 0, 1000));
+		return extras;
 	}
 }

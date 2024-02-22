@@ -22,7 +22,7 @@ public class MainWindow extends JFrame {
     private void initGUI() {
         JPanel mainPanel = new JPanel(new BorderLayout());
 
-        JPanel paramsPanel = new ParamsPanel();
+        JPanel paramsPanel = new ParamsPanel(factoria);
         JPanel graphPanel = new GraphPanel();
         
         mainPanel.add(paramsPanel, BorderLayout.WEST);

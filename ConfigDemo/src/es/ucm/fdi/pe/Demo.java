@@ -132,11 +132,11 @@ public class Demo extends JFrame {
 	
 	public ConfigPanel<Figura> creaPanelConfiguracion() {
 		Color[] colores = new Color[] { Color.red, Color.blue, Color.green };
-		Forma[] formas = new Forma[] { new Circulo(), new Rectangulo() };
+		Forma[] formas = new Forma[] { new Circulo(), new Rectangulo(), new Triangulo() };
 		
 		ConfigPanel<Figura> config = new ConfigPanel<Figura>();
 		
-		// se pueden añadir las opciones de forma independiente, o "de seguido"; el resultado es el mismo.
+		// se pueden aï¿½adir las opciones de forma independiente, o "de seguido"; el resultado es el mismo.
 		config.addOption(new IntegerOption<Figura>(  // -- entero
 				"grosor (px)", 					     // texto a usar como etiqueta del campo
 				"pixeles de grosor del borde",       // texto a usar como 'tooltip' cuando pasas el puntero
@@ -176,6 +176,23 @@ public class Demo extends JFrame {
 		  		  .addInner(new DoubleOption<Forma>(
 		  		     "alto", "alto del rectangulo", "alto", 0, Double.POSITIVE_INFINITY))
 		  		  .endInner()
+		  		  
+		  		.beginInner(new InnerOption<Figura,Forma>( 
+					  	"Triangulo", "opciones del Triangulo", "forma", Triangulo.class))
+				  		  .addInner(new StrategyOption<Figura>( // -- eleccion de objeto configurable
+				  				"forma",							 // etiqueta
+								"forma de la figura",                // tooltip
+								"forma",                             // campo
+								formas))
+					  		.beginInner(new InnerOption<Figura,Forma>(  
+								  	"circulo",							 // titulo del sub-panel
+								  	"opciones del circulo",				 // tooltip asociado
+								  	"forma",							 // campo
+								  	Circulo.class))						 // tipo que debe de tener ese campo para que se active el sub-panel
+							  		  .addInner(new DoubleOption<Forma>(
+							  		     "radio", "radio del circulo", "radio", 0, Integer.MAX_VALUE))
+							  		  .endInner()
+							.endInner()
 
 			  // y por ultimo, el punto (siempre estara visible)
 			  .beginInner(new InnerOption<Figura,Punto>(
@@ -295,6 +312,25 @@ public class Demo extends JFrame {
 
 		public String toString() {
 			return "rectangulo de " + ancho  + "x" + alto; 
+		}
+	}	
+	
+	/** un rectangulo (una forma, y por tanto 'cloneable') */
+	public static class Triangulo extends Forma {
+		private double ancho = 1, alto = 1;
+		private Forma forma;
+	
+		public double getAncho() { return ancho; }
+		public void setAncho(double ancho) { this.ancho = ancho; }
+		public double getAlto() { return alto; }
+		public void setAlto(double alto) { this.alto = alto; }
+		public Forma getForma() { return forma;	}
+		public void setForma(Forma forma) {	this.forma = forma;	}
+
+		public void dibuja() { /* ... */ };
+
+		public String toString() {
+			return "Triangulo de " + ancho  + "x" + alto; 
 		}
 	}	
 }
