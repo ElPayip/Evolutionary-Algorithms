@@ -12,6 +12,7 @@ import vista.ConfigPanel;
 import vista.ConfigPanel.ComplexOption;
 import vista.ConfigPanel.DoubleOption;
 import vista.ConfigPanel.IntegerOption;
+import vista.ConfigPanel.Option;
 import vista.ConfigPanel.StrategyOption;
 
 public class FactoriaAlgGenetico {
@@ -32,6 +33,10 @@ public class FactoriaAlgGenetico {
 		selecciones = new FactoriaSeleccion();
 	}
 	
+	public AlgGenetico<?> generar() {
+		return alg;
+	}
+	
 	public void configurar(ConfigPanel<FactoriaAlgGenetico> config) {
 		config.addOption(new StrategyOption<FactoriaAlgGenetico>(
 				  "algoritmo genetico",
@@ -39,7 +44,8 @@ public class FactoriaAlgGenetico {
 				  "alg",
 				  algPosibles));
 		for (AlgGenetico<?> ag : algPosibles) {
-			config.beginInner((ComplexOption<?,?>) ag.configuracion("alg").get(0));
+			List<Option<FactoriaAlgGenetico>> agConf = ag.configuracion("alg");
+			config.beginInner((ComplexOption<FactoriaAlgGenetico,?>) agConf.get(0));
 			
 			config.addInner(new IntegerOption<>(
 						  "número de generaciones", 		// texto a usar como etiqueta del campo
@@ -61,6 +67,8 @@ public class FactoriaAlgGenetico {
 						  "probabilidad de mutacion",
 						  "probMutacion",
 						  0, 1));
+			for (int i = 1; i < agConf.size(); ++i)
+				config.addInner(agConf.get(i));
 			
 			config.addInner(new StrategyOption<FactoriaAlgGenetico>(
 					"metodo de cruce", 

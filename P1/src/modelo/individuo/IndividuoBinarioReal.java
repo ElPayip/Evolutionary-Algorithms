@@ -6,6 +6,10 @@ import modelo.genes.Gen;
 import modelo.genes.GenBinReal;
 
 public class IndividuoBinarioReal extends Individuo<Double> {
+	
+	public IndividuoBinarioReal(IndividuoBinarioReal otro) {
+		super(otro);
+	}
 
 	public IndividuoBinarioReal(List<Gen<Double>> cromosoma) {
 		super(cromosoma);
@@ -28,5 +32,10 @@ public class IndividuoBinarioReal extends Individuo<Double> {
 		} catch (ClassCastException e) {
 			throw new IllegalArgumentException("Para createInstance de IndividuoBinarioReal son necesarios GenBinReal");
 		}
+	}
+
+	@Override
+	public Individuo<Double> clone() {
+		return new IndividuoBinarioReal(this);
 	}
 }

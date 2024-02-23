@@ -10,7 +10,7 @@ public abstract class GenBinario<T> extends Gen<T> {
 	
 	public GenBinario(GenBinario<T> gen) {
 		super(gen);
-		alelos = gen.alelos;
+		alelos = new ArrayList<>(gen.alelos);
 	}
 	
 	public GenBinario(T min, T max, T precision) {
@@ -21,8 +21,8 @@ public abstract class GenBinario<T> extends Gen<T> {
 	protected T randomVal() {
 		alelos = new ArrayList<Integer>(getSize());
 		Random rnd = new Random();
-		for (int i = 0; i < alelos.size(); ++i)
-			alelos.set(i, rnd.nextBoolean() ? 1 : 0);
+		for (int i = 0; i < getSize(); ++i)
+			alelos.add(rnd.nextBoolean() ? 1 : 0);
 		
 		return getValor();
 	}

@@ -6,6 +6,10 @@ import modelo.genes.Gen;
 import modelo.genes.GenReal;
 
 public class IndividuoReal extends Individuo<Double> {
+	
+	public IndividuoReal(IndividuoReal otro) {
+		super(otro);
+	}
 
 	public IndividuoReal(List<Gen<Double>> cromosoma) {
 		super(cromosoma);
@@ -28,5 +32,10 @@ public class IndividuoReal extends Individuo<Double> {
 		} catch (ClassCastException e) {
 			throw new IllegalArgumentException("Para createInstance de IndividuoReal son necesarios GenReal");
 		}
+	}
+
+	@Override
+	public Individuo<Double> clone() {
+		return new IndividuoReal(this);
 	}
 }

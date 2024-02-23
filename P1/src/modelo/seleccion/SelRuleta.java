@@ -12,12 +12,12 @@ public class SelRuleta implements Seleccion {
 	@Override
 	public <T> List<Individuo<T>> seleccionar(List<Individuo<T>> individuos) {
 		Random rnd = new Random();
-		double totalFit = 0, acum = 0;
+		double totalFit = 0;
 		for (Individuo<T> ind : individuos) totalFit += ind.getFitness();
 		
 		List<Individuo<T>> supervs = new ArrayList<>(individuos.size());
-		for (int i = 0; i < supervs.size(); ++i) {
-			double prob = rnd.nextDouble();
+		for (int i = 0; i < individuos.size(); ++i) {
+			double prob = rnd.nextDouble(), acum = 0;
 			
 			int j = -1;
 			do {
@@ -25,7 +25,7 @@ public class SelRuleta implements Seleccion {
 				acum += individuos.get(j).getFitness() / totalFit;
 			} while(acum < prob);
 			
-			supervs.set(i, individuos.get(j)); //TODO clonar
+			supervs.add(individuos.get(j).clone());
 		}
 		
 		return supervs;
@@ -39,5 +39,10 @@ public class SelRuleta implements Seleccion {
 	@Override
 	public <T> List<Option<T>> getExtraOpts() {
 		return null;
+	}
+	
+	@Override
+	public Seleccion clone() {
+		return new SelRuleta();
 	}
 }

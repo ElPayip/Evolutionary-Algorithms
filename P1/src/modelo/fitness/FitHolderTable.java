@@ -12,6 +12,6 @@ public class FitHolderTable implements Fitness<Double> {
 		double fit = Math.sqrt(Math.pow(x.get(0), 2) + Math.pow(x.get(1), 2));
 		fit = Math.abs(1 - fit / Math.PI);
 		fit = Math.sin(x.get(0)) * Math.cos(x.get(1)) * Math.exp(fit);
-		return - Math.abs(fit);
+		return -Math.abs(fit);
 	}
 }

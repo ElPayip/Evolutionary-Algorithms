@@ -10,6 +10,12 @@ import vista.ConfigPanel.Option;
 public class SelTruncamiento implements Seleccion {
 	
 	private Double trunc = 0.5;
+	
+	public SelTruncamiento() {}
+	
+	public SelTruncamiento(Double trunc) {
+		this.trunc = trunc;
+	}
 
 	@Override
 	public <T> List<Individuo<T>> seleccionar(List<Individuo<T>> individuos) {
@@ -19,7 +25,7 @@ public class SelTruncamiento implements Seleccion {
 		int lim = (int) (trunc * individuos.size());
 		List<Individuo<T>> supervs = new ArrayList<>(individuos.size());
 		for (int i = 0; i < individuos.size(); ++i) 
-			supervs.set(i, individuos.get(i % lim));
+			supervs.add(individuos.get(i % lim).clone());
 			
 		return supervs;
 	}
@@ -42,5 +48,10 @@ public class SelTruncamiento implements Seleccion {
 	
 	public Double getTrunc() {
 		return trunc;
+	}
+	
+	@Override
+	public Seleccion clone() {
+		return new SelTruncamiento(trunc);
 	}
 }

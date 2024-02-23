@@ -14,5 +14,4 @@ public class FitCalibracionPrueba implements Fitness<Double> {
 		
 		return Math.pow(vals.get(0), 2) + 2*Math.pow(vals.get(1), 2);
 	}
-
 }

@@ -18,9 +18,15 @@ public class MichalewiczReal extends AlgGenetico<Double> {
 	private static final double MAX = Math.PI;
 	private static final double MIN = 0;
 	private int d;
+	
+	public MichalewiczReal(MichalewiczReal otro) {
+		super(otro);
+		d = otro.d;
+	}
 
 	public MichalewiczReal() {
 		super(new FitMichalewicz());
+		mutacion = new MutacionUniforme();
 	}
 
 	public MichalewiczReal(Cruce<Double> cruce, Seleccion seleccion,
@@ -53,5 +59,15 @@ public class MichalewiczReal extends AlgGenetico<Double> {
 		List<Option<T>> extras = new ArrayList<>();
 		extras.add(new IntegerOption<T>("dimension", "dimension", "d", 0, 1000));
 		return extras;
+	}
+
+	@Override
+	public AlgGenetico<Double> clone() {
+		return new MichalewiczReal(this);
+	}
+
+	@Override
+	public Boolean maximizacion() {
+		return false;
 	}
 }

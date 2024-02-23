@@ -7,14 +7,14 @@ public class GenBinReal extends GenBinario<Double> {
 	private int size;
 	private double step;
 
-	public GenBinReal(GenBinario<Double> gen) {
+	public GenBinReal(GenBinReal gen) {
 		super(gen);
-		calcSize();
+		this.size = gen.size;
+		this.step = gen.step;
 	}
 	
 	public GenBinReal(Double min, Double max, Double precision) {
 		super(min, max, precision);
-		calcSize();
 	}
 	
 	private void calcSize() {
@@ -32,11 +32,13 @@ public class GenBinReal extends GenBinario<Double> {
 
 	@Override
 	public int getSize() {
+		if (size <= 0)
+			calcSize();
 		return size;
 	}
 
 	@Override
-	protected Gen<Double> clonar() {
+	public Gen<Double> clone() {
 		return new GenBinReal(this);
 	}
 }

@@ -56,4 +56,9 @@ public class CruceMonopuntoBin<T> implements Cruce<T> {
 	public <O> List<Option<O>> getExtraOpts() {
 		return null;
 	}
+	
+	@Override
+	public Cruce<T> clone() {
+		return new CruceMonopuntoBin<>();
+	}
 }

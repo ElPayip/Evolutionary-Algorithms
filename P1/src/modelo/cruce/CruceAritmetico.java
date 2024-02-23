@@ -49,4 +49,9 @@ public class CruceAritmetico implements Cruce<Double> {
 	public void setAlpha(double alpha) {
 		this.alpha = alpha;
 	}
+	
+	@Override
+	public Cruce<Double> clone() {
+		return new CruceAritmetico();
+	}
 }

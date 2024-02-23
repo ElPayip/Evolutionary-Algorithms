@@ -11,6 +11,12 @@ import vista.ConfigPanel.Option;
 public class SelTorneoProb implements Seleccion {
 	
 	private Integer k = 3;
+	
+	public SelTorneoProb() {}
+	
+	public SelTorneoProb(Integer k) {
+		this.k = k;
+	}
 
 	@Override
 	public <T> List<Individuo<T>> seleccionar(List<Individuo<T>> individuos) {
@@ -32,8 +38,8 @@ public class SelTorneoProb implements Seleccion {
 			do {
 				++j;
 				acum += individuos.get(j).getFitness() / totalFit;
-			} while(acum < prob);
-			supervs.set(i, individuos.get(j));
+			} while(acum < prob && j < individuos.size()-1);
+			supervs.add(individuos.get(j).clone());
 		}
 		return supervs;
 	}
@@ -56,5 +62,10 @@ public class SelTorneoProb implements Seleccion {
 		List<Option<T>> extras = new ArrayList<>();
 		extras.add(new IntegerOption<T>("k", "k", "k", 0, 100));
 		return extras;
+	}
+	
+	@Override
+	public Seleccion clone() {
+		return new SelTorneoProb(k);
 	}
 }

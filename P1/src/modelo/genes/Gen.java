@@ -1,6 +1,6 @@
 package modelo.genes;
 
-public abstract class Gen<T> {
+public abstract class Gen<T> implements Cloneable {
 	
 	protected T valor;
 	protected T min, max;
@@ -34,5 +34,5 @@ public abstract class Gen<T> {
 	
 	protected abstract T randomVal();
 	
-	protected abstract Gen<T> clonar();
+	public abstract Gen<T> clone();
 }

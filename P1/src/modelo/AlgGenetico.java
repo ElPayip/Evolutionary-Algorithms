@@ -54,16 +54,21 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	public Individuo<T> ejecutar() {
 		initPoblacion();
 		evaluar();
-		for (int i = 0; i < nGeneraciones; ++i)
-			seleccionar();
+		for (int i = 0; i < nGeneraciones; ++i) {
+			poblacion = seleccionar();
 			cruzar();
 			mutar();
 			evaluar();
+			
+			System.out.println("Generacion "+(i+1));
+			mostrarFitness();
+		}
+		mejor.eval(fitness);
 		return mejor;
 	}
 	
-	protected void seleccionar() {
-		seleccion.seleccionar(poblacion);
+	protected List<Individuo<T>> seleccionar() {
+		return seleccion.seleccionar(poblacion);
 	}
 	
 	protected void cruzar() {
@@ -83,8 +88,22 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	}
 	
 	protected void evaluar() {
+		double maxFit = Double.MIN_VALUE, minFit = Double.MAX_VALUE;
+		for (Individuo<T> i : poblacion) {
+			i.eval(fitness);
+			if (i.getFitness() > maxFit) 
+				maxFit = i.getFitness();
+			if (i.getFitness() < minFit)
+				minFit = i.getFitness();
+		}
+		
+		maxFit *= 1.05;
+		minFit *= 1.05;
 		for (Individuo<T> i : poblacion)
-			fitness.eval(i);
+			if (maximizacion())
+				i.setFitness(i.getFitness() - minFit);
+			else
+				i.setFitness(maxFit - i.getFitness());
 		
 		poblacion.sort(new Comparator<Individuo<T>>() {
 			@Override
@@ -92,8 +111,9 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 				return Double.compare(o2.getFitness(), o1.getFitness());
 			}
 		});
-		if (mejor == null || mejor.getFitness() < poblacion.get(0).getFitness())
-			mejor = poblacion.get(0);
+		if (mejor == null || (maximizacion() && fitness.eval(mejor) < fitness.eval(poblacion.get(0)))
+						  || (!maximizacion() && fitness.eval(mejor) > fitness.eval(poblacion.get(0))))
+			mejor = poblacion.get(0).clone();
 	}
 	
 	protected void mutar() {
@@ -108,15 +128,44 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 			poblacion.add(generarIndividuo());
 	}
 	
+	public Double mediaFitness() {
+		double acum = 0;
+		for (Individuo<T> ind : poblacion)
+			acum += fitness.eval(ind);
+		return acum / poblacion.size();
+	}
+	
+	public Double maxFitnessActual() {
+		return fitness.eval(poblacion.get(0));
+	}
+	
+	public Double maxFitnessGlobal() {
+		return fitness.eval(mejor);
+	}
+	
+	private void mostrarFitness() {
+		System.out.println("Media: "+mediaFitness());
+		System.out.println("Max actual: "+maxFitnessActual());
+		System.out.println("Max global: "+maxFitnessGlobal());
+	}
+	
 	protected abstract Individuo<T> generarIndividuo();
 	
 	public abstract CategoriaGen getCategoria();
+	
+	public abstract AlgGenetico<T> clone();
+	
+	public abstract Boolean maximizacion();
 	
 	/* ----------------------------------------------------
 	 
 	----------		 Getters & Setters			----------
 			
 	---------------------------------------------------- */
+	
+	public Individuo<T> getMejor() {
+		return mejor;
+	}
 
 	public Cruce<T> getCruce() {
 		return cruce;

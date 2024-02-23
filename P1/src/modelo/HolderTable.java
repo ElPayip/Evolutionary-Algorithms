@@ -16,10 +16,16 @@ public class HolderTable extends AlgGenetico<Double> {
 	
 	private static final double MAX = 10;
 	private static final double MIN = -10;
-	private Double precision;
+	private Double precision = 0.01;
+	
+	public HolderTable(HolderTable otro) {
+		super(otro);
+		precision = otro.precision;
+	}
 
 	public HolderTable() {
 		super(new FitHolderTable());
+		mutacion = new MutacionBinaria<Double>();
 	}
 
 	public HolderTable(Cruce<Double> cruce, Seleccion seleccion,
@@ -31,7 +37,7 @@ public class HolderTable extends AlgGenetico<Double> {
 	protected Individuo<Double> generarIndividuo() {
 		Double[] maxs = {MAX,MAX};
 		Double[] mins = {MIN,MIN};
-		return new IndividuoBinarioReal(maxs, mins, precision);
+		return new IndividuoBinarioReal(mins, maxs, precision);
 	}
 
 	@Override
@@ -57,5 +63,15 @@ public class HolderTable extends AlgGenetico<Double> {
 
 	public void setPrecision(Double precision) {
 		this.precision = precision;
+	}
+
+	@Override
+	public AlgGenetico<Double> clone() {
+		return new HolderTable(this);
+	}
+
+	@Override
+	public Boolean maximizacion() {
+		return false;
 	}
 }

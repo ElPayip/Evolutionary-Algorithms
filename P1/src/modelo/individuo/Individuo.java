@@ -9,13 +9,20 @@ import modelo.genes.Gen;
 import modelo.mutacion.Mutacion;
 import utils.Pair;
 
-public abstract class Individuo<T> {
+public abstract class Individuo<T> implements Cloneable {
 	
 	protected List<Gen<T>> cromosoma;
 	protected double fitness=-1;
 
+	public Individuo(Individuo<T> otro) {
+		this(otro.cromosoma);
+		this.fitness = otro.fitness;
+	}
+
 	public Individuo(List<Gen<T>> cromosoma) {
-		this.cromosoma = cromosoma;
+		this.cromosoma = new ArrayList<>();
+		for (Gen<T> g : cromosoma)
+			this.cromosoma.add(g.clone());
 	}
 	
 	public Individuo(T[] mins, T[] maxs, T prec) {
@@ -30,6 +37,10 @@ public abstract class Individuo<T> {
 	public double getFitness() {
 		return fitness;
 	}
+
+	public void setFitness(double fitness) {
+		this.fitness = fitness;
+	}
 	
 	public double eval(Fitness<T> func) {
 		fitness = func.eval(this);
@@ -37,6 +48,7 @@ public abstract class Individuo<T> {
 	}
 	
 	public Pair<Individuo<T>,Individuo<T>> cruzar(Individuo<T> otro, Cruce<T> cruce) {
+		
 		Pair<List<? extends Gen<T>>,List<? extends Gen<T>>> croms = cruce.cruzar(cromosoma, otro.cromosoma);
 		return new Pair<>(createInstance(croms.getFirst()), createInstance(croms.getSecond()));
 	}
@@ -55,4 +67,6 @@ public abstract class Individuo<T> {
 	protected abstract Gen<T> generarGen(T min, T max, T prec);
 	
 	protected abstract Individuo<T> createInstance(List<? extends Gen<T>> crom);
+	
+	public abstract Individuo<T> clone();
 }

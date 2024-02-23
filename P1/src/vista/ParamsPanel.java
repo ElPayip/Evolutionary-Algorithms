@@ -13,15 +13,17 @@ public class ParamsPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	FactoriaAlgGenetico factoria;
-	private boolean datosValidos = false;
+	ConfigPanel<FactoriaAlgGenetico> config;
+	MainWindow window;
 
-	public ParamsPanel(FactoriaAlgGenetico factoria) {
+	public ParamsPanel(MainWindow win, FactoriaAlgGenetico factoria) {
 		this.factoria = factoria;
+		window = win;
 		initGUI();
 	}
 	
 	private void initGUI() {
-		ConfigPanel<FactoriaAlgGenetico> config = new ConfigPanel<FactoriaAlgGenetico>();
+		config = new ConfigPanel<FactoriaAlgGenetico>();
 		
 		factoria.configurar(config);
 		config.setTarget(factoria);
@@ -35,7 +37,7 @@ public class ParamsPanel extends JPanel {
 			@Override
 			public void configChanged(boolean isConfigValid) {
 				valido.setText(isConfigValid ? textoTodoValido: textoHayErrores);		
-				datosValidos = isConfigValid;
+				window.activarBotones(isConfigValid);
 			}
 		});
 		
@@ -50,7 +52,8 @@ public class ParamsPanel extends JPanel {
 		this.add(valido);
 	}
 	
-	public boolean isConfigValid() {
-		return datosValidos;
+	public void confirmParams() {
+		config.setTarget(factoria);
+		config.copyUpdate();
 	}
 }
