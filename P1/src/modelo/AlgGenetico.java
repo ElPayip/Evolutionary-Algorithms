@@ -88,7 +88,7 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	}
 	
 	protected void evaluar() {
-		double maxFit = Double.MIN_VALUE, minFit = Double.MAX_VALUE;
+		double maxFit = -Double.MAX_VALUE, minFit = Double.MAX_VALUE;
 		for (Individuo<T> i : poblacion) {
 			i.eval(fitness);
 			if (i.getFitness() > maxFit) 
@@ -98,7 +98,7 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 		}
 		
 		maxFit *= 1.05;
-		minFit *= 1.05;
+		minFit *= 0.95;
 		for (Individuo<T> i : poblacion)
 			if (maximizacion())
 				i.setFitness(i.getFitness() - minFit);

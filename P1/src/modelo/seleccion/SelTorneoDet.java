@@ -9,7 +9,14 @@ import vista.ConfigPanel.IntegerOption;
 import vista.ConfigPanel.Option;
 
 public class SelTorneoDet implements Seleccion {
-    private Integer k;
+	
+    private Integer k = 3;
+	
+	public SelTorneoDet() {}
+	
+	public SelTorneoDet(Integer k) {
+		this.k = k;
+	}
 
 	@Override
 	public <T> List<Individuo<T>> seleccionar(List<Individuo<T>> individuos) {
@@ -29,13 +36,15 @@ public class SelTorneoDet implements Seleccion {
                 torneo.add(individuos.get(idx));
             }
             Individuo<T> seleccionado = null;
-            double fitnessSel = Double.MIN_VALUE;
+            double fitnessSel = 0;
             for(int j = 0; j < k; ++j){
                 if(torneo.get(j).getFitness() > fitnessSel){
-                    seleccionado = torneo.get(j);
+                    seleccionado = torneo.get(j).clone();
                     fitnessSel = torneo.get(j).getFitness();
                 }
             }
+            if (seleccionado == null)
+            	System.out.println('a');
             supervs.add(seleccionado);
         }
 		return supervs;
@@ -50,7 +59,7 @@ public class SelTorneoDet implements Seleccion {
 	}
 
 	@Override
-	public String getName() {
+	public String toString() {
 		return "Torneo determinístico";
 	}
 
@@ -59,5 +68,10 @@ public class SelTorneoDet implements Seleccion {
 		List<Option<T>> extras = new ArrayList<>();
 		extras.add(new IntegerOption<T>("k", "k", "k", 0, 100));
 		return extras;
+	}
+	
+	@Override
+	public SelTorneoDet clone() {
+		return new SelTorneoDet(k);
 	}
 }
