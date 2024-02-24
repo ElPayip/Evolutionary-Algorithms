@@ -66,7 +66,12 @@ public class FactoriaAlgGenetico {
 						  "probabilidad de mutacion",
 						  "probabilidad de mutacion",
 						  "probMutacion",
-						  0, 1));
+						  0, 1))
+				  .addInner(new DoubleOption<>(
+						  "% de elitismo",
+						  "% de elitismo",
+						  "elitismo",
+						  0, 100, 100));
 			for (int i = 1; i < agConf.size(); ++i)
 				config.addInner(agConf.get(i));
 			
