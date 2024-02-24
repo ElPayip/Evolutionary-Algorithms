@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import modelo.AlgGenetico;
 import modelo.factorias.FactoriaAlgGenetico;
+import modelo.individuo.Individuo;
 
 public class MainWindow extends JFrame {
     
@@ -16,6 +17,7 @@ public class MainWindow extends JFrame {
 	
 	FactoriaAlgGenetico factoria;
 	
+	GraphPanel graphPanel;
 	JButton bEjecutar;
 	Thread thread;
 
@@ -29,7 +31,7 @@ public class MainWindow extends JFrame {
         JPanel mainPanel = new JPanel(new BorderLayout());
 
         ParamsPanel paramsPanel = new ParamsPanel(this, factoria);
-        JPanel graphPanel = new GraphPanel();
+        graphPanel = new GraphPanel();
         
         JPanel panelBotones = new JPanel(new FlowLayout());
         bEjecutar = new JButton("Ejecutar");
@@ -47,7 +49,8 @@ public class MainWindow extends JFrame {
         
         setContentPane(mainPanel);
         
-        this.setSize(600, 600);
+        this.pack();
+        this.setSize(this.getWidth()+50, 600);
         this.setVisible(true);
     }
     
@@ -57,9 +60,10 @@ public class MainWindow extends JFrame {
     
     private void run(AlgGenetico<?> alg) {
     	activarBotones(false);
-    	alg.ejecutar();
+    	Individuo<?> ind = alg.ejecutar();
     	System.out.println(alg.getMejor().getValores());
     	System.out.println(alg.getMejor().getFitness());
+    	graphPanel.update(alg.getMetricas(), ind);
     	activarBotones(true);
     }
 }

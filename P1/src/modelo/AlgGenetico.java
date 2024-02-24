@@ -29,6 +29,9 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	protected Double elitismo = 0.0;
 
 	protected Random rand;
+	private List<Double> mediaFit = new ArrayList<>();
+	private List<Double> maxActFit = new ArrayList<>();
+	private List<Double> MaxGlobFit = new ArrayList<>();
 	
 	public AlgGenetico(Fitness<T> fit) {
 		rand = new Random();
@@ -62,8 +65,19 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 			mutar();
 			evaluar();
 			elitismo();
-			System.out.println("Generacion "+(i+1));
-			mostrarFitness();
+			
+			System.out.println(i);
+			System.out.println(maxFitnessActual());
+			System.out.println(mediaFitness());
+
+			if (mediaFitness() > maxFitnessActual()) {
+				System.out.println("a");
+				System.out.println(maxFitnessActual());
+				System.out.println(mediaFitness());
+				for (Individuo<T> ind : poblacion)
+					System.out.println(fitness.eval(ind)+" vs "+ind.getFitness());
+			}
+			guardar();
 		}
 		mejor.eval(fitness);
 		return mejor;
@@ -72,7 +86,9 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	protected List<Individuo<T>> seleccionar() {
 		if (elitismo > 0) {
 			int corte = (int) (elitismo * poblacion.size());
-			elite = poblacion.subList(0, corte);
+			elite = new ArrayList<>();
+			for (int i = 0; i < corte; ++i)
+				elite.add(poblacion.get(i).clone());
 		}
 		return seleccion.seleccionar(poblacion);
 	}
@@ -102,19 +118,30 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 			if (i.getFitness() < minFit)
 				minFit = i.getFitness();
 		}
+		if (elite != null)
+			for (Individuo<T> i : elite) {
+				i.eval(fitness);
+				if (i.getFitness() > maxFit) 
+					maxFit = i.getFitness();
+				if (i.getFitness() < minFit)
+					minFit = i.getFitness();
+			}
 		
-		maxFit *= 1.05;
-		minFit *= 0.95;
+		maxFit += 0.01;
+		minFit -= 0.01;
 		for (Individuo<T> i : poblacion)
 			if (maximizacion())
 				i.setFitness(i.getFitness() - minFit);
 			else
 				i.setFitness(maxFit - i.getFitness());
+		if (elite != null)
+			for (Individuo<T> i : elite)
+				if (maximizacion())
+					i.setFitness(i.getFitness() - minFit);
+				else
+					i.setFitness(maxFit - i.getFitness());
 		
 		ordenar();
-		if (mejor == null || (maximizacion() && fitness.eval(mejor) < fitness.eval(poblacion.get(0)))
-						  || (!maximizacion() && fitness.eval(mejor) > fitness.eval(poblacion.get(0))))
-			mejor = poblacion.get(0).clone();
 	}
 	
 	protected void mutar() {
@@ -136,6 +163,9 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 				return Double.compare(o2.getFitness(), o1.getFitness());
 			}
 		});
+		if (mejor == null || (maximizacion() && fitness.eval(mejor) < fitness.eval(poblacion.get(0)))
+				  		  || (!maximizacion() && fitness.eval(mejor) > fitness.eval(poblacion.get(0))))
+			mejor = poblacion.get(0).clone();
 	}
 	
 	private void elitismo() {
@@ -163,10 +193,19 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 		return fitness.eval(mejor);
 	}
 	
-	private void mostrarFitness() {
-		System.out.println("Media: "+mediaFitness());
-		System.out.println("Max actual: "+maxFitnessActual());
-		System.out.println("Max global: "+maxFitnessGlobal());
+	private void guardar() {
+		mediaFit.add(mediaFitness());
+		maxActFit.add(maxFitnessActual());
+		MaxGlobFit.add(maxFitnessGlobal());
+	}
+	
+	public List<Double[]> getMetricas(){
+		Double[] aux = new Double[0];
+		List<Double[]> metricas = new ArrayList<>();
+		metricas.add(mediaFit.toArray(aux));
+		metricas.add(maxActFit.toArray(aux));
+		metricas.add(MaxGlobFit.toArray(aux));
+		return metricas;
 	}
 	
 	protected abstract Individuo<T> generarIndividuo();

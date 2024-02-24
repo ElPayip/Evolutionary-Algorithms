@@ -17,7 +17,7 @@ public class MichalewiczReal extends AlgGenetico<Double> {
 
 	private static final double MAX = Math.PI;
 	private static final double MIN = 0;
-	private int d;
+	private int d = 2;
 	
 	public MichalewiczReal(MichalewiczReal otro) {
 		super(otro);
@@ -69,5 +69,13 @@ public class MichalewiczReal extends AlgGenetico<Double> {
 	@Override
 	public Boolean maximizacion() {
 		return false;
+	}
+
+	public int getD() {
+		return d;
+	}
+
+	public void setD(int d) {
+		this.d = d;
 	}
 }
