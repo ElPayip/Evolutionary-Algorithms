@@ -6,6 +6,7 @@ import modelo.AlgGenetico;
 import modelo.CalibracionYPrueba;
 import modelo.HolderTable;
 import modelo.MishraBird;
+import modelo.MichalewiczBinario;
 import modelo.MichalewiczReal;
 import modelo.cruce.Cruce;
 import modelo.seleccion.Seleccion;
@@ -27,6 +28,7 @@ public class FactoriaAlgGenetico {
 	private AlgGenetico<?>[] algPosibles = {new CalibracionYPrueba(),
 											new MishraBird(),
 										 	new HolderTable(),
+										 	new MichalewiczBinario(),
 										 	new MichalewiczReal()
 										 	};
 	
