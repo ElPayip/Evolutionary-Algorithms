@@ -27,19 +27,22 @@ public class SelTorneoProb implements Seleccion {
 		List<Individuo<T>> supervs = new ArrayList<>(individuos.size());
 		
 		for (int i = 0; i < individuos.size(); ++i) {
-			int[] idx = rnd.ints(k, 0, individuos.size()).toArray();
+			List<Individuo<T>> torneo = new ArrayList<>();
+            for (int j = 0; j < k; ++j) {
+                int idx = rnd.nextInt(individuos.size());
+                torneo.add(individuos.get(idx));
+            }
 			
 			double totalFit = 0;
-			for (int j : idx)
-				totalFit += individuos.get(j).getFitness();
+			for (Individuo<T> ind : torneo) totalFit += ind.getFitness();
 			
 			double prob = rnd.nextDouble(), acum = 0;
 			int j = -1;
 			do {
 				++j;
-				acum += individuos.get(j).getFitness() / totalFit;
-			} while(acum < prob && j < individuos.size()-1);
-			supervs.add(individuos.get(j).clone());
+				acum += torneo.get(j).getFitness() / totalFit;
+			} while(acum < prob);
+			supervs.add(torneo.get(j).clone());
 		}
 		return supervs;
 	}

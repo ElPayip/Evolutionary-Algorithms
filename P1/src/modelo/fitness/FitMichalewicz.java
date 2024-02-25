@@ -13,7 +13,7 @@ public class FitMichalewicz implements Fitness<Double> {
 		double fit = 0;
 		List<Double> x = ind.getValores();
 		for (int i = 0; i < x.size(); ++i) {
-			double aux = i * Math.pow(x.get(i), 2) / Math.PI;
+			double aux = (i+1) * Math.pow(x.get(i), 2) / Math.PI;
 			fit -= Math.sin(x.get(i)) * Math.pow(Math.sin(aux), 2 * M);
 		}
 		return fit;
