@@ -5,6 +5,7 @@ import java.util.List;
 import modelo.AlgGenetico;
 import modelo.CalibracionYPrueba;
 import modelo.HolderTable;
+import modelo.MishraBird;
 import modelo.MichalewiczReal;
 import modelo.cruce.Cruce;
 import modelo.seleccion.Seleccion;
@@ -24,6 +25,7 @@ public class FactoriaAlgGenetico {
 	private FactoriaSeleccion selecciones;
 	private AlgGenetico<?> alg;
 	private AlgGenetico<?>[] algPosibles = {new CalibracionYPrueba(),
+											new MishraBird(),
 										 	new HolderTable(),
 										 	new MichalewiczReal()
 										 	};
