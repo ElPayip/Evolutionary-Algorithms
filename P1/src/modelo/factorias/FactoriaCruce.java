@@ -8,7 +8,9 @@ import java.util.Map;
 import modelo.CategoriaGen;
 import modelo.cruce.Cruce;
 import modelo.cruce.CruceAritmetico;
+import modelo.cruce.CruceBLXAlpha;
 import modelo.cruce.CruceMonopuntoBin;
+import modelo.cruce.CruceUniformeBin;
 
 
 public class FactoriaCruce {
@@ -21,9 +23,11 @@ public class FactoriaCruce {
 	public <T> FactoriaCruce() {
 		binarios = new ArrayList<>();
 		binarios.add(new CruceMonopuntoBin<T>());
+		binarios.add(new CruceUniformeBin<T>());
 		
 		reales = new ArrayList<>();
 		reales.add(new CruceAritmetico());
+		reales.add(new CruceBLXAlpha());
 		
 		cruces = new HashMap<>();
 		cruces.put(CategoriaGen.BINARIO, binarios);

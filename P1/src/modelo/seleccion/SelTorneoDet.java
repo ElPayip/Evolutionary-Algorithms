@@ -22,9 +22,6 @@ public class SelTorneoDet implements Seleccion {
 	public <T> List<Individuo<T>> seleccionar(List<Individuo<T>> individuos) {
 		if (k == null)
 			throw new RuntimeException("Hay que inicializar SelTorneoDet con setK");
-
-    if (k < 2 || k > 3)
-      throw new IllegalArgumentException("El tamaño del torneo debe ser 2 o 3");
 		
 		Random rnd = new Random();
 		List<Individuo<T>> supervs = new ArrayList<>(individuos.size());

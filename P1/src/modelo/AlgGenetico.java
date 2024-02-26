@@ -66,17 +66,6 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 			evaluar();
 			elitismo();
 			
-			System.out.println(i);
-			System.out.println(maxFitnessActual());
-			System.out.println(mediaFitness());
-
-			if (mediaFitness() > maxFitnessActual()) {
-				System.out.println("a");
-				System.out.println(maxFitnessActual());
-				System.out.println(mediaFitness());
-				for (Individuo<T> ind : poblacion)
-					System.out.println(fitness.eval(ind)+" vs "+ind.getFitness());
-			}
 			guardar();
 		}
 		mejor.eval(fitness);
