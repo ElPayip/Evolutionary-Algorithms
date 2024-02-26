@@ -3,8 +3,8 @@ package modelo.seleccion;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.ucm.fdi.pe.ConfigPanel.IntegerOption;
 import modelo.individuo.Individuo;
+import vista.ConfigPanel.IntegerOption;
 import vista.ConfigPanel.Option;
 
 public class SelRestos implements Seleccion {
@@ -42,6 +42,19 @@ public class SelRestos implements Seleccion {
 		List<Option<T>> extras = new ArrayList<>();
 		extras.add(new IntegerOption<T>("k", "k", "k", 0, Integer.MAX_VALUE));
 		return extras;
+	}
+	
+	@Override
+	public String toString() {
+		return "Restos";
+	}
+	
+	public int getK() {
+		return k;
+	}
+
+	public void setK(int k) {
+		this.k = k;
 	}
 	
 	@Override
