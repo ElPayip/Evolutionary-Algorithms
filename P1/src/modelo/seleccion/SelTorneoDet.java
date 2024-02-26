@@ -40,8 +40,6 @@ public class SelTorneoDet implements Seleccion {
                     fitnessSel = torneo.get(j).getFitness();
                 }
             }
-            if (seleccionado == null)
-            	System.out.println('a');
             supervs.add(seleccionado);
         }
 		return supervs;

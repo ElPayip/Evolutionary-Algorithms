@@ -20,8 +20,12 @@ public class CruceAritmetico implements Cruce<Double> {
 	public Pair<List<? extends Gen<Double>>,List<? extends Gen<Double>>> cruzar(
 			List<? extends Gen<Double>> crom1, List<? extends Gen<Double>> crom2) {
 		
-		List<Gen<Double>> h1 = new ArrayList<>(crom1);
-		List<Gen<Double>> h2 = new ArrayList<>(crom2);
+		List<Gen<Double>> h1 = new ArrayList<>();
+		List<Gen<Double>> h2 = new ArrayList<>();
+		for (Gen<Double> g : crom1)
+			h1.add(g.clone());
+		for (Gen<Double> g : crom2)
+			h2.add(g.clone());
 		
 		for (int i = 0; i < h1.size(); ++i) {
 			h1.get(i).setValor(h1.get(i).getValor()*alpha + (1-alpha)*h2.get(i).getValor());
