@@ -3,6 +3,7 @@ package modelo.factorias;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.seleccion.SelEstocastico;
 import modelo.seleccion.SelRuleta;
 import modelo.seleccion.SelTorneoDet;
 import modelo.seleccion.SelTorneoProb;
@@ -15,6 +16,7 @@ public class FactoriaSeleccion {
 	
 	public FactoriaSeleccion() {
 		selecciones = new ArrayList<>();
+		selecciones.add(new SelEstocastico());
 		selecciones.add(new SelRuleta());
 		selecciones.add(new SelTruncamiento());
 		selecciones.add(new SelTorneoProb());
