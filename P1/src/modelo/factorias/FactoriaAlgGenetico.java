@@ -24,7 +24,9 @@ public class FactoriaAlgGenetico {
 	private FactoriaSeleccion selecciones;
 	private AlgGenetico<?> alg;
 	private AlgGenetico<?>[] algPosibles = {new CalibracionYPrueba(),
+											new MishraBird(),
 										 	new HolderTable(),
+											new MichalewiczBinario(),
 										 	new MichalewiczReal()
 										 	};
 	
