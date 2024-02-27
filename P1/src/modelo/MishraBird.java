@@ -16,8 +16,6 @@ import vista.ConfigPanel.Option;
 
 public class MishraBird extends AlgGenetico<Double>{
 	
-	private static final double MAX = 10;
-	private static final double MIN = -10;
 	private Double precision = 0.01;
 	
 	public MishraBird(MishraBird otro) {
@@ -45,8 +43,8 @@ public class MishraBird extends AlgGenetico<Double>{
 
 	@Override
 	protected Individuo<Double> generarIndividuo() {
-		Double[] maxs = {MAX,MAX};
-		Double[] mins = {MIN,MIN};
+		Double[] maxs = {0.0,0.0};
+		Double[] mins = {-10.0,-6.5};
 		return new IndividuoBinarioReal(mins, maxs, precision);
 	}
 	

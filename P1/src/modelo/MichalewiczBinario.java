@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import modelo.cruce.Cruce;
@@ -9,6 +10,7 @@ import modelo.individuo.Individuo;
 import modelo.individuo.IndividuoBinarioReal;
 import modelo.mutacion.MutacionBinaria;
 import modelo.seleccion.Seleccion;
+import vista.ConfigPanel.DoubleOption;
 import vista.ConfigPanel.IntegerOption;
 import vista.ConfigPanel.Option;
 
@@ -30,21 +32,25 @@ public class MichalewiczBinario extends AlgGenetico<Double>{
 	}
 	
 	public MichalewiczBinario(Cruce<Double> cruce, Seleccion seleccion,
-			int nGeneraciones, int tamPoblacion, double probCruce, double probMutacion, double prec) {
+			int nGeneraciones, int tamPoblacion, double probCruce, double probMutacion, double prec, int d) {
 		super(cruce, seleccion, new FitMichalewicz(), new MutacionBinaria<Double>(), nGeneraciones, tamPoblacion, probCruce, probMutacion);
+		this.d = d;
 	}
 
 	@Override
 	public <T> List<Option<T>> getExtraOpts() {
 		List<Option<T>> extras = new ArrayList<>();
+		extras.add(new DoubleOption<T>("precision", "precision", "precision", 0, 1000));
 		extras.add(new IntegerOption<T>("dimension", "dimension", "d", 0, 1000));
 		return extras;
 	}
 
 	@Override
 	protected Individuo<Double> generarIndividuo() {
-		Double[] maxs = {MAX,MAX};
-		Double[] mins = {MIN,MIN};
+		Double[] maxs = new Double[d], 
+				 mins = new Double[d];
+		Arrays.fill(maxs, MAX);
+		Arrays.fill(mins, MIN);
 		return new IndividuoBinarioReal(mins, maxs, precision);
 	}
 	
@@ -74,5 +80,13 @@ public class MichalewiczBinario extends AlgGenetico<Double>{
 
 	public void setD(int d) {
 		this.d = d;
+	}
+
+	public Double getPrecision() {
+		return precision;
+	}
+
+	public void setPrecision(Double precision) {
+		this.precision = precision;
 	}
 }

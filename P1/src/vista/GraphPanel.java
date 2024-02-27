@@ -10,6 +10,8 @@ import java.util.stream.Stream;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import org.math.plot.Plot2DPanel;
 
@@ -20,8 +22,9 @@ public class GraphPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private Plot2DPanel plot;
-	private JLabel individuoLabel;
+	private JTextArea individuoLabel;
 	private JLabel resultadoLabel;
+	private JScrollPane indPanel;
 	
 	private String[] nombres = { "Media", "Max Actual", "Max Global" };
 	private Color[] colores = { Color.GREEN, Color.RED, Color.BLUE };
@@ -37,9 +40,19 @@ public class GraphPanel extends JPanel {
 		JPanel mejorPanel = new JPanel();
 		mejorPanel.setLayout(new BoxLayout(mejorPanel, BoxLayout.Y_AXIS));
 		mejorPanel.add(new JLabel("Mejor individuo:"));
-		individuoLabel = new JLabel("...");
+		individuoLabel = new JTextArea("...");
+		individuoLabel.setEditable(false);
+		
+		JPanel individuoPanel = new JPanel();
+		individuoPanel.add(individuoLabel);
+		individuoPanel.setBackground(Color.WHITE);
+		
+		indPanel = new JScrollPane(individuoPanel);
+		indPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		indPanel.setPreferredSize(new Dimension(100, 50));
+		
 		resultadoLabel = new JLabel("");
-		mejorPanel.add(individuoLabel);
+		mejorPanel.add(indPanel);
 		mejorPanel.add(resultadoLabel);
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -60,6 +73,8 @@ public class GraphPanel extends JPanel {
 		}
 		
 		individuoLabel.setText("Valores: "+mejor.getValores().toString());
+		individuoLabel.validate();
+		indPanel.validate();
 		resultadoLabel.setText("Solución: "+mejor.getFitness());
 	}
 }
