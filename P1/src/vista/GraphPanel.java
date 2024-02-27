@@ -21,6 +21,7 @@ public class GraphPanel extends JPanel {
 	
 	private Plot2DPanel plot;
 	private JLabel individuoLabel;
+	private JLabel resultadoLabel;
 	
 	private String[] nombres = { "Media", "Max Actual", "Max Global" };
 	private Color[] colores = { Color.GREEN, Color.RED, Color.BLUE };
@@ -34,9 +35,12 @@ public class GraphPanel extends JPanel {
 		plot.addLegend("SOUTH");
 		
 		JPanel mejorPanel = new JPanel();
+		mejorPanel.setLayout(new BoxLayout(mejorPanel, BoxLayout.Y_AXIS));
 		mejorPanel.add(new JLabel("Mejor individuo:"));
 		individuoLabel = new JLabel("...");
+		resultadoLabel = new JLabel("");
 		mejorPanel.add(individuoLabel);
+		mejorPanel.add(resultadoLabel);
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(plot);
@@ -50,11 +54,12 @@ public class GraphPanel extends JPanel {
 		for (int i = 0; i < metricas.size(); ++i) {
 			double[] y = Stream.of(metricas.get(i)).mapToDouble(Double::doubleValue).toArray();
 			
-			try { Thread.sleep(5);// Esta espera impide excepciones por problemas de concurrencia (aunque son inofensivas)
+			try { Thread.sleep(20);// Esta espera impide excepciones por problemas de concurrencia (aunque son inofensivas)
 			} catch (InterruptedException e) { System.out.println("Espera interrumpida"); }
 			plot.addLinePlot(nombres[i], colores[i], x, y);
 		}
 		
-		individuoLabel.setText(mejor.getValores().toString());
+		individuoLabel.setText("Valores: "+mejor.getValores().toString());
+		resultadoLabel.setText("Solución: "+mejor.getFitness());
 	}
 }
