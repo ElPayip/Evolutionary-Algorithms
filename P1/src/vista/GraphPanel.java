@@ -46,10 +46,12 @@ public class GraphPanel extends JPanel {
 	
 	public void update(List<Double[]> metricas, Individuo<?> mejor) {
 		plot.removeAllPlots();
+		double[] x = Arrays.stream(IntStream.range(0, metricas.get(0).length).toArray()).asDoubleStream().toArray();
 		for (int i = 0; i < metricas.size(); ++i) {
-			double[] x = Arrays.stream(IntStream.range(0, metricas.get(i).length).toArray()).asDoubleStream().toArray();
 			double[] y = Stream.of(metricas.get(i)).mapToDouble(Double::doubleValue).toArray();
 			
+			try { Thread.sleep(5);// Esta espera impide excepciones por problemas de concurrencia (aunque son inofensivas)
+			} catch (InterruptedException e) { System.out.println("Espera interrumpida"); }
 			plot.addLinePlot(nombres[i], colores[i], x, y);
 		}
 		

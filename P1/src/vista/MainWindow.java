@@ -51,6 +51,7 @@ public class MainWindow extends JFrame {
         
         this.pack();
         this.setSize(this.getWidth()+50, 600);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
     
@@ -61,8 +62,6 @@ public class MainWindow extends JFrame {
     private void run(AlgGenetico<?> alg) {
     	activarBotones(false);
     	Individuo<?> ind = alg.ejecutar();
-    	System.out.println(alg.getMejor().getValores());
-    	System.out.println(alg.getMejor().getFitness());
     	graphPanel.update(alg.getMetricas(), ind);
     	activarBotones(true);
     }
