@@ -1,5 +1,3 @@
-import javax.swing.SwingUtilities;
-
 import modelo.factorias.FactoriaAlgGenetico;
 import vista.MainWindow;
 
