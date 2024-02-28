@@ -9,7 +9,9 @@ import modelo.CategoriaGen;
 import modelo.cruce.Cruce;
 import modelo.cruce.CruceAritmetico;
 import modelo.cruce.CruceBLXAlpha;
+import modelo.cruce.CruceMonopunto;
 import modelo.cruce.CruceMonopuntoBin;
+import modelo.cruce.CruceUniforme;
 import modelo.cruce.CruceUniformeBin;
 
 
@@ -26,6 +28,8 @@ public class FactoriaCruce {
 		binarios.add(new CruceUniformeBin<T>());
 		
 		reales = new ArrayList<>();
+		reales.add(new CruceMonopunto<T>());
+		reales.add(new CruceUniforme<T>());
 		reales.add(new CruceAritmetico());
 		reales.add(new CruceBLXAlpha());
 		

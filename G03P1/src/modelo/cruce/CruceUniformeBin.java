@@ -15,8 +15,6 @@ public class CruceUniformeBin<T> implements Cruce<T>{
 	@Override
 	public Pair<List<? extends Gen<T>>, List<? extends Gen<T>>> cruzar(List<? extends Gen<T>> crom1,
 			List<? extends Gen<T>> crom2) {
-		if (crom1.size() != crom2.size())
-			throw new IllegalArgumentException("Cromosomas de distinto tamaño en cruce");
 		
 		List<GenBinario<T>> hijo1 = new ArrayList<>(), 
 				hijo2 = new ArrayList<>();
@@ -29,8 +27,6 @@ public class CruceUniformeBin<T> implements Cruce<T>{
 		
 		List<Integer> alelos1 = GenBinario.getGenotipo(hijo1);
 		List<Integer> alelos2 = GenBinario.getGenotipo(hijo2);
-		if (alelos1.size() != alelos2.size())
-			throw new IllegalArgumentException("Cromosomas de distinto tamaño en cruce");
 		
 		List<Integer> c1 = new ArrayList<>(), 
 					  c2 = new ArrayList<>();

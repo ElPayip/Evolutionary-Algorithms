@@ -5,10 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import modelo.cruce.Cruce;
+import modelo.cruce.CruceMonopuntoBin;
 import modelo.fitness.FitMichalewicz;
 import modelo.individuo.Individuo;
 import modelo.individuo.IndividuoBinarioReal;
 import modelo.mutacion.MutacionBinaria;
+import modelo.seleccion.SelEstocastico;
 import modelo.seleccion.Seleccion;
 import vista.ConfigPanel.DoubleOption;
 import vista.ConfigPanel.IntegerOption;
@@ -29,6 +31,8 @@ public class MichalewiczBinario extends AlgGenetico<Double>{
 	public MichalewiczBinario() {
 		super(new FitMichalewicz());
 		mutacion = new MutacionBinaria<Double>();
+		cruce = new CruceMonopuntoBin<Double>();
+		seleccion = new SelEstocastico();
 	}
 	
 	public MichalewiczBinario(Cruce<Double> cruce, Seleccion seleccion,

@@ -35,6 +35,8 @@ public class FactoriaAlgGenetico {
 	public FactoriaAlgGenetico() {
 		cruces = new FactoriaCruce();
 		selecciones = new FactoriaSeleccion();
+		
+		alg = algPosibles[0];
 	}
 	
 	public AlgGenetico<?> generar() {

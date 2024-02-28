@@ -40,7 +40,7 @@ public class MainWindow extends JFrame {
         	thread = new Thread(() -> run(factoria.generar()));
         	thread.start();
         });
-        bEjecutar.setEnabled(false);
+        bEjecutar.setEnabled(true);
         panelBotones.add(bEjecutar);
         
         mainPanel.add(paramsPanel, BorderLayout.WEST);

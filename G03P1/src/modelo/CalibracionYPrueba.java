@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.cruce.Cruce;
+import modelo.cruce.CruceUniformeBin;
 import modelo.fitness.FitCalibracionPrueba;
 import modelo.individuo.Individuo;
 import modelo.individuo.IndividuoBinarioReal;
 import modelo.mutacion.MutacionBinaria;
+import modelo.seleccion.SelTorneoDet;
 import modelo.seleccion.Seleccion;
 import vista.ConfigPanel.DoubleOption;
 import vista.ConfigPanel.Option;
@@ -21,6 +23,8 @@ public class CalibracionYPrueba extends AlgGenetico<Double> {
 	public CalibracionYPrueba() {
 		super(new FitCalibracionPrueba());
 		mutacion = new MutacionBinaria<Double>();
+		cruce = new CruceUniformeBin<Double>();
+		seleccion = new SelTorneoDet();
 	}
 
 	public CalibracionYPrueba(Cruce<Double> cruce, Seleccion seleccion,
