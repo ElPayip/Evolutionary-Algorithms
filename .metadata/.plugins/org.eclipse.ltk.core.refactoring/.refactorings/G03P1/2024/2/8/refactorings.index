@@ -1,0 +1,23 @@
+1708330739442	Rename method 'getRandomVal'
+1708335296375	Rename type 'IndividuoBinario'
+1708336024732	Rename method 'getFenotipo'
+1708353353012	Rename type 'CruceMonopunto'
+1708378357278	Rename method 'initRandomVal'
+1708378459100	Rename method 'initRandomVal'
+1708548263966	Delete element
+1708548450366	Rename local variable 'func'
+1708548470066	Delete element
+1708550205345	Move compilation unit
+1708550298146	Delete element
+1708550501817	Rename field 'ctrl'
+1708557231654	Rename field 'tiposAlg'
+1708595127550	Rename type 'CruceUniforme'
+1708606099387	Delete element
+1708607537615	Delete element
+1708609473886	Rename local variable 'aux'
+1708609861753	Rename field 'prec'
+1708610063464	Rename field 'prec'
+1708617124360	Delete element
+1708643748916	Rename method 'clonar'
+1708786163121	Rename local variable 'aux'
+1708870553377	Rename local variable 'j'

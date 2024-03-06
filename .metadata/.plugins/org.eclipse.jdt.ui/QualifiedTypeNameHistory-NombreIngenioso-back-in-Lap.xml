@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="modelo.AlgGenetico"/>
+    <fullyQualifiedTypeName name="control.Controller"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="java.util.Collections"/>
+    <fullyQualifiedTypeName name="modelo.seleccion.SelTorneoProb"/>
+    <fullyQualifiedTypeName name="modelo.Individuo"/>
+    <fullyQualifiedTypeName name="modelo.individuo.Individuo"/>
+    <fullyQualifiedTypeName name="modelo.fitness.FitCalibracionPrueba"/>
+    <fullyQualifiedTypeName name="modelo.mutacion.MutacionBinaria"/>
+</qualifiedTypeNameHistroy>
