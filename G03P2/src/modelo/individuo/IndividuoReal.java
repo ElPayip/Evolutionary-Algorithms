@@ -24,14 +24,9 @@ public class IndividuoReal extends Individuo<Double> {
 		return new GenReal(min, max);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	protected Individuo<Double> createInstance(List<? extends Gen<Double>> crom) {
-		try {
-			return new IndividuoReal((List<Gen<Double>>) crom);
-		} catch (ClassCastException e) {
-			throw new IllegalArgumentException("Para createInstance de IndividuoReal son necesarios GenReal");
-		}
+	protected Individuo<Double> createInstance(List<Gen<Double>> crom) {
+		return new IndividuoReal(crom);
 	}
 
 	@Override

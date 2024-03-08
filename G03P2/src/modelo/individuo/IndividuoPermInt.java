@@ -39,9 +39,8 @@ public class IndividuoPermInt extends Individuo<Integer> {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	protected Individuo<Integer> createInstance(List<? extends Gen<Integer>> crom) {
+	protected Individuo<Integer> createInstance(List<Gen<Integer>> crom) {
 		return new IndividuoPermInt((List<Gen<Integer>>) crom);
 	}
 

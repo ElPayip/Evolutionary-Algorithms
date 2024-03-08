@@ -1,6 +1,6 @@
 package modelo;
 
-public enum Pesos {
+public enum Peso {
 
 	W, G, L
 }

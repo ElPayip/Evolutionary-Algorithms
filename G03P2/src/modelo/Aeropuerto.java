@@ -7,30 +7,43 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import modelo.cruce.CrucePMX;
 import modelo.fitness.FitAeropuerto;
 import modelo.individuo.Individuo;
+import modelo.mutacion.MutacionIntercambio;
+import modelo.seleccion.SelRuleta;
 import vista.ConfigPanel.IntegerOption;
 import vista.ConfigPanel.Option;
 
 public class Aeropuerto extends AlgGenetico<Integer> {
 	
 	private List<List<Integer>> tel;
-	private Map<Pesos,Map<Pesos,Double>> sep;
-	private List<Pesos> peso;
+	private Map<Peso,Map<Peso,Double>> sep;
+	private List<Peso> peso;
 	
 	private Integer pistas;
 	private Integer vuelos;
 	
 	public Aeropuerto(String file) {
-		fitness = new FitAeropuerto();
-		mutacion = null;
-		cruce = null;
-		seleccion = new SelRanking();
+		initFromFile(file);
+		fitness = new FitAeropuerto(tel, sep, peso);
+		mutacion = new MutacionIntercambio<>();
+		cruce = new CrucePMX<>();
+		seleccion = new SelRuleta();
 	}
 
 	public Aeropuerto(AlgGenetico<Integer> otro) {
 		super(otro);
-		// TODO Auto-generated constructor stub
+		Aeropuerto alg = (Aeropuerto) otro;
+		tel = alg.tel;
+		sep = alg.sep;
+		peso = alg.peso;
+		pistas = alg.pistas;
+		vuelos = alg.vuelos;
+	}
+	
+	private void initFromFile(String file) {
+		//TODO
 	}
 
 	@Override

@@ -3,17 +3,17 @@ package modelo.fitness;
 import java.util.List;
 import java.util.Map;
 
-import modelo.Pesos;
+import modelo.Peso;
 import modelo.individuo.Individuo;
 
 public class FitAeropuerto implements Fitness<Integer> {
 	
 	private List<List<Integer>> tel;
-	private Map<Pesos,Map<Pesos,Double>> sep;
-	private List<Pesos> peso;
+	private Map<Peso,Map<Peso,Double>> sep;
+	private List<Peso> peso;
 	private int nPistas;
 	
-	public FitAeropuerto(List<List<Integer>> tels, Map<Pesos,Map<Pesos,Double>> seps, List<Pesos> pesos) {
+	public FitAeropuerto(List<List<Integer>> tels, Map<Peso,Map<Peso,Double>> seps, List<Peso> pesos) {
 		tel = tels;
 		sep = seps;
 		peso = pesos;

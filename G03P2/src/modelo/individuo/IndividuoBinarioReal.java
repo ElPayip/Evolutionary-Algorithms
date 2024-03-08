@@ -24,14 +24,9 @@ public class IndividuoBinarioReal extends Individuo<Double> {
 		return new GenBinReal(min, max, prec);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	protected Individuo<Double> createInstance(List<? extends Gen<Double>> crom) {
-		try {
-			return new IndividuoBinarioReal((List<Gen<Double>>) crom);
-		} catch (ClassCastException e) {
-			throw new IllegalArgumentException("Para createInstance de IndividuoBinarioReal son necesarios GenBinReal");
-		}
+	protected Individuo<Double> createInstance(List<Gen<Double>> crom) {
+		return new IndividuoBinarioReal(crom);
 	}
 
 	@Override

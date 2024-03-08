@@ -52,7 +52,7 @@ public abstract class Individuo<T> implements Cloneable {
 	
 	public Pair<Individuo<T>,Individuo<T>> cruzar(Individuo<T> otro, Cruce<T> cruce) {
 		
-		Pair<List<? extends Gen<T>>,List<? extends Gen<T>>> croms = cruce.cruzar(cromosoma, otro.cromosoma);
+		Pair<List<Gen<T>>,List<Gen<T>>> croms = cruce.cruzar(cromosoma, otro.cromosoma);
 		return new Pair<>(createInstance(croms.getFirst()), createInstance(croms.getSecond()));
 	}
 	
@@ -69,7 +69,7 @@ public abstract class Individuo<T> implements Cloneable {
 	
 	protected abstract Gen<T> generarGen(T min, T max, T prec);
 	
-	protected abstract Individuo<T> createInstance(List<? extends Gen<T>> crom);
+	protected abstract Individuo<T> createInstance(List<Gen<T>> crom);
 	
 	public abstract Individuo<T> clone();
 }
