@@ -8,8 +8,7 @@ import utils.Pair;
 
 public interface Cruce<T> extends Configurable, Cloneable {
 	
-	public Pair<List<? extends Gen<T>>,List<? extends Gen<T>>> cruzar(
-			List<? extends Gen<T>> crom1, List<? extends Gen<T>> crom2);
+	public Pair<List<Gen<T>>,List<Gen<T>>> cruzar(List<Gen<T>> crom1, List<Gen<T>> crom2);
 	
 	public Cruce<T> clone();
 }

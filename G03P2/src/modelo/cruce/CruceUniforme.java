@@ -11,8 +11,7 @@ import vista.ConfigPanel.Option;
 public class CruceUniforme<T> implements Cruce<T> {
 
 	@Override
-	public Pair<List<? extends Gen<T>>, List<? extends Gen<T>>> cruzar(List<? extends Gen<T>> crom1,
-			List<? extends Gen<T>> crom2) {
+	public Pair<List<Gen<T>>, List<Gen<T>>> cruzar(List<Gen<T>> crom1, List<Gen<T>> crom2) {
 		
 		List<Gen<T>> hijo1 = new ArrayList<>(), 
 					 hijo2 = new ArrayList<>();

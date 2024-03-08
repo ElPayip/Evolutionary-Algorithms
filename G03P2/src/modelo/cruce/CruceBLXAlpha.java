@@ -18,8 +18,7 @@ public class CruceBLXAlpha implements Cruce<Double> {
 	}
 
 	@Override
-	public Pair<List<? extends Gen<Double>>, List<? extends Gen<Double>>> cruzar(List<? extends Gen<Double>> crom1,
-			List<? extends Gen<Double>> crom2) {
+	public Pair<List<Gen<Double>>, List<Gen<Double>>> cruzar(List<Gen<Double>> crom1, List<Gen<Double>> crom2) {
 		
 		List<Gen<Double>> h1 = new ArrayList<>();
 		List<Gen<Double>> h2 = new ArrayList<>();

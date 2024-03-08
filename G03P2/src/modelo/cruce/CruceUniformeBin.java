@@ -11,16 +11,14 @@ import vista.ConfigPanel.Option;
 
 public class CruceUniformeBin<T> implements Cruce<T>{
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public Pair<List<? extends Gen<T>>, List<? extends Gen<T>>> cruzar(List<? extends Gen<T>> crom1,
-			List<? extends Gen<T>> crom2) {
+	public Pair<List<Gen<T>>, List<Gen<T>>> cruzar(List<Gen<T>> crom1, List<Gen<T>> crom2) {
 		
 		List<GenBinario<T>> hijo1 = new ArrayList<>(), 
 				hijo2 = new ArrayList<>();
 		try {
-			hijo1.addAll((List<GenBinario<T>>) crom1);
-			hijo2.addAll((List<GenBinario<T>>) crom2);
+			for (Gen<T> g : crom1) hijo1.add((GenBinario<T>) g);
+			for (Gen<T> g : crom2) hijo2.add((GenBinario<T>) g);
 		} catch (ClassCastException e) {
 			throw new IllegalArgumentException("CruceUniformeBin debe aplicarse sobre GenBinario");
 		}
@@ -47,7 +45,8 @@ public class CruceUniformeBin<T> implements Cruce<T>{
 		GenBinario.setGenotipo(hijo1, c1);
 		GenBinario.setGenotipo(hijo2, c2);
 		
-		return new Pair<>(hijo1, hijo2);
+		return new Pair<>(new ArrayList<Gen<T>>(hijo1), 
+						  new ArrayList<Gen<T>>(hijo2));
 	}
 	
 	@Override
