@@ -64,8 +64,8 @@ public class MichalewiczBinario extends AlgGenetico<Double>{
 	}
 
 	@Override
-	public CategoriaGen getCategoria() {
-		return CategoriaGen.BINARIO;
+	public CategoriaCrom getCategoria() {
+		return CategoriaCrom.BINARIO;
 	}
 
 	@Override

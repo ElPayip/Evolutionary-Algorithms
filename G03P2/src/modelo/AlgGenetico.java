@@ -33,6 +33,10 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	private List<Double> maxActFit = new ArrayList<>();
 	private List<Double> MaxGlobFit = new ArrayList<>();
 	
+	public AlgGenetico() {
+		rand = new Random();
+	}
+	
 	public AlgGenetico(Fitness<T> fit) {
 		rand = new Random();
 		fitness = fit;
@@ -199,7 +203,7 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	
 	protected abstract Individuo<T> generarIndividuo();
 	
-	public abstract CategoriaGen getCategoria();
+	public abstract CategoriaCrom getCategoria();
 	
 	public abstract AlgGenetico<T> clone();
 	

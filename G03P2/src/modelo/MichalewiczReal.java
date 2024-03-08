@@ -49,8 +49,8 @@ public class MichalewiczReal extends AlgGenetico<Double> {
 	}
 
 	@Override
-	public CategoriaGen getCategoria() {
-		return CategoriaGen.REAL;
+	public CategoriaCrom getCategoria() {
+		return CategoriaCrom.REAL;
 	}
 
 	@Override

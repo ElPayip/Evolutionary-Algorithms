@@ -14,6 +14,9 @@ public abstract class Individuo<T> implements Cloneable {
 	protected List<Gen<T>> cromosoma;
 	protected double fitness=-1;
 
+	public Individuo() {
+	}
+
 	public Individuo(Individuo<T> otro) {
 		this(otro.cromosoma);
 		this.fitness = otro.fitness;

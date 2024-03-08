@@ -6,6 +6,9 @@ public abstract class Gen<T> implements Cloneable {
 	protected T min, max;
 	protected T precision;
 	
+	public Gen() {
+	}
+	
 	public Gen(Gen<T> gen) {
 		valor = gen.valor;
 		min = gen.min;

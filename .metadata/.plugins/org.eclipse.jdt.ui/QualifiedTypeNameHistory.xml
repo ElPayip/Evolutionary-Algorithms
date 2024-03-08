@@ -15,7 +15,6 @@
     <fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
     <fullyQualifiedTypeName name="java.math.MathContext"/>
     <fullyQualifiedTypeName name="modelo.fitness.FitMichalewicz"/>
-    <fullyQualifiedTypeName name="java.util.Arrays"/>
     <fullyQualifiedTypeName name="org.math.plot.Plot2DPanel"/>
     <fullyQualifiedTypeName name="vista.ConfigPanel.IntegerOption"/>
     <fullyQualifiedTypeName name="modelo.factorias.FactoriaSeleccion"/>
@@ -29,4 +28,8 @@
     <fullyQualifiedTypeName name="java.util.stream.Stream"/>
     <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="javax.swing.BoxLayout"/>
+    <fullyQualifiedTypeName name="java.util.Arrays"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="javax.naming.OperationNotSupportedException"/>
+    <fullyQualifiedTypeName name="modelo.individuo.IndividuoPermInt"/>
 </qualifiedTypeNameHistroy>
