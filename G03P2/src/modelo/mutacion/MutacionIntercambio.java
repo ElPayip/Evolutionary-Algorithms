@@ -28,4 +28,9 @@ public class MutacionIntercambio<T> implements Mutacion<T> {
 	public Mutacion<T> clone(){
 		return new MutacionIntercambio<>();
 	}
+
+	@Override
+	public String toString() {
+		return "Intercambio";
+	}
 }

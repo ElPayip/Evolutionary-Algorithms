@@ -3,14 +3,12 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
-import modelo.cruce.Cruce;
 import modelo.cruce.CruceUniformeBin;
 import modelo.fitness.FitHolderTable;
 import modelo.individuo.Individuo;
 import modelo.individuo.IndividuoBinarioReal;
 import modelo.mutacion.MutacionBinaria;
 import modelo.seleccion.SelTorneoProb;
-import modelo.seleccion.Seleccion;
 import vista.ConfigPanel.DoubleOption;
 import vista.ConfigPanel.Option;
 
@@ -30,11 +28,6 @@ public class HolderTable extends AlgGenetico<Double> {
 		mutacion = new MutacionBinaria<Double>();
 		cruce = new CruceUniformeBin<Double>();
 		seleccion = new SelTorneoProb();
-	}
-
-	public HolderTable(Cruce<Double> cruce, Seleccion seleccion,
-			int nGeneraciones, int tamPoblacion, double probCruce, double probMutacion, double prec) {
-		super(cruce, seleccion, new FitHolderTable(), new MutacionBinaria<Double>(), nGeneraciones, tamPoblacion, probCruce, probMutacion);
 	}
 
 	@Override

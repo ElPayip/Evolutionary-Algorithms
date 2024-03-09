@@ -51,4 +51,9 @@ public class CrucePMX<T> implements Cruce<T> {
 	public <O> List<Option<O>> getExtraOpts() {
 		return null;
 	}
+
+	@Override
+	public String toString() {
+		return "PMX";
+	}
 }

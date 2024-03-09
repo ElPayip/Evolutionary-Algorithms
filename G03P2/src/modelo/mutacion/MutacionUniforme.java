@@ -22,4 +22,9 @@ public class MutacionUniforme implements Mutacion<Double> {
 	public Mutacion<Double> clone(){
 		return new MutacionUniforme();
 	}
+
+	@Override
+	public String toString() {
+		return "Uniforme";
+	}
 }

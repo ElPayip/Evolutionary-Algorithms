@@ -3,16 +3,12 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
-import modelo.cruce.Cruce;
 import modelo.cruce.CruceMonopuntoBin;
 import modelo.fitness.FitMishraBird;
-import modelo.fitness.Fitness;
 import modelo.individuo.Individuo;
 import modelo.individuo.IndividuoBinarioReal;
-import modelo.mutacion.Mutacion;
 import modelo.mutacion.MutacionBinaria;
 import modelo.seleccion.SelTruncamiento;
-import modelo.seleccion.Seleccion;
 import vista.ConfigPanel.DoubleOption;
 import vista.ConfigPanel.Option;
 
@@ -30,12 +26,6 @@ public class MishraBird extends AlgGenetico<Double>{
 		mutacion = new MutacionBinaria<Double>();
 		cruce = new CruceMonopuntoBin<Double>();
 		seleccion = new SelTruncamiento();
-	}
-	
-	
-	public MishraBird(Cruce<Double> cruce, Seleccion seleccion, Fitness<Double> fitness, Mutacion<Double> mutacion,
-			int nGeneraciones, int tamPoblacion, double probCruce, double probMutacion) {
-		super(cruce, seleccion, new FitMishraBird(), new MutacionBinaria<Double>(), nGeneraciones, tamPoblacion, probCruce, probMutacion);
 	}
 
 	@Override

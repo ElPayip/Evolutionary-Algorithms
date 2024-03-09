@@ -12,8 +12,8 @@ import modelo.fitness.FitAeropuerto;
 import modelo.individuo.Individuo;
 import modelo.mutacion.MutacionIntercambio;
 import modelo.seleccion.SelRuleta;
-import vista.ConfigPanel.IntegerOption;
 import vista.ConfigPanel.Option;
+import vista.ConfigPanel.TextOption;
 
 public class Aeropuerto extends AlgGenetico<Integer> {
 	
@@ -23,10 +23,9 @@ public class Aeropuerto extends AlgGenetico<Integer> {
 	
 	private Integer pistas;
 	private Integer vuelos;
+	private String file = "";
 	
-	public Aeropuerto(String file) {
-		initFromFile(file);
-		fitness = new FitAeropuerto(tel, sep, peso);
+	public Aeropuerto() {
 		mutacion = new MutacionIntercambio<>();
 		cruce = new CrucePMX<>();
 		seleccion = new SelRuleta();
@@ -42,6 +41,16 @@ public class Aeropuerto extends AlgGenetico<Integer> {
 		vuelos = alg.vuelos;
 	}
 	
+	public String getFile() {
+		return file;
+	}
+
+	public void setFile(String file) {
+		this.file = file;
+		initFromFile(file);
+		fitness = new FitAeropuerto(tel, sep, peso);
+	}
+
 	private void initFromFile(String file) {
 		//TODO
 	}
@@ -49,8 +58,7 @@ public class Aeropuerto extends AlgGenetico<Integer> {
 	@Override
 	public <T> List<Option<T>> getExtraOpts() {
 		List<Option<T>> extras = new ArrayList<>();
-		extras.add(new IntegerOption<T>("vuelos", "vuelos", "vuelos", 0, 1000));
-		extras.add(new IntegerOption<T>("pistas", "pistas", "pistas", 0, 1000));
+		extras.add(new TextOption<T>("archivo", "archivo", "file"));
 		return extras;
 	}
 
@@ -76,4 +84,8 @@ public class Aeropuerto extends AlgGenetico<Integer> {
 		return false;
 	}
 
+	@Override
+	public String toString() {
+		return "Aeropuerto";
+	}
 }

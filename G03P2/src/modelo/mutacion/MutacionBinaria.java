@@ -29,4 +29,9 @@ public class MutacionBinaria<T> implements Mutacion<T> {
 	public Mutacion<T> clone(){
 		return new MutacionBinaria<>();
 	}
+
+	@Override
+	public String toString() {
+		return "Binaria";
+	}
 }

@@ -2,13 +2,15 @@ package modelo.factorias;
 
 import java.util.List;
 
+import modelo.Aeropuerto;
 import modelo.AlgGenetico;
 import modelo.CalibracionYPrueba;
 import modelo.HolderTable;
-import modelo.MishraBird;
 import modelo.MichalewiczBinario;
 import modelo.MichalewiczReal;
+import modelo.MishraBird;
 import modelo.cruce.Cruce;
+import modelo.mutacion.Mutacion;
 import modelo.seleccion.Seleccion;
 import vista.ConfigPanel;
 import vista.ConfigPanel.ComplexOption;
@@ -24,17 +26,19 @@ public class FactoriaAlgGenetico {
 
 	private FactoriaCruce cruces;
 	private FactoriaSeleccion selecciones;
+	private FactoriaMutacion mutaciones;
 	private AlgGenetico<?> alg;
 	private AlgGenetico<?>[] algPosibles = {new CalibracionYPrueba(),
 											new MishraBird(),
 										 	new HolderTable(),
 										 	new MichalewiczBinario(),
-										 	new MichalewiczReal()
-										 	};
+										 	new MichalewiczReal(),
+										 	new Aeropuerto()};
 	
 	public FactoriaAlgGenetico() {
 		cruces = new FactoriaCruce();
 		selecciones = new FactoriaSeleccion();
+		mutaciones = new FactoriaMutacion();
 		
 		alg = algPosibles[0];
 	}
@@ -96,6 +100,14 @@ public class FactoriaAlgGenetico {
 					selecciones.getSelecciones() ));
 			for (Seleccion seleccion : selecciones.getSelecciones())
 				innerConfig(config, seleccion.configuracion("seleccion"));
+			
+			config.addInner(new StrategyOption<FactoriaAlgGenetico>(
+					"metodo de mutacion", 
+					"metodo de mutacion", 
+					"mutacion",
+					mutaciones.getMutaciones(ag.getCategoria()) ));
+			for (Mutacion<?> mutacion : mutaciones.getMutaciones(ag.getCategoria()))
+				innerConfig(config, mutacion.configuracion("mutacion"));
 			
 			config.endInner();
 		}

@@ -30,4 +30,10 @@ public class FactoriaMutacion {
 		mutaciones.put(CategoriaCrom.REAL, reales);
 		mutaciones.put(CategoriaCrom.PERMUTACION, permutaciones);
 	}
+	
+	public Mutacion<?>[] getMutaciones(CategoriaCrom categoria) {
+		List<Mutacion<?>> sol = mutaciones.get(categoria);
+		Mutacion<?>[] aux = new Mutacion<?>[sol.size()];
+		return sol.toArray(aux);
+	}
 }

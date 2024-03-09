@@ -42,22 +42,15 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 		fitness = fit;
 	}
 	
-	public AlgGenetico(Cruce<T> cruce, Seleccion seleccion, Fitness<T> fitness, Mutacion<T> mutacion,
-			int nGeneraciones, int tamPoblacion, double probCruce, double probMutacion) {
-		this(fitness);
-		this.cruce = cruce;
-		this.seleccion = seleccion;
-		this.mutacion = mutacion;
-		
-		this.nGeneraciones = nGeneraciones;
-		this.tamPoblacion = tamPoblacion;
-		this.probCruce = probCruce;
-		this.probMutacion = probMutacion;
-	}
-	
 	public AlgGenetico(AlgGenetico<T> otro) {
-		this(otro.cruce, otro.seleccion, otro.fitness, otro.mutacion, 
-				otro.nGeneraciones, otro.tamPoblacion, otro.probCruce, otro.probMutacion);
+		this(otro.fitness);
+		mutacion = otro.mutacion;
+		nGeneraciones = otro.nGeneraciones; 
+		tamPoblacion = otro.tamPoblacion; 
+		probCruce = otro.probCruce; 
+		probMutacion = otro.probMutacion;
+		cruce = otro.cruce; 
+		seleccion = otro.seleccion;
 	}
 	
 	public Individuo<T> ejecutar() {

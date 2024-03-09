@@ -11,6 +11,7 @@ import modelo.cruce.CruceAritmetico;
 import modelo.cruce.CruceBLXAlpha;
 import modelo.cruce.CruceMonopunto;
 import modelo.cruce.CruceMonopuntoBin;
+import modelo.cruce.CrucePMX;
 import modelo.cruce.CruceUniforme;
 import modelo.cruce.CruceUniformeBin;
 
@@ -30,7 +31,8 @@ public class FactoriaCruce {
 		reales.add(new CruceAritmetico());
 		reales.add(new CruceBLXAlpha());
 		
-		List<Cruce<?>> permutaciones = new ArrayList<>(); //TODO
+		List<Cruce<?>> permutaciones = new ArrayList<>();
+		permutaciones.add(new CrucePMX<T>());
 		
 		cruces = new HashMap<>();
 		cruces.put(CategoriaCrom.BINARIO, binarios);
