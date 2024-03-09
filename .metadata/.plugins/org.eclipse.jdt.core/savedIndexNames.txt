@@ -1,7 +1,0 @@
-INDEX VERSION 1.134+C:\Users\david\OneDrive - Universidad Complutense de Madrid (UCM)\Escritorio\Git\Evolutiva\.metadata\.plugins\org.eclipse.jdt.core
-2494171228.index
-2444139970.index
-939298549.index
-490607472.index
-1865797976.index
-2218214090.index
