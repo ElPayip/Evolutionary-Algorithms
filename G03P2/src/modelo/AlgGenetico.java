@@ -131,6 +131,7 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	}
 	
 	protected void mutar() {
+		mutacion.update(fitness, mejor);
 		for (Individuo<T> ind : poblacion)
 			if (rand.nextDouble() < probMutacion)
 				ind.muta(mutacion);

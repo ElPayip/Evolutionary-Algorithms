@@ -25,7 +25,7 @@ public class IndividuoReal extends Individuo<Double> {
 	}
 
 	@Override
-	protected Individuo<Double> createInstance(List<Gen<Double>> crom) {
+	public Individuo<Double> createInstance(List<Gen<Double>> crom) {
 		return new IndividuoReal(crom);
 	}
 

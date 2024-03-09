@@ -69,7 +69,7 @@ public abstract class Individuo<T> implements Cloneable {
 	
 	protected abstract Gen<T> generarGen(T min, T max, T prec);
 	
-	protected abstract Individuo<T> createInstance(List<Gen<T>> crom);
+	public abstract Individuo<T> createInstance(List<Gen<T>> crom);
 	
 	public abstract Individuo<T> clone();
 }

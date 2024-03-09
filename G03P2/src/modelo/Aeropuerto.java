@@ -47,12 +47,18 @@ public class Aeropuerto extends AlgGenetico<Integer> {
 
 	public void setFile(String file) {
 		this.file = file;
-		initFromFile(file);
-		fitness = new FitAeropuerto(tel, sep, peso);
 	}
 
 	private void initFromFile(String file) {
 		//TODO
+	}
+	
+	@Override
+	public Individuo<Integer> ejecutar() {
+		initFromFile(file);
+		fitness = new FitAeropuerto(tel, sep, peso);
+		
+		return super.ejecutar();
 	}
 
 	@Override

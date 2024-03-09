@@ -40,8 +40,8 @@ public class IndividuoPermInt extends Individuo<Integer> {
 	}
 
 	@Override
-	protected Individuo<Integer> createInstance(List<Gen<Integer>> crom) {
-		return new IndividuoPermInt((List<Gen<Integer>>) crom);
+	public Individuo<Integer> createInstance(List<Gen<Integer>> crom) {
+		return new IndividuoPermInt(crom);
 	}
 
 	@Override
