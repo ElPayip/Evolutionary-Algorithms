@@ -38,11 +38,6 @@ public class MutacionInversion<T> implements Mutacion<T> {
 		return null;
 	}
 	
-	@Override
-	public void update(Fitness<T> fit, Individuo<T> ind) {
-		//TODO
-	}
-	
 	public Mutacion<T> clone(){
 		return new MutacionInversion<>();
 	}

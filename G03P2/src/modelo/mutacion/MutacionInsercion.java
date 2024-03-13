@@ -1,24 +1,14 @@
 package modelo.mutacion;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import modelo.fitness.Fitness;
 import modelo.genes.Gen;
-import modelo.individuo.Individuo;
-import vista.ConfigPanel.IntegerOption;
 import vista.ConfigPanel.Option;
 
 public class MutacionInsercion<T> implements Mutacion<T> {
 	
-	private Integer numInserciones = 1;
-	
-	public MutacionInsercion() {}
-	
-	public MutacionInsercion(Integer numInserciones) {
-		this.numInserciones = numInserciones;
-	}
+	private Integer numInserciones = 2;
 	
 	@Override
 	public void mutar(List<Gen<T>> crom) {
@@ -45,9 +35,7 @@ public class MutacionInsercion<T> implements Mutacion<T> {
 	
 	@Override
 	public <O> List<Option<O>> getExtraOpts() {
-		List<Option<O>> extras = new ArrayList<>();
-		extras.add(new IntegerOption<O>("Inserciones", "Inserciones", "Inserciones", 0, 100));
-		return extras;
+		return null;
 	}
 	
 	public Mutacion<T> clone(){
