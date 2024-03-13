@@ -29,7 +29,7 @@ public class MutacionInversion<T> implements Mutacion<T> {
 		Collections.reverse(seg);
 		
 		for(int i = pos1; i < pos2; ++i) {
-			crom.get(i).setValor(seg.get(i - pos1).getValor());
+			crom.set(i, seg.get(i - pos1));
 		}
 	}
 	

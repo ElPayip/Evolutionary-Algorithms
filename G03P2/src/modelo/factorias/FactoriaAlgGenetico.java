@@ -28,12 +28,7 @@ public class FactoriaAlgGenetico {
 	private FactoriaSeleccion selecciones;
 	private FactoriaMutacion mutaciones;
 	private AlgGenetico<?> alg;
-	private AlgGenetico<?>[] algPosibles = {new CalibracionYPrueba(),
-											new MishraBird(),
-										 	new HolderTable(),
-										 	new MichalewiczBinario(),
-										 	new MichalewiczReal(),
-										 	new Aeropuerto()};
+	private AlgGenetico<?>[] algPosibles = {new Aeropuerto()};
 	
 	public FactoriaAlgGenetico() {
 		cruces = new FactoriaCruce();
