@@ -31,7 +31,28 @@ public class CruceOX<T> implements Cruce<T> {
 			seg2.add(crom2.get(i));
 		}
 		
-		return null;
+		for(int i = pos1; i < pos2; ++i) {
+			hijo1.set(i, seg2.get(i - pos1));
+			hijo2.set(i, seg1.get(i - pos1));
+		}
+		
+		for(int i = pos2; i < crom1.size(); ++i) {
+			int j = i;
+			while(hijo1.contains(crom1.get(j % crom1.size()))) {
+				j++;
+			}
+			hijo1.set(i, crom1.get(j % crom1.size()));
+		}
+		
+		for(int i = pos2; i < crom2.size(); ++i) {
+			int j = i;
+			while(hijo1.contains(crom2.get(j % crom2.size()))) {
+				j++;
+			}
+			hijo2.set(i, crom2.get(j % crom2.size()));
+		}
+		
+		return new Pair<>(hijo1, hijo2);
 	}
 	
 	@Override
