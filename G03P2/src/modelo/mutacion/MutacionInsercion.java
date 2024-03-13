@@ -44,15 +44,10 @@ public class MutacionInsercion<T> implements Mutacion<T> {
 	}
 	
 	@Override
-	public <T> List<Option<T>> getExtraOpts() {
-		List<Option<T>> extras = new ArrayList<>();
-		extras.add(new IntegerOption<T>("Inserciones", "Inserciones", "Inserciones", 0, 100));
+	public <O> List<Option<O>> getExtraOpts() {
+		List<Option<O>> extras = new ArrayList<>();
+		extras.add(new IntegerOption<O>("Inserciones", "Inserciones", "Inserciones", 0, 100));
 		return extras;
-	}
-	
-	@Override
-	public void update(Fitness<T> fit, Individuo<T> ind) {
-		//TODO
 	}
 	
 	public Mutacion<T> clone(){
