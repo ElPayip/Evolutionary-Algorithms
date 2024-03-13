@@ -17,7 +17,6 @@ public class MutacionInsercion<T> implements Mutacion<T> {
 	
 	@Override
 	public <O> List<Option<O>> getExtraOpts() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
