@@ -46,7 +46,7 @@ public class CruceOX<T> implements Cruce<T> {
 		
 		for(int i = pos2; i < crom2.size(); ++i) {
 			int j = i;
-			while(hijo1.contains(crom2.get(j % crom2.size()))) {
+			while(hijo2.contains(crom2.get(j % crom2.size()))) {
 				j++;
 			}
 			hijo2.set(i, crom2.get(j % crom2.size()));
