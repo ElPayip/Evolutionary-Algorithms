@@ -13,8 +13,11 @@ import modelo.cruce.CruceCX;
 import modelo.cruce.CruceCodifOrdinal;
 import modelo.cruce.CruceMonopunto;
 import modelo.cruce.CruceMonopuntoBin;
+import modelo.cruce.CruceOX;
+import modelo.cruce.CruceOXOP;
 import modelo.cruce.CruceOXPP;
 import modelo.cruce.CrucePMX;
+import modelo.cruce.CruceRecombinacionRutas;
 import modelo.cruce.CruceUniforme;
 import modelo.cruce.CruceUniformeBin;
 
@@ -39,8 +42,11 @@ public class FactoriaCruce {
 		
 		List<Cruce<?>> permutaciones = new ArrayList<>();
 		permutaciones.add(new CrucePMX<T>());
+		permutaciones.add(new CruceOX<T>());
 		permutaciones.add(new CruceOXPP<T>());
+		permutaciones.add(new CruceOXOP<T>());
 		permutaciones.add(new CruceCX<T>());
+		permutaciones.add(new CruceRecombinacionRutas<T>());
 		permutaciones.add(new CruceCodifOrdinal<T>());
 		
 		cruces = new HashMap<>();
