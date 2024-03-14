@@ -20,6 +20,10 @@ public class IndividuoPermInt extends Individuo<Integer> {
 	public IndividuoPermInt(Integer[] mins, Integer[] maxs, Integer prec) throws OperationNotSupportedException {
 		throw new OperationNotSupportedException();
 	}
+
+	public IndividuoPermInt(List<Gen<Integer>> cromosoma) {
+		super(cromosoma);
+	}
 	
 	public IndividuoPermInt(int vuelos) {
 		List<Integer> crom = IntStream.range(0, vuelos).boxed().collect(Collectors.toList());
@@ -28,10 +32,6 @@ public class IndividuoPermInt extends Individuo<Integer> {
 		for (Integer i : crom)
 			cromosoma.add(new GenEntero(i));
 		this.cromosoma = cromosoma;
-	}
-
-	public IndividuoPermInt(List<Gen<Integer>> cromosoma) {
-		super(cromosoma);
 	}
 
 	@Override
