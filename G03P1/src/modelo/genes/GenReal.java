@@ -21,5 +21,4 @@ public class GenReal extends Gen<Double> {
 	public Gen<Double> clone() {
 		return new GenReal(this);
 	}
-
 }

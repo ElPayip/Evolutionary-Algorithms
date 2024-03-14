@@ -28,7 +28,7 @@ public class CrucePMX<T> implements Cruce<T> {
 			hijo2.set(i, crom1.get(i).clone());
 			++i;
 		}
-		
+
 		i %= crom1.size();
 		while (i != pos1) {
 			if (!hijo1.contains(crom1.get(i))) hijo1.set(i, crom1.get(i).clone());
