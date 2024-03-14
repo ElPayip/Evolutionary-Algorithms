@@ -49,16 +49,16 @@ public class CruceOXOP<T> implements Cruce<T> {
 		
 		List<Integer> posCiudades = new ArrayList<Integer>(nPos);
 		for (int i = 0; i < nPos; ++i) {
-			posCiudades.add(crom2.indexOf(ciudades.get(i)));
+			posCiudades.add(crom2.indexOf(ciudades.get(i).clone()));
 		}
 		
 		int j = 0;
 		for (int i = 0; i < hijo1.size(); ++i) {
 			if(posCiudades.contains(i)) {
-				hijo1.set(i, crom2.get(i));
+				hijo1.set(i, crom2.get(i).clone());
 			}
 			else {
-				hijo1.set(i, ciudades.get(j));
+				hijo1.set(i, ciudades.get(j).clone());
 				j++;
 			}
 		}
@@ -82,16 +82,16 @@ public class CruceOXOP<T> implements Cruce<T> {
 		
 		posCiudades = new ArrayList<Integer>(nPos);
 		for (int i = 0; i < nPos; ++i) {
-			posCiudades.add(crom1.indexOf(ciudades.get(i)));
+			posCiudades.add(crom1.indexOf(ciudades.get(i).clone()));
 		}
 		
 		j = 0;
 		for (int i = 0; i < hijo1.size(); ++i) {
 			if(posCiudades.contains(i)) {
-				hijo2.set(i, crom1.get(i));
+				hijo2.set(i, crom1.get(i).clone());
 			}
 			else {
-				hijo2.set(i, ciudades.get(j));
+				hijo2.set(i, ciudades.get(j).clone());
 				j++;
 			}
 		}
