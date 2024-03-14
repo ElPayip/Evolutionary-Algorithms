@@ -32,12 +32,6 @@ public abstract class Gen<T> implements Cloneable {
 		valor = randomVal();
 	}
 	
-	@SuppressWarnings("unchecked")
-	@Override
-	public boolean equals(Object obj) {
-		return valor.equals(((Gen<T>) obj).valor);
-	}
-	
 	protected abstract T randomVal();
 	
 	public abstract Gen<T> clone();

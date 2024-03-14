@@ -87,11 +87,13 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 				if (pareja < 0)
 					pareja = i;
 				else {	// Reemplazo de progenitores
-					System.out.println("Padre1: " + poblacion.get(pareja).getValores().toString());
-					System.out.println("Padre2: " + poblacion.get(i).getValores().toString());
+					System.out.println("P1: " + poblacion.get(pareja).getValores().toString());
+					System.out.println("P2: " + poblacion.get(i).getValores().toString());
 					Pair<Individuo<T>,Individuo<T>> hijos = poblacion.get(pareja).cruzar(poblacion.get(i), cruce);
 					poblacion.set(pareja, hijos.getFirst());
 					poblacion.set(i, hijos.getSecond());
+					System.out.println("H1: " + poblacion.get(pareja).getValores().toString());
+					System.out.println("H2: " + poblacion.get(i).getValores().toString());
 					pareja = -1;
 				}
 			}

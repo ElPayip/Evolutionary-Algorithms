@@ -31,11 +31,13 @@ public class CrucePMX<T> implements Cruce<T> {
 
 		i %= crom1.size();
 		while (i != pos1) {
-			if (!hijo1.contains(crom1.get(i))) hijo1.set(i, crom1.get(i).clone());
-			else hijo1.set(i, crom1.get(crom2.indexOf(crom1.get(i))).clone());
+			Gen<T> g = crom1.get(i);
+			while (hijo1.contains(g)) g = crom1.get(crom2.indexOf(g));
+			hijo1.set(i, g.clone());
 
-			if (!hijo2.contains(crom2.get(i))) hijo2.set(i, crom2.get(i).clone());
-			else hijo2.set(i, crom2.get(crom1.indexOf(crom2.get(i))).clone());
+			g = crom2.get(i);
+			while (hijo2.contains(g)) g = crom2.get(crom1.indexOf(g));
+			hijo2.set(i, g.clone());
 			
 			i = (i + 1) % crom1.size();
 		}

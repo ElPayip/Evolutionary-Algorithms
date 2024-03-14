@@ -1,5 +1,6 @@
 package modelo.fitness;
 
+import java.util.Arrays;
 import java.util.List;
 
 import modelo.Aeropuerto.Peso;
@@ -22,23 +23,24 @@ public class FitAeropuerto implements Fitness<Integer> {
 	@Override
 	public double eval(Individuo<Integer> ind) {
 		double fitness = 0;
-		int[] heads = new int[nPistas];
-		double[] tlas = new double[nPistas];
+		int[] heads = new int[nPistas]; Arrays.fill(heads, -1);
+		double[] tlas = new double[nPistas]; Arrays.fill(tlas, 0);
 		
 		for (Integer avion : ind.getValores()) {
-			double minTLA = Double.MAX_VALUE, minTEL = 0;
+			double minTLA = Double.MAX_VALUE, minTEL = Double.MAX_VALUE;
 			int pistaFinal = 0;
 			
 			for (int pista = 0; pista < nPistas; ++pista) {
-				double separacion = sep[peso.get(heads[pista]).ordinal()]
-									   [peso.get(avion).ordinal()];
+				double separacion = heads[pista] < 0 ? 0 : sep[peso.get(heads[pista]).ordinal()]
+									   						  [peso.get(avion).ordinal()];
 				double tla = Math.max(separacion + tlas[pista], tel.get(pista).get(avion));
 				
-				if (tla - tel.get(pista).get(avion) < minTLA - minTEL) {
+				if (tla < minTLA) {
 					minTLA = tla;
-					minTEL = tel.get(pista).get(avion);
 					pistaFinal = pista;
 				}
+				if (tel.get(pista).get(avion) < minTEL)
+					minTEL = tel.get(pista).get(avion);
 			}
 			heads[pistaFinal] = avion;
 			tlas[pistaFinal] = minTLA;

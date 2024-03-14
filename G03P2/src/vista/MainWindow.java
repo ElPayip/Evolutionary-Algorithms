@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import modelo.AlgGenetico;
@@ -61,8 +62,13 @@ public class MainWindow extends JFrame {
     
     private void run(AlgGenetico<?> alg) {
     	activarBotones(false);
-    	Individuo<?> ind = alg.ejecutar();
-    	graphPanel.update(alg.getMetricas(), ind);
+    	try {
+    		Individuo<?> ind = alg.ejecutar();
+        	graphPanel.update(alg.getMetricas(), ind);
+		} catch (Exception ex) {
+			//JOptionPane.showInternalMessageDialog(null, ex.getMessage());
+			ex.printStackTrace();
+		}
     	activarBotones(true);
     }
 }
