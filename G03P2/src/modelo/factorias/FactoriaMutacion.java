@@ -8,6 +8,7 @@ import java.util.Map;
 import modelo.CategoriaCrom;
 import modelo.mutacion.Mutacion;
 import modelo.mutacion.MutacionBinaria;
+import modelo.mutacion.MutacionHeuristica;
 import modelo.mutacion.MutacionIntercambio;
 import modelo.mutacion.MutacionUniforme;
 
@@ -24,6 +25,7 @@ public class FactoriaMutacion {
 
 		List<Mutacion<?>> permutaciones = new ArrayList<>();
 		permutaciones.add(new MutacionIntercambio<>());
+		permutaciones.add(new MutacionHeuristica<>());
 		
 		mutaciones = new HashMap<>();
 		mutaciones.put(CategoriaCrom.BINARIO, binarias);

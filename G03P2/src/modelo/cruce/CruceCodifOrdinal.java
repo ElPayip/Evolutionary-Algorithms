@@ -15,7 +15,7 @@ import vista.ConfigPanel.StrategyOption;
 
 public class CruceCodifOrdinal<T> implements Cruce<Comparable<T>> {
 	
-	private Cruce<Integer> cruce;
+	private Cruce<Integer> cruce = new CruceMonopunto<Integer>();
 	
 	public CruceCodifOrdinal() {}
 
