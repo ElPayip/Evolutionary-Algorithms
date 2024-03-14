@@ -9,7 +9,9 @@ import modelo.CategoriaCrom;
 import modelo.mutacion.Mutacion;
 import modelo.mutacion.MutacionBinaria;
 import modelo.mutacion.MutacionHeuristica;
+import modelo.mutacion.MutacionInsercion;
 import modelo.mutacion.MutacionIntercambio;
+import modelo.mutacion.MutacionInversion;
 import modelo.mutacion.MutacionUniforme;
 
 public class FactoriaMutacion {
@@ -24,7 +26,9 @@ public class FactoriaMutacion {
 		reales.add(new MutacionUniforme());
 
 		List<Mutacion<?>> permutaciones = new ArrayList<>();
+		permutaciones.add(new MutacionInversion<>());
 		permutaciones.add(new MutacionIntercambio<>());
+		permutaciones.add(new MutacionInsercion<>());
 		permutaciones.add(new MutacionHeuristica<>());
 		
 		mutaciones = new HashMap<>();
