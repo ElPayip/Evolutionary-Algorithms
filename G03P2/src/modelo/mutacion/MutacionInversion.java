@@ -5,9 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import modelo.fitness.Fitness;
 import modelo.genes.Gen;
-import modelo.individuo.Individuo;
 import vista.ConfigPanel.Option;
 
 public class MutacionInversion<T> implements Mutacion<T> {

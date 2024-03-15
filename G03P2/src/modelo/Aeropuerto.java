@@ -11,7 +11,7 @@ import modelo.fitness.FitAeropuerto;
 import modelo.individuo.Individuo;
 import modelo.individuo.IndividuoPermInt;
 import modelo.mutacion.MutacionIntercambio;
-import modelo.seleccion.SelRuleta;
+import modelo.seleccion.SelEstocastico;
 import vista.ConfigPanel.Option;
 import vista.ConfigPanel.TextOption;
 
@@ -36,7 +36,7 @@ public class Aeropuerto extends AlgGenetico<Integer> {
 	public Aeropuerto() {
 		mutacion = new MutacionIntercambio<>();
 		cruce = new CrucePMX<>();
-		seleccion = new SelRuleta();
+		seleccion = new SelEstocastico();
 	}
 
 	public Aeropuerto(AlgGenetico<Integer> otro) {

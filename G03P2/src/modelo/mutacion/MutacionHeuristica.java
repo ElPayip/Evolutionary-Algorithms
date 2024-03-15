@@ -37,7 +37,7 @@ public class MutacionHeuristica<T> implements Mutacion<T> {
 		
 		double maxFit = -Double.MAX_VALUE;
 		List<Gen<T>> mejor = new ArrayList<>(), actual = new ArrayList<>(crom);
-		for (List<Integer> perm : permutaciones(idx, nPos, 0)) {
+		for (List<Integer> perm : permutaciones(idx)) {
 			
 			for (int i = 0; i < nPos; ++i)
 				actual.set(idx.get(i), crom.get(perm.get(i)));
@@ -53,26 +53,23 @@ public class MutacionHeuristica<T> implements Mutacion<T> {
 		crom.addAll(mejor);
 	}
 	
-	private List<List<Integer>> permutaciones(List<Integer> lista, int pos, Integer val) {
-		List<List<Integer>> sol = new ArrayList<>();
-		if (pos == lista.size()) {
-			for (Integer i : lista)
-				sol.addAll(permutaciones(lista, pos-1, i));
+	private List<List<Integer>> permutaciones(List<Integer> lista) {
+		List<List<Integer>> perms = new ArrayList<>();
+		if (lista.size() == 0) {
+			perms.add(new ArrayList<>());
+			return perms;
 		}
-		else if (pos == 0) {
-			List<Integer> perm = new ArrayList<>();
-			perm.add(val);
-			sol.add(perm);
-		}
-		else {
-			for (Integer i : lista) {
-				List<List<Integer>> perms = permutaciones(lista, pos-1, i);
-				for (List<Integer> perm : perms)
-					perm.add(val);
-				sol.addAll(perms);
+		
+		for (Integer elem : lista) {
+			List<Integer> restantes = new ArrayList<>(lista);
+			restantes.remove(elem);
+			
+			for (List<Integer> perm : permutaciones(restantes)) {
+				perm.add(elem);
+				perms.add(perm);
 			}
 		}
-		return sol;
+		return perms;
 	}
 	
 	@Override

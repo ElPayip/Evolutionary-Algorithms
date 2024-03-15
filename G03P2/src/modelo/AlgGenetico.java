@@ -26,7 +26,7 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	protected Integer tamPoblacion = 100;
 	protected Double probCruce = 0.6;
 	protected Double probMutacion = 0.1;
-	protected Double elitismo = 0.0;
+	protected Double elitismo = 0.02;
 
 	protected Random rand;
 	private List<Double> mediaFit = new ArrayList<>();
@@ -64,6 +64,7 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 			elitismo();
 			
 			guardar();
+			System.out.println(i);
 		}
 		mejor.eval(fitness);
 		return mejor;
