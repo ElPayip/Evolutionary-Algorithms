@@ -1,13 +1,10 @@
 package modelo.cruce;
 
-import java.awt.Container;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import modelo.genes.Gen;
 import utils.Pair;
 import vista.ConfigPanel.Option;
@@ -22,11 +19,11 @@ public class CruceRecombinacionRutas<T> implements Cruce<T> {
 		Map<Gen<T>, List<Gen<T>>> conectividades = new HashMap<Gen<T>, List<Gen<T>>>();
 		
 		for(int i = 0; i < crom1.size(); ++i) {
-			conectividades.put(crom1.get(i).clone(), null);
-			conectividades.get(crom1.get(i).clone()).add(crom1.get(i - 1 %crom1.size()));
-			conectividades.get(crom1.get(i).clone()).add(crom1.get(i + 1 %crom1.size()));
-			conectividades.get(crom1.get(i).clone()).add(crom2.get(i - 1 %crom2.size()));
-			conectividades.get(crom1.get(i).clone()).add(crom2.get(i + 1 %crom2.size()));
+			conectividades.put(crom1.get(i), null);
+			conectividades.get(crom1.get(i)).add(crom1.get(i - 1 %crom1.size()));
+			conectividades.get(crom1.get(i)).add(crom1.get(i + 1 %crom1.size()));
+			conectividades.get(crom1.get(i)).add(crom2.get(i - 1 %crom2.size()));
+			conectividades.get(crom1.get(i)).add(crom2.get(i + 1 %crom2.size()));
 		}
 		
 		recombinar(hijo1, crom2, conectividades);
