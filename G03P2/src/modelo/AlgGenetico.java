@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
@@ -30,8 +31,8 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 
 	protected Random rand;
 	private List<Double> mediaFit = new ArrayList<>();
-	private List<Double> maxActFit = new ArrayList<>();
-	private List<Double> MaxGlobFit = new ArrayList<>();
+	private List<Double> mejorActFit = new ArrayList<>();
+	private List<Double> mejorGlobFit = new ArrayList<>();
 	
 	public AlgGenetico() {
 		rand = new Random();
@@ -183,16 +184,23 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	
 	private void guardar() {
 		mediaFit.add(mediaFitness());
-		maxActFit.add(maxFitnessActual());
-		MaxGlobFit.add(maxFitnessGlobal());
+		mejorActFit.add(maxFitnessActual());
+		mejorGlobFit.add(maxFitnessGlobal());
 	}
 	
 	public List<Double[]> getMetricas(){
+		List<Double> presSelectiva = new ArrayList<>();
+		double maxFit = Collections.max(mediaFit);
+		for (int i = 0; i < mediaFit.size(); ++i)
+			presSelectiva.add(maximizacion() ? mejorActFit.get(i) / mediaFit.get(i)
+								: (maxFit - mejorActFit.get(i)) / (maxFit - mediaFit.get(i)));
+		presSelectiva.set(0, presSelectiva.get(1));
 		Double[] aux = new Double[0];
 		List<Double[]> metricas = new ArrayList<>();
 		metricas.add(mediaFit.toArray(aux));
-		metricas.add(maxActFit.toArray(aux));
-		metricas.add(MaxGlobFit.toArray(aux));
+		metricas.add(mejorActFit.toArray(aux));
+		metricas.add(mejorGlobFit.toArray(aux));
+		metricas.add(presSelectiva.toArray(aux));
 		return metricas;
 	}
 	

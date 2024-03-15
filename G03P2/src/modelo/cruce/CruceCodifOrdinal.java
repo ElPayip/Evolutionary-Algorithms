@@ -37,13 +37,13 @@ public class CruceCodifOrdinal<T> implements Cruce<Comparable<T>> {
 		lista2 = new LinkedList<>(lista);
 		
 		List<Gen<Integer>> ord1 = new ArrayList<>(), 
-					  ord2 = new ArrayList<>();
+					  	   ord2 = new ArrayList<>();
 		
 		for (int i = 0; i < crom1.size(); ++i) {
 			ord1.add(new GenEntero(lista1.indexOf(crom1.get(i))));
 			lista1.remove(crom1.get(i));
-			ord2.add(new GenEntero(lista1.indexOf(crom2.get(i))));
-			lista2.remove(crom1.get(i));
+			ord2.add(new GenEntero(lista2.indexOf(crom2.get(i))));
+			lista2.remove(crom2.get(i));
 		}
 		
 		Pair<List<Gen<Integer>>,List<Gen<Integer>>> newOrds = cruce.cruzar(ord1, ord2);
@@ -52,9 +52,13 @@ public class CruceCodifOrdinal<T> implements Cruce<Comparable<T>> {
 
 		List<Gen<Comparable<T>>> hijo1 = new ArrayList<>(),
 								 hijo2 = new ArrayList<>();
+		lista1 = new LinkedList<>(lista);
+		lista2 = new LinkedList<>(lista);
 		for (int i = 0; i < crom1.size(); ++i) {
-			hijo1.add(lista.get(ord1.get(i).getValor()).clone());
-			hijo2.add(lista.get(ord2.get(i).getValor()).clone());
+			hijo1.add(lista1.get(ord1.get(i).getValor()).clone());
+			lista1.remove((int) ord1.get(i).getValor());
+			hijo2.add(lista2.get(ord2.get(i).getValor()).clone());
+			lista2.remove((int) ord2.get(i).getValor());
 		}
 		
 		return new Pair<>(hijo1,hijo2);

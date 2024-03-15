@@ -32,6 +32,7 @@ public class ParamsPanel extends JPanel {
 		final String textoTodoValido = "Todos los campos OK";
 		final String textoHayErrores = "Hay errores en algunos campos";
 		final JLabel valido = new JLabel(textoHayErrores);
+		valido.setText(config.isAllValid() ? textoTodoValido: textoHayErrores);
 		// este evento se lanza cada vez que la validez cambia
 		config.addConfigListener(new ConfigListener() {
 			@Override

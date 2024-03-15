@@ -35,6 +35,11 @@ public abstract class Gen<T> implements Cloneable {
 		valor = randomVal();
 	}
 	
+	@Override
+	public String toString() {
+		return "Gen: " + valor.toString();
+	}
+	
 	protected abstract T randomVal();
 	
 	public abstract Gen<T> clone();

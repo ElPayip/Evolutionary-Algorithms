@@ -26,8 +26,8 @@ public class GraphPanel extends JPanel {
 	private JLabel resultadoLabel;
 	private JScrollPane indPanel;
 	
-	private String[] nombres = { "Media", "Max Actual", "Max Global" };
-	private Color[] colores = { Color.GREEN, Color.RED, Color.BLUE };
+	private String[] nombres = { "Media", "Mejor Actual", "Mejor Global", "Presión selectiva (x10)" };
+	private Color[] colores = { Color.GREEN, Color.RED, Color.BLUE, Color.LIGHT_GRAY };
 
 	public GraphPanel() {
 		initGUI();
@@ -63,6 +63,8 @@ public class GraphPanel extends JPanel {
 	
 	public void update(List<Double[]> metricas, Individuo<?> mejor) {
 		plot.removeAllPlots();
+		for (int i = 0; i < metricas.get(0).length; ++i)
+			metricas.get(3)[i] *= 10;
 		double[] x = Arrays.stream(IntStream.range(0, metricas.get(0).length).toArray()).asDoubleStream().toArray();
 		for (int i = 0; i < metricas.size(); ++i) {
 			double[] y = Stream.of(metricas.get(i)).mapToDouble(Double::doubleValue).toArray();
