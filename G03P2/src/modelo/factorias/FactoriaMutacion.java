@@ -7,11 +7,13 @@ import java.util.Map;
 
 import modelo.CategoriaCrom;
 import modelo.mutacion.Mutacion;
+import modelo.mutacion.MutacionAdelantamiento;
 import modelo.mutacion.MutacionBinaria;
 import modelo.mutacion.MutacionHeuristica;
 import modelo.mutacion.MutacionInsercion;
 import modelo.mutacion.MutacionIntercambio;
 import modelo.mutacion.MutacionInversion;
+import modelo.mutacion.MutacionShuffle;
 import modelo.mutacion.MutacionUniforme;
 
 public class FactoriaMutacion {
@@ -30,6 +32,8 @@ public class FactoriaMutacion {
 		permutaciones.add(new MutacionIntercambio<>());
 		permutaciones.add(new MutacionInsercion<>());
 		permutaciones.add(new MutacionHeuristica<>());
+		permutaciones.add(new MutacionAdelantamiento<>());
+		permutaciones.add(new MutacionShuffle<>());
 		
 		mutaciones = new HashMap<>();
 		mutaciones.put(CategoriaCrom.BINARIO, binarias);
