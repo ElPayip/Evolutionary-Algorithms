@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.seleccion.SelEstocastico;
+import modelo.seleccion.SelRanking;
 import modelo.seleccion.SelRestos;
 import modelo.seleccion.SelRuleta;
 import modelo.seleccion.SelTorneoDet;
@@ -23,6 +24,7 @@ public class FactoriaSeleccion {
 		selecciones.add(new SelTorneoProb());
 		selecciones.add(new SelTorneoDet());
 		selecciones.add(new SelRestos());
+		selecciones.add(new SelRanking());
 	}
 	
 	public Seleccion[] getSelecciones() {

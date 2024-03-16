@@ -4,11 +4,6 @@ import java.util.List;
 
 import modelo.Aeropuerto;
 import modelo.AlgGenetico;
-import modelo.CalibracionYPrueba;
-import modelo.HolderTable;
-import modelo.MichalewiczBinario;
-import modelo.MichalewiczReal;
-import modelo.MishraBird;
 import modelo.cruce.Cruce;
 import modelo.mutacion.Mutacion;
 import modelo.seleccion.Seleccion;
