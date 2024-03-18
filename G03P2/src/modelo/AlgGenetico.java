@@ -65,7 +65,6 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 			elitismo();
 			
 			guardar();
-			System.out.println(i);
 		}
 		mejor.eval(fitness);
 		return mejor;

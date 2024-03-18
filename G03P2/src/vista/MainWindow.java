@@ -5,12 +5,10 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import modelo.AlgGenetico;
 import modelo.factorias.FactoriaAlgGenetico;
-import modelo.individuo.Individuo;
 
 public class MainWindow extends JFrame {
     
@@ -45,7 +43,7 @@ public class MainWindow extends JFrame {
         panelBotones.add(bEjecutar);
         
         mainPanel.add(paramsPanel, BorderLayout.WEST);
-        mainPanel.add(graphPanel, BorderLayout.EAST);
+        mainPanel.add(graphPanel, BorderLayout.CENTER);
         mainPanel.add(panelBotones, BorderLayout.SOUTH);
         
         setContentPane(mainPanel);
@@ -63,8 +61,8 @@ public class MainWindow extends JFrame {
     private void run(AlgGenetico<?> alg) {
     	activarBotones(false);
     	try {
-    		Individuo<?> ind = alg.ejecutar();
-        	graphPanel.update(alg.getMetricas(), ind);
+    		alg.ejecutar();
+        	graphPanel.update(alg);
 		} catch (Exception ex) {
 			//JOptionPane.showInternalMessageDialog(null, ex.getMessage());
 			ex.printStackTrace();

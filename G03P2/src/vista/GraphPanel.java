@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,6 +16,8 @@ import javax.swing.JTextArea;
 
 import org.math.plot.Plot2DPanel;
 
+import modelo.Aeropuerto;
+import modelo.AlgGenetico;
 import modelo.individuo.Individuo;
 
 public class GraphPanel extends JPanel {
@@ -24,7 +27,7 @@ public class GraphPanel extends JPanel {
 	private Plot2DPanel plot;
 	private JTextArea individuoLabel;
 	private JLabel resultadoLabel;
-	private JScrollPane indPanel;
+	private JPanel individuoPanel;
 	
 	private String[] nombres = { "Media", "Mejor Actual", "Mejor Global", "Presión selectiva (x10)" };
 	private Color[] colores = { Color.GREEN, Color.RED, Color.BLUE, Color.LIGHT_GRAY };
@@ -43,13 +46,16 @@ public class GraphPanel extends JPanel {
 		individuoLabel = new JTextArea("...");
 		individuoLabel.setEditable(false);
 		
-		JPanel individuoPanel = new JPanel();
+		individuoPanel = new JPanel();
+		individuoPanel.setLayout(new BoxLayout(individuoPanel, BoxLayout.Y_AXIS));
 		individuoPanel.add(individuoLabel);
 		individuoPanel.setBackground(Color.WHITE);
+		individuoPanel.setAlignmentX(CENTER_ALIGNMENT);
 		
-		indPanel = new JScrollPane(individuoPanel);
+		JScrollPane indPanel = new JScrollPane(individuoPanel);
 		indPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		indPanel.setPreferredSize(new Dimension(100, 50));
+		indPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		indPanel.setPreferredSize(new Dimension(800, 160));
 		
 		resultadoLabel = new JLabel("");
 		mejorPanel.add(indPanel);
@@ -61,7 +67,9 @@ public class GraphPanel extends JPanel {
 		this.setPreferredSize(new Dimension(600, 600));
 	}
 	
-	public void update(List<Double[]> metricas, Individuo<?> mejor) {
+	public void update(AlgGenetico<?> alg) {
+		Individuo<?> mejor = alg.getMejor();
+		List<Double[]> metricas = alg.getMetricas();
 		plot.removeAllPlots();
 		for (int i = 0; i < metricas.get(0).length; ++i)
 			metricas.get(3)[i] *= 10;
@@ -74,9 +82,13 @@ public class GraphPanel extends JPanel {
 			plot.addLinePlot(nombres[i], colores[i], x, y);
 		}
 		
-		individuoLabel.setText("Valores: "+mejor.getValores().toString());
-		individuoLabel.validate();
-		indPanel.validate();
+		individuoLabel.setText("    Valores: "+mejor.getValores().toString());
+		
+		individuoPanel.removeAll();
+		individuoPanel.add(individuoLabel);
+		individuoPanel.add(Box.createVerticalStrut(5));
+		individuoPanel.add(new TablasAeropuerto((Aeropuerto) alg));
+		this.validate();
 		resultadoLabel.setText("Solución: "+mejor.getFitness());
 	}
 }
