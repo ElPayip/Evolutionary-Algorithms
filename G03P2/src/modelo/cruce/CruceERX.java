@@ -9,7 +9,7 @@ import modelo.genes.Gen;
 import utils.Pair;
 import vista.ConfigPanel.Option;
 
-public class CruceRecombinacionRutas<T> implements Cruce<T> {
+public class CruceERX<T> implements Cruce<T> { //Cruce de recombinación por rutas
 
 	@Override
 	public Pair<List<Gen<T>>, List<Gen<T>>> cruzar(List<Gen<T>> crom1, List<Gen<T>> crom2) {
@@ -50,7 +50,7 @@ public class CruceRecombinacionRutas<T> implements Cruce<T> {
 	
 	@Override
 	public Cruce<T> clone() {
-		return new CruceRecombinacionRutas<>();
+		return new CruceERX<>();
 	}
 	
 	@Override

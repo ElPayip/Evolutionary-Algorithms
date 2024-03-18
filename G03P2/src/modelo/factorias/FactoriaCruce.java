@@ -17,7 +17,7 @@ import modelo.cruce.CruceOX;
 import modelo.cruce.CruceOXOP;
 import modelo.cruce.CruceOXPP;
 import modelo.cruce.CrucePMX;
-import modelo.cruce.CruceRecombinacionRutas;
+import modelo.cruce.CruceERX;
 import modelo.cruce.CruceUniforme;
 import modelo.cruce.CruceUniformeBin;
 
@@ -46,7 +46,7 @@ public class FactoriaCruce {
 		permutaciones.add(new CruceOXPP<T>());
 		permutaciones.add(new CruceOXOP<T>());
 		permutaciones.add(new CruceCX<T>());
-		permutaciones.add(new CruceRecombinacionRutas<T>());
+		permutaciones.add(new CruceERX<T>());
 		permutaciones.add(new CruceCodifOrdinal<T>());
 		
 		cruces = new HashMap<>();
