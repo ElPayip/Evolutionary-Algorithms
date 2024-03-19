@@ -206,10 +206,13 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	public List<Double[]> getMetricas(){
 		List<Double> presSelectiva = new ArrayList<>();
 		double maxFit = Collections.max(mediaFit);
-		for (int i = 0; i < mediaFit.size(); ++i)
+		presSelectiva.add(0.0);
+		for (int i = 1; i < mediaFit.size(); ++i) {
 			presSelectiva.add(maximizacion() ? mejorActFit.get(i) / mediaFit.get(i)
 								: (maxFit - mejorActFit.get(i)) / (maxFit - mediaFit.get(i)));
-		presSelectiva.set(0, presSelectiva.get(1));
+			if (Double.isInfinite(presSelectiva.get(i))) 
+				presSelectiva.set(i, presSelectiva.get(i-1));
+		}
 		Double[] aux = new Double[0];
 		List<Double[]> metricas = new ArrayList<>();
 		metricas.add(mediaFit.toArray(aux));

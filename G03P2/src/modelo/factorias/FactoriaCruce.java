@@ -11,6 +11,8 @@ import modelo.cruce.CruceAritmetico;
 import modelo.cruce.CruceBLXAlpha;
 import modelo.cruce.CruceCX;
 import modelo.cruce.CruceCodifOrdinal;
+import modelo.cruce.CruceCromShifting;
+import modelo.cruce.CruceERX;
 import modelo.cruce.CruceMonopunto;
 import modelo.cruce.CruceMonopuntoBin;
 import modelo.cruce.CruceMultipunto;
@@ -18,7 +20,6 @@ import modelo.cruce.CruceOX;
 import modelo.cruce.CruceOXOP;
 import modelo.cruce.CruceOXPP;
 import modelo.cruce.CrucePMX;
-import modelo.cruce.CruceERX;
 import modelo.cruce.CruceUniforme;
 import modelo.cruce.CruceUniformeBin;
 
@@ -50,6 +51,7 @@ public class FactoriaCruce {
 		permutaciones.add(new CruceCX<>());
 		permutaciones.add(new CruceERX<>());
 		permutaciones.add(new CruceCodifOrdinal<>());
+		permutaciones.add(new CruceCromShifting<>());
 		
 		cruces = new HashMap<>();
 		cruces.put(CategoriaCrom.GENERICA, genericos);
