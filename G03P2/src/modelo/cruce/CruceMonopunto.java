@@ -17,7 +17,7 @@ public class CruceMonopunto<T> implements Cruce<T> {
 					 hijo2 = new ArrayList<>();
 		
 		int len = crom1.size();
-		int punto = (int) (new Random().nextDouble() * len);
+		int punto = new Random().nextInt(len);
 		
 		for (int i = 0; i < punto; ++i) {
 			hijo1.add(crom1.get(i).clone());

@@ -27,7 +27,7 @@ public class CruceMonopuntoBin<T> implements Cruce<T> {
 		List<Integer> alelos2 = GenBinario.getGenotipo(hijo2);
 		
 		int len = alelos1.size();
-		int punto = (int) (new Random().nextDouble() * len);
+		int punto = new Random().nextInt(len);
 		
 		List<Integer> c1 = alelos1.subList(0, punto);
 		List<Integer> c2 = alelos2.subList(0, punto);
