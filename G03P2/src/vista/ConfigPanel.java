@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -938,4 +939,37 @@ public class ConfigPanel<T> extends JPanel {
 			return c == v || (c != null && v != null && c.getClass().equals(v.getClass()));
 		}	
 	}	
+	
+	public static class BooleanOption<T> extends SimpleOption<T> {
+		public BooleanOption(String nombre, String tooltip, String fieldName) {
+			super(nombre, tooltip, fieldName);
+		}		
+		public BooleanOption(String nombre, String tooltip) {
+			this(nombre, tooltip, null);
+		}		
+		@Override
+		public JComponent getControlComponent() {
+			JCheckBox jcb = new JCheckBox();
+			jcb.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					readControl();
+					cp.rootPanel.update(); 
+				}
+			});
+			return jcb;
+		}
+		@Override
+		protected void writeControl(Object o) {
+			((JCheckBox)control).setSelected((Boolean)o);;
+		}
+		@Override
+		protected Object readControl() {
+			return ((JCheckBox)control).isSelected();
+		}
+		@Override
+		protected boolean isValid(Object v) {
+			return true;
+		}
+	}
 }

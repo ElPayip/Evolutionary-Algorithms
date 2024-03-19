@@ -28,6 +28,7 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	protected Double probCruce = 0.6;
 	protected Double probMutacion = 0.1;
 	protected Double elitismo = 0.02;
+	protected Boolean escalado = true;
 
 	protected Random rand;
 	private List<Double> mediaFit = new ArrayList<>();
@@ -62,7 +63,6 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 			cruzar();
 			mutar();
 			evaluar();
-			elitismo();
 			
 			guardar();
 		}
@@ -96,46 +96,62 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 			}
 	}
 	
-	protected void evaluar() {
-		double maxFit = -Double.MAX_VALUE, minFit = Double.MAX_VALUE;
-		for (Individuo<T> i : poblacion) {
-			i.eval(fitness);
-			if (i.getFitness() > maxFit) 
-				maxFit = i.getFitness();
-			if (i.getFitness() < minFit)
-				minFit = i.getFitness();
-		}
-		if (elite != null)
-			for (Individuo<T> i : elite) {
-				i.eval(fitness);
-				if (i.getFitness() > maxFit) 
-					maxFit = i.getFitness();
-				if (i.getFitness() < minFit)
-					minFit = i.getFitness();
-			}
-		
-		maxFit += 0.01;
-		minFit -= 0.01;
-		for (Individuo<T> i : poblacion)
-			if (maximizacion())
-				i.setFitness(i.getFitness() - minFit);
-			else
-				i.setFitness(maxFit - i.getFitness());
-		if (elite != null)
-			for (Individuo<T> i : elite)
-				if (maximizacion())
-					i.setFitness(i.getFitness() - minFit);
-				else
-					i.setFitness(maxFit - i.getFitness());
-		
-		ordenar();
-	}
-	
 	protected void mutar() {
 		mutacion.update(fitness, mejor);
 		for (Individuo<T> ind : poblacion)
 			if (rand.nextDouble() < probMutacion)
 				ind.muta(mutacion);
+	}
+	
+	protected void evaluar() {
+		for (Individuo<T> i : poblacion)
+			i.eval(fitness);
+		if (elite != null)
+			for (Individuo<T> i : elite)
+				i.eval(fitness);
+
+		desplazamiento();
+		ordenar();
+		elitismo();
+		if (escalado) escalado();
+	}
+	
+	private void desplazamiento() {
+		double maxFit = -Double.MAX_VALUE, minFit = Double.MAX_VALUE;
+		for (Individuo<T> i : poblacion) {
+			if (i.getFitness() > maxFit) maxFit = i.getFitness();
+			if (i.getFitness() < minFit) minFit = i.getFitness();
+		}
+		if (elite != null)
+			for (Individuo<T> i : elite) {
+				if (i.getFitness() > maxFit) maxFit = i.getFitness();
+				if (i.getFitness() < minFit) minFit = i.getFitness();
+			}
+		
+		maxFit += 0.01;
+		minFit -= 0.01;
+		for (Individuo<T> i : poblacion)
+			i.setFitness(maximizacion() ? i.getFitness() - minFit : 
+										  maxFit - i.getFitness());
+		if (elite != null)
+			for (Individuo<T> i : elite)
+				i.setFitness(maximizacion() ? i.getFitness() - minFit : 
+					  						  maxFit - i.getFitness());
+	}
+	
+	private void escalado() {
+		double media = 0, minFit = Double.MAX_VALUE, a, b;
+		int tamPob = poblacion.size();
+		for (Individuo<T> ind : poblacion) {
+			media += ind.getFitness();
+			if (ind.getFitness() < minFit) minFit = ind.getFitness();
+		}
+		media /= tamPob;
+		a = media / (media - minFit);
+		b = (1 - a) * media;
+		
+		for (Individuo<T> ind : poblacion) 
+			ind.setFitness(a * ind.getFitness() + b);
 	}
 	
 	protected void initPoblacion() {
@@ -148,7 +164,7 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 		poblacion.sort(new Comparator<Individuo<T>>() {
 			@Override
 			public int compare(Individuo<T> o1, Individuo<T> o2) {
-				return Double.compare(o2.getFitness(), o1.getFitness());
+				return Double.compare(o2.getFitness(), o1.getFitness()); // De mayor a menor fitness
 			}
 		});
 		if (mejor == null || (maximizacion() && fitness.eval(mejor) < fitness.eval(poblacion.get(0)))
@@ -291,5 +307,13 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 
 	public void setElitismo(Double elitismo) {
 		this.elitismo = elitismo;
+	}
+
+	public Boolean getEscalado() {
+		return escalado;
+	}
+
+	public void setEscalado(Boolean escalado) {
+		this.escalado = escalado;
 	}
 }

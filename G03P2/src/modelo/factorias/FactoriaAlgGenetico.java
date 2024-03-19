@@ -8,6 +8,7 @@ import modelo.cruce.Cruce;
 import modelo.mutacion.Mutacion;
 import modelo.seleccion.Seleccion;
 import vista.ConfigPanel;
+import vista.ConfigPanel.BooleanOption;
 import vista.ConfigPanel.ComplexOption;
 import vista.ConfigPanel.DoubleOption;
 import vista.ConfigPanel.IntegerOption;
@@ -71,7 +72,11 @@ public class FactoriaAlgGenetico {
 						  "% de elitismo",
 						  "% de elitismo",
 						  "elitismo",
-						  0, 100, 100));
+						  0, 100, 100))
+				  .addInner(new BooleanOption<>(
+						  "escalado",
+						  "escalado",
+						  "escalado"));
 			for (int i = 1; i < agConf.size(); ++i)
 				config.addInner(agConf.get(i));
 			
