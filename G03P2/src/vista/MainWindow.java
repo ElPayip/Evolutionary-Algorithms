@@ -49,7 +49,7 @@ public class MainWindow extends JFrame {
         setContentPane(mainPanel);
         
         this.pack();
-        this.setSize(this.getWidth()+50, 600);
+        this.setSize(this.getWidth()+50, 700);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
