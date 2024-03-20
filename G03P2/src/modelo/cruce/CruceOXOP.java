@@ -31,6 +31,7 @@ public class CruceOXOP<T> implements Cruce<T> {
 		List<Integer> posiciones = new ArrayList<Integer>(nPos);
 		int pos;
 		
+		//
 		for (int i = 0; i < nPos; ++i) {
 			do {
 				pos = rand.nextInt(crom1.size());
@@ -50,8 +51,8 @@ public class CruceOXOP<T> implements Cruce<T> {
 		}
 		
 		int j = 0;
-		for (int i = 0; i < hijo1.size(); ++i) {
-			if(posCiudades.contains(i)) {
+		for (int i = 0; i < crom1.size(); ++i) {
+			if(!posCiudades.contains(i)) {
 				hijo1.set(i, crom2.get(i).clone());
 			}
 			else {
@@ -59,6 +60,8 @@ public class CruceOXOP<T> implements Cruce<T> {
 				j++;
 			}
 		}
+		
+		
 		
 		// Cálculo del hijo 2
 		rand = new Random();
@@ -84,7 +87,7 @@ public class CruceOXOP<T> implements Cruce<T> {
 		
 		j = 0;
 		for (int i = 0; i < hijo1.size(); ++i) {
-			if(posCiudades.contains(i)) {
+			if(!posCiudades.contains(i)) {
 				hijo2.set(i, crom1.get(i).clone());
 			}
 			else {
