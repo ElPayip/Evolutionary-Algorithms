@@ -36,20 +36,32 @@ public class CruceOX<T> implements Cruce<T> {
 			hijo2.set(i, seg1.get(i - pos1));
 		}
 		
-		for(int i = pos2; i < crom1.size(); ++i) {
-			int j = i;
-			while(hijo1.contains(crom1.get(j % crom1.size()))) {
-				j++;
+		int i = (pos2 + 1) % crom1.size(),
+			j = (pos2 + 1) % crom1.size(),
+			count = pos2 - pos1;
+		while (count < crom1.size()) {
+			if (hijo1.get(j) != null) j = (j + 1) % crom1.size();
+			else if (hijo1.contains(crom1.get(i))) i = (i + 1) % crom1.size();
+			else {
+				hijo1.set(j, crom1.get(i).clone());
+				j = (j + 1) % crom1.size();
+				i = (i + 1) % crom1.size();
+				count++;
 			}
-			hijo1.set(i, crom1.get(j % crom1.size()));
 		}
 		
-		for(int i = pos2; i < crom2.size(); ++i) {
-			int j = i;
-			while(hijo2.contains(crom2.get(j % crom2.size()))) {
-				j++;
+		i = (pos2 + 1) % crom1.size();
+		j = (pos2 + 1) % crom1.size();
+		count = pos2 - pos1;
+		while (count < crom1.size()) {
+			if (hijo2.get(j) != null) j = (j + 1) % crom1.size();
+			else if (hijo2.contains(crom1.get(i))) i = (i + 1) % crom1.size();
+			else {
+				hijo2.set(j, crom1.get(i).clone());
+				j = (j + 1) % crom1.size();
+				i = (i + 1) % crom1.size();
+				count++;
 			}
-			hijo2.set(i, crom2.get(j % crom2.size()));
 		}
 		
 		return new Pair<>(hijo1, hijo2);
