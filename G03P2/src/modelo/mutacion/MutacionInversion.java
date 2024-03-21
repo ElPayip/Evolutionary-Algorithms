@@ -11,7 +11,7 @@ import vista.ConfigPanel.Option;
 public class MutacionInversion<T> implements Mutacion<T> {
 
 	@Override
-	public void mutar(List<Gen<T>> crom) { //TODO probar
+	public void mutar(List<Gen<T>> crom) {
 		
 		Random rand = new Random();
 		int pos1 = rand.nextInt(crom.size()), pos2 = rand.nextInt(crom.size());
