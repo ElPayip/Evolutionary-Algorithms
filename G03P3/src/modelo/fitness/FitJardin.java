@@ -11,7 +11,7 @@ import modelo.genes.Accion.Coord;
 import modelo.genes.GenNodo;
 import modelo.genes.GenNodoJardin;
 import modelo.individuo.Individuo;
-import modelo.individuo.IndividuoArbol;
+import modelo.individuo.IndividuoJardin;
 
 public class FitJardin implements Fitness<Accion> {
 	
@@ -48,7 +48,7 @@ public class FitJardin implements Fitness<Accion> {
 			copiaJardin.add(new ArrayList<>(lista));
 		
 		try {
-			recorrer(((IndividuoArbol) ind).getRaiz(), copiaJardin, new Estado());
+			recorrer(((IndividuoJardin) ind).getRaiz(), copiaJardin, new Estado());
 		} catch (OperationNotSupportedException e) {
 			e.printStackTrace();
 		}

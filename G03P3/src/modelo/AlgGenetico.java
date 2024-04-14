@@ -9,6 +9,7 @@ import java.util.Random;
 import modelo.cruce.Cruce;
 import modelo.fitness.Fitness;
 import modelo.individuo.Individuo;
+import modelo.inicializaciones.Inicializacion;
 import modelo.mutacion.Mutacion;
 import modelo.seleccion.Seleccion;
 import utils.Pair;
@@ -22,6 +23,7 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	protected Seleccion seleccion;
 	protected Fitness<T> fitness;
 	protected Mutacion<T> mutacion;
+	protected Inicializacion<T> inicializacion;
 	
 	protected Integer nGeneraciones = 100;
 	protected Integer tamPoblacion = 100;
@@ -155,9 +157,7 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	}
 	
 	protected void initPoblacion() {
-		poblacion = new ArrayList<>();
-		for (int i = 0; i < tamPoblacion; ++i)
-			poblacion.add(generarIndividuo());
+		poblacion = inicializacion.init(tamPoblacion);
 	}
 	
 	private void ordenar() {
@@ -222,13 +222,15 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 		return metricas;
 	}
 	
-	protected abstract Individuo<T> generarIndividuo();
-	
 	public abstract CategoriaCrom getCategoria();
 	
 	public abstract AlgGenetico<T> clone();
 	
 	public abstract Boolean maximizacion();
+	
+	public abstract Class<?> getIndividuoClass();
+
+	public abstract Class<?> getGenClass();
 	
 	/* ----------------------------------------------------
 	 

@@ -6,18 +6,14 @@ import java.util.List;
 import modelo.genes.Gen;
 import modelo.genes.GenNodo;
 import modelo.individuo.Individuo;
+import vista.ConfigPanel.IntegerOption;
+import vista.ConfigPanel.Option;
 
 public class IniRampedAndHalf<T> implements Inicializacion<T> {
 	
 	private Individuo<T> ejemploInd;
 	private GenNodo<T> ejemploNodo;
 	private int prof;
-	
-	public IniRampedAndHalf(Individuo<T> ejemploInd, GenNodo<T> ejemploNodo, int profundidad) {
-		this.ejemploNodo = ejemploNodo.createInstance(null, false);
-		prof = profundidad;
-		this.ejemploInd = ejemploInd.clone();
-	}
 
 	@Override
 	public List<Individuo<T>> init(int n) {
@@ -48,5 +44,18 @@ public class IniRampedAndHalf<T> implements Inicializacion<T> {
 	
 	public List<Gen<T>> generarCompleta(GenNodo<T> padre, int profRestante) {
 		return null; //TODO
+	}
+
+	@Override
+	public <O> List<Option<O>> getExtraOpts() {
+		List<Option<O>> extras = new ArrayList<>();
+		extras.add(new IntegerOption<O>("Profundidad", "Profundidad", "prof", 0, 1000));
+		return extras;
+	}
+
+	@Override
+	public void setInstances(Individuo<T> ind, Gen<T> gen) {
+		ejemploInd = ind.clone();
+		ejemploNodo = (GenNodo<T>) gen.clone();
 	}
 }

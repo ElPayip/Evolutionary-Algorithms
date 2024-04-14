@@ -5,19 +5,18 @@ import java.util.List;
 import modelo.genes.Accion;
 import modelo.genes.Gen;
 import modelo.genes.GenNodoJardin;
-import modelo.inicializaciones.Inicializacion;
 
-public class IndividuoArbol extends Individuo<Accion> {
+public class IndividuoJardin extends Individuo<Accion> {
 	
-	public IndividuoArbol() {
+	public IndividuoJardin() {
 		super();
 	}
 
-	public IndividuoArbol(Individuo<Accion> otro) {
+	public IndividuoJardin(Individuo<Accion> otro) {
 		super(otro);
 	}
 
-	public IndividuoArbol(List<Gen<Accion>> cromosoma) {
+	public IndividuoJardin(List<Gen<Accion>> cromosoma) {
 		super(cromosoma);
 	}
 
@@ -28,12 +27,12 @@ public class IndividuoArbol extends Individuo<Accion> {
 
 	@Override
 	public Individuo<Accion> createInstance(List<Gen<Accion>> crom) {
-		return new IndividuoArbol(crom);
+		return new IndividuoJardin(crom);
 	}
 
 	@Override
 	public Individuo<Accion> clone() {
-		return new IndividuoArbol(this);
+		return new IndividuoJardin(this);
 	}
 	
 	public GenNodoJardin getRaiz() {

@@ -2,8 +2,8 @@ package modelo.factorias;
 
 import java.util.List;
 
-import modelo.Aeropuerto;
 import modelo.AlgGenetico;
+import modelo.Cortacesped;
 import modelo.cruce.Cruce;
 import modelo.mutacion.Mutacion;
 import modelo.seleccion.Seleccion;
@@ -24,7 +24,7 @@ public class FactoriaAlgGenetico {
 	private FactoriaSeleccion selecciones;
 	private FactoriaMutacion mutaciones;
 	private AlgGenetico<?> alg;
-	private AlgGenetico<?>[] algPosibles = {new Aeropuerto()};
+	private AlgGenetico<?>[] algPosibles = {new Cortacesped()};
 	
 	public FactoriaAlgGenetico() {
 		cruces = new FactoriaCruce();
@@ -118,12 +118,17 @@ public class FactoriaAlgGenetico {
 		config.endInner();
 	}
 	
+	private void updateAlg() {
+		
+	}
+	
 	public AlgGenetico<?> getAlg() {
 		return alg;
 	}
 
 	public void setAlg(AlgGenetico<?> alg) {
 		this.alg = alg;
+		updateAlg();
 	}
 
 	public int getnGeneraciones() {

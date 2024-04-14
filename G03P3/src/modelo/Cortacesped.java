@@ -3,9 +3,11 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.fitness.FitJardin;
 import modelo.genes.Accion;
+import modelo.genes.GenNodoJardin;
 import modelo.individuo.Individuo;
-import modelo.inicializaciones.Inicializacion;
+import modelo.individuo.IndividuoJardin;
 import vista.ConfigPanel.Option;
 
 public class Cortacesped extends AlgGenetico<Accion> {
@@ -15,7 +17,6 @@ public class Cortacesped extends AlgGenetico<Accion> {
 	}
 	
 	private Integer profMax, ancho, alto;
-	private Inicializacion<Accion> init;
 	private List<List<Casilla>> jardin;
 	
 	public Cortacesped() {
@@ -39,14 +40,9 @@ public class Cortacesped extends AlgGenetico<Accion> {
 	@Override
 	public Individuo<Accion> ejecutar() {
 		initJardin();
+		fitness = new FitJardin(jardin);
 		
 		return super.ejecutar();
-	}
-
-	@Override
-	protected Individuo<Accion> generarIndividuo() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -76,5 +72,15 @@ public class Cortacesped extends AlgGenetico<Accion> {
 
 	public Integer getAlto() {
 		return alto;
+	}
+
+	@Override
+	public Class<?> getIndividuoClass() {
+		return IndividuoJardin.class;
+	}
+
+	@Override
+	public Class<?> getGenClass() {
+		return GenNodoJardin.class;
 	}
 }
