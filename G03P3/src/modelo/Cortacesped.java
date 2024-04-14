@@ -16,7 +16,7 @@ public class Cortacesped extends AlgGenetico<Accion> {
 		CESPED, CORTADO
 	}
 	
-	private Integer profMax, ancho, alto;
+	private Integer ancho, alto;
 	private List<List<Casilla>> jardin;
 	
 	public Cortacesped() {

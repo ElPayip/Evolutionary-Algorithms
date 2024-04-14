@@ -54,12 +54,29 @@ public abstract class GenNodo<T> extends Gen<T> {
 		return nuevo;
 	}
 	
+	public List<Gen<T>> getInorden() {
+		List<Gen<T>> inorden = new ArrayList<>();
+		inorden.add(this);
+		
+		for (GenNodo<T> g : hijos)
+			inorden.addAll(g.getInorden());
+		return inorden;
+	}
+	
 	public void setHijos(List<GenNodo<T>> hijos) {
 		this.hijos = hijos;
 	}
 	
 	public List<GenNodo<T>> getHijos() {
 		return hijos;
+	}
+	
+	public void setPadre(GenNodo<T> padre) {
+		this.padre = padre;
+	}
+	
+	public GenNodo<T> getPadre() {
+		return padre;
 	}
 	
 	public boolean isTerminal() {
