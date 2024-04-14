@@ -8,6 +8,7 @@ import javax.naming.OperationNotSupportedException;
 import modelo.Cortacesped.Casilla;
 import modelo.genes.Accion;
 import modelo.genes.Accion.Coord;
+import modelo.genes.GenNodo;
 import modelo.genes.GenNodoJardin;
 import modelo.individuo.Individuo;
 import modelo.individuo.IndividuoArbol;
@@ -67,19 +68,19 @@ public class FitJardin implements Fitness<Accion> {
 			c = arbol.getValor().getCoord();
 			break;
 		case SALTA:
-			c = recorrer(arbol.getHijos().get(0), copiaJardin, estado);
+			c = recorrer((GenNodoJardin) arbol.getHijos().get(0), copiaJardin, estado);
 			estado.setPos(c.fila(), c.columna());
 			break;
 		case SUMA: 
-			for (GenNodoJardin g : arbol.getHijos()) {
-				Coord co = recorrer(g, copiaJardin, estado);
+			for (GenNodo<Accion> g : arbol.getHijos()) {
+				Coord co = recorrer((GenNodoJardin) g, copiaJardin, estado);
 				c = new Coord((c.fila() + co.fila()) % jardin.size(), 
 							  (c.columna()+ co.columna()) % jardin.size());
 			}
 			break;
 		case PROGN:
-			for (GenNodoJardin g : arbol.getHijos())
-				c = recorrer(g, copiaJardin, estado);
+			for (GenNodo<Accion> g : arbol.getHijos())
+				c = recorrer((GenNodoJardin) g, copiaJardin, estado);
 			break;
 		default:
 			break;

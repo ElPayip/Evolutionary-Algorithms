@@ -1,7 +1,9 @@
 package modelo.genes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public abstract class GenNodo<T> extends Gen<T> {
 	
@@ -20,6 +22,25 @@ public abstract class GenNodo<T> extends Gen<T> {
 	
 	public GenNodo(GenNodo<T> padre) {
 		setRandomVal();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	protected T randomVal() {
+		if (terminal > 0)
+			return randomNodo(terminales());
+		else if (terminal < 0)
+			return randomNodo(noTerminales());
+		else {
+			List<T> aux = Arrays.asList(noTerminales());
+			aux.addAll(Arrays.asList(terminales()));
+			return randomNodo((T[]) aux.toArray());
+		}
+	}
+	
+	private T randomNodo(T[] terms) {
+		int i = new Random().nextInt(terms.length);
+		return terms[i];
 	}
 
 	@Override
@@ -47,5 +68,11 @@ public abstract class GenNodo<T> extends Gen<T> {
 	
 	public abstract int getAridad();
 	
-	abstract GenNodo<T> createInstance(GenNodo<T> padre);
+	public abstract GenNodo<T> createInstance(GenNodo<T> padre);
+	
+	public abstract GenNodo<T> createInstance(GenNodo<T> padre, boolean terminal);
+	
+	abstract T[] terminales();
+
+	abstract T[] noTerminales();
 }

@@ -21,10 +21,6 @@ public class IndividuoArbol extends Individuo<Accion> {
 		super(cromosoma);
 	}
 
-	public IndividuoArbol(int profMax, Inicializacion<Accion> init) {
-		cromosoma = init.init(profMax);
-	}
-
 	@Override
 	protected Gen<Accion> generarGen(Accion min, Accion max, Accion prec) {
 		throw new UnsupportedOperationException();

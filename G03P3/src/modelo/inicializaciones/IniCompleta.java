@@ -2,13 +2,12 @@ package modelo.inicializaciones;
 
 import java.util.List;
 
-import modelo.genes.Accion;
-import modelo.genes.Gen;
+import modelo.individuo.Individuo;
 
-public class IniCompleta implements Inicializacion<Accion> {
+public class IniCompleta<T> implements Inicializacion<T> {
 
 	@Override
-	public List<Gen<Accion>> init(int profundidad) {
+	public List<Individuo<T>> init(int n) {
 		// TODO Auto-generated method stub
 		return null;
 	}

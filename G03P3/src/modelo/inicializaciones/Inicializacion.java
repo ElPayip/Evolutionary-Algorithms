@@ -2,9 +2,9 @@ package modelo.inicializaciones;
 
 import java.util.List;
 
-import modelo.genes.Gen;
+import modelo.individuo.Individuo;
 
 public interface Inicializacion<T> {
 
-	public List<Gen<T>> init(int profundidad);
+	public List<Individuo<T>> init(int n);
 }
