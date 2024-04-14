@@ -5,6 +5,7 @@ import java.util.List;
 import modelo.AlgGenetico;
 import modelo.Cortacesped;
 import modelo.cruce.Cruce;
+import modelo.inicializaciones.Inicializacion;
 import modelo.mutacion.Mutacion;
 import modelo.seleccion.Seleccion;
 import vista.ConfigPanel;
@@ -23,6 +24,7 @@ public class FactoriaAlgGenetico {
 	private FactoriaCruce cruces;
 	private FactoriaSeleccion selecciones;
 	private FactoriaMutacion mutaciones;
+	private FactoriaInicializacion<?> inicializaciones;
 	private AlgGenetico<?> alg;
 	private AlgGenetico<?>[] algPosibles = {new Cortacesped()};
 	
@@ -30,6 +32,7 @@ public class FactoriaAlgGenetico {
 		cruces = new FactoriaCruce();
 		selecciones = new FactoriaSeleccion();
 		mutaciones = new FactoriaMutacion();
+		inicializaciones = new FactoriaInicializacion<>();
 		
 		alg = algPosibles[0];
 	}
@@ -79,6 +82,14 @@ public class FactoriaAlgGenetico {
 						  "escalado"));
 			for (int i = 1; i < agConf.size(); ++i)
 				config.addInner(agConf.get(i));
+			
+			config.addInner(new StrategyOption<FactoriaAlgGenetico>(
+					"metodo de inicializacion", 
+					"metodo de inicializacion", 
+					"inicializacion",
+					inicializaciones.getInicializaciones() ));
+			for (Inicializacion<?> inicializacion : inicializaciones.getInicializaciones())
+				innerConfig(config, inicializacion.configuracion("inicializacion"));
 			
 			config.addInner(new StrategyOption<FactoriaAlgGenetico>(
 					"metodo de cruce", 

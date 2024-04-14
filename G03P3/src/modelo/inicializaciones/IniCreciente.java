@@ -10,10 +10,20 @@ import vista.ConfigPanel.IntegerOption;
 import vista.ConfigPanel.Option;
 
 public class IniCreciente<T> implements Inicializacion<T> {
-	
+
 	private Individuo<T> ejemploInd;
 	private GenNodo<T> ejemploNodo;
 	private Integer prof;
+	
+	public IniCreciente() {
+	}
+	
+	public IniCreciente(Individuo<T> ejemploInd, GenNodo<T> ejemploNodo, Integer prof) {
+		super();
+		this.ejemploInd = ejemploInd;
+		this.ejemploNodo = ejemploNodo;
+		this.prof = prof;
+	}
 
 	@Override
 	public List<Individuo<T>> init(int n) {
@@ -51,5 +61,10 @@ public class IniCreciente<T> implements Inicializacion<T> {
 	public void setInstances(Individuo<T> ind, Gen<T> gen) {
 		ejemploInd = ind.clone();
 		ejemploNodo = (GenNodo<T>) gen.clone();
+	}
+	
+	@Override
+	public Inicializacion<T> clone() {
+		return new IniCreciente<>(ejemploInd, ejemploNodo, prof);
 	}
 }

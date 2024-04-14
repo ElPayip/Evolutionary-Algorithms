@@ -112,11 +112,14 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 			for (Individuo<T> i : elite)
 				i.eval(fitness);
 
+		filtros();
 		desplazamiento();
 		ordenar();
 		elitismo();
 		if (escalado) escalado();
 	}
+	
+	protected void filtros() {}
 	
 	private void desplazamiento() {
 		double maxFit = -Double.MAX_VALUE, minFit = Double.MAX_VALUE;

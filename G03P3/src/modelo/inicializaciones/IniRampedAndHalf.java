@@ -15,6 +15,16 @@ public class IniRampedAndHalf<T> implements Inicializacion<T> {
 	private GenNodo<T> ejemploNodo;
 	private int prof;
 
+	public IniRampedAndHalf() {
+	}
+
+	public IniRampedAndHalf(Individuo<T> ejemploInd, GenNodo<T> ejemploNodo, int prof) {
+		super();
+		this.ejemploInd = ejemploInd;
+		this.ejemploNodo = ejemploNodo;
+		this.prof = prof;
+	}
+
 	@Override
 	public List<Individuo<T>> init(int n) {
 		List<Individuo<T>> poblacion = new ArrayList<>();
@@ -57,5 +67,10 @@ public class IniRampedAndHalf<T> implements Inicializacion<T> {
 	public void setInstances(Individuo<T> ind, Gen<T> gen) {
 		ejemploInd = ind.clone();
 		ejemploNodo = (GenNodo<T>) gen.clone();
+	}
+	
+	@Override
+	public Inicializacion<T> clone() {
+		return new IniRampedAndHalf<>(ejemploInd, ejemploNodo, prof);
 	}
 }

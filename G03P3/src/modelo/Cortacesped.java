@@ -3,12 +3,15 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.bloating.ControlBloating;
+import modelo.factorias.FactoriaBloating;
 import modelo.fitness.FitJardin;
 import modelo.genes.Accion;
 import modelo.genes.GenNodoJardin;
 import modelo.individuo.Individuo;
 import modelo.individuo.IndividuoJardin;
 import vista.ConfigPanel.Option;
+import vista.ConfigPanel.StrategyOption;
 
 public class Cortacesped extends AlgGenetico<Accion> {
 
@@ -18,6 +21,7 @@ public class Cortacesped extends AlgGenetico<Accion> {
 	
 	private Integer ancho, alto;
 	private List<List<Casilla>> jardin;
+	private ControlBloating controlBloating;
 	
 	public Cortacesped() {
 		super();
@@ -44,6 +48,11 @@ public class Cortacesped extends AlgGenetico<Accion> {
 		
 		return super.ejecutar();
 	}
+	
+	@Override
+	protected void filtros() {
+		controlBloating.controlar(poblacion);
+	}
 
 	@Override
 	public CategoriaCrom getCategoria() {
@@ -62,8 +71,13 @@ public class Cortacesped extends AlgGenetico<Accion> {
 
 	@Override
 	public <T> List<Option<T>> getExtraOpts() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Option<T>> extras = new ArrayList<>();
+		extras.add(new StrategyOption<T>(
+				"metodo de control del bloating", 
+				"metodo de control del bloating", 
+				"controlBloating",
+				new FactoriaBloating().getControlesBloating()));
+		return extras;
 	}
 
 	public Integer getAncho() {
