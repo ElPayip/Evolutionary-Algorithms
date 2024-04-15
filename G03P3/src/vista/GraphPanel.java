@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,7 +15,6 @@ import javax.swing.JTextArea;
 
 import org.math.plot.Plot2DPanel;
 
-import modelo.Aeropuerto;
 import modelo.AlgGenetico;
 import modelo.individuo.Individuo;
 
@@ -86,8 +84,6 @@ public class GraphPanel extends JPanel {
 		
 		individuoPanel.removeAll();
 		individuoPanel.add(individuoLabel);
-		individuoPanel.add(Box.createVerticalStrut(5));
-		individuoPanel.add(new TablasAeropuerto((Aeropuerto) alg));
 		this.validate();
 		resultadoLabel.setText("Solución: "+mejor.getFitness());
 	}
