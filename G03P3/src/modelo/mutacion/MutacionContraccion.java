@@ -25,7 +25,7 @@ public class MutacionContraccion<T> implements Mutacion<T> {
 	}
 
 	public Mutacion<T> clone(){
-		return new MutacionSubarbol<>();
+		return new MutacionContraccion<>();
 	}
 
 	@Override
