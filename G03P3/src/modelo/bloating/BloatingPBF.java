@@ -13,7 +13,7 @@ public class BloatingPBF implements ControlBloating {
 	}
 	
 	public ControlBloating clone() {
-		return new BloatingTarpeian();
+		return new BloatingPBF();
 	}
 
 	@Override
