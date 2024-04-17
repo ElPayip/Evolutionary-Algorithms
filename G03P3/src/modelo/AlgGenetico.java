@@ -277,6 +277,14 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 		this.mutacion = mutacion;
 	}
 
+	public Inicializacion<T> getInicializacion() {
+		return inicializacion;
+	}
+
+	public void setInicializacion(Inicializacion<T> inicializacion) {
+		this.inicializacion = inicializacion;
+	}
+
 	public Integer getnGeneraciones() {
 		return nGeneraciones;
 	}

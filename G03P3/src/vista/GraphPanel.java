@@ -80,7 +80,7 @@ public class GraphPanel extends JPanel {
 			plot.addLinePlot(nombres[i], colores[i], x, y);
 		}
 		
-		individuoLabel.setText("    Valores: "+mejor.getValores().toString());
+		individuoLabel.setText("    Valores: "+mejor.toString());
 		
 		individuoPanel.removeAll();
 		individuoPanel.add(individuoLabel);

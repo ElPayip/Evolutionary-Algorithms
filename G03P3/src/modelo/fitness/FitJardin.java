@@ -17,7 +17,7 @@ public class FitJardin implements Fitness<Accion> {
 	
 	Integer fitness;
 	List<List<Casilla>> jardin;
-	private class Estado {
+	protected class Estado {
 		private int orientacion = 0, fila = 4, col = 4;
 		public void gira() {
 			orientacion++;
@@ -34,6 +34,8 @@ public class FitJardin implements Fitness<Accion> {
 			fila = f;
 			col = c;
 		}
+		public int fila() {return fila;}
+		public int columna() {return col;}
 	}
 	
 	public FitJardin(List<List<Casilla>> jardin) {
@@ -55,7 +57,7 @@ public class FitJardin implements Fitness<Accion> {
 		return 0;
 	}
 	
-	private Coord recorrer(GenNodoJardin arbol, List<List<Casilla>> copiaJardin, Estado estado) throws OperationNotSupportedException {
+	protected Coord recorrer(GenNodoJardin arbol, List<List<Casilla>> copiaJardin, Estado estado) throws OperationNotSupportedException {
 		Coord c = new Coord(0,0);
 		switch (arbol.getValor()) {
 		case AVANZA:

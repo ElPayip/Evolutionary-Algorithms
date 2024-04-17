@@ -13,7 +13,7 @@ public class IniCreciente<T> implements Inicializacion<T> {
 
 	private Individuo<T> ejemploInd;
 	private GenNodo<T> ejemploNodo;
-	private Integer prof;
+	private Integer prof = 20;
 	
 	public IniCreciente() {}
 	
@@ -65,5 +65,13 @@ public class IniCreciente<T> implements Inicializacion<T> {
 	@Override
 	public Inicializacion<T> clone() {
 		return new IniCreciente<>(ejemploInd, ejemploNodo, prof);
+	}
+
+	public Integer getProf() {
+		return prof;
+	}
+
+	public void setProf(Integer prof) {
+		this.prof = prof;
 	}
 }

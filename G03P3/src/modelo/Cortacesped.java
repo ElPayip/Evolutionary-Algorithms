@@ -3,13 +3,18 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.bloating.BloatingTarpeian;
 import modelo.bloating.ControlBloating;
+import modelo.cruce.CruceSubArbol;
 import modelo.factorias.FactoriaBloating;
 import modelo.fitness.FitJardin;
 import modelo.genes.Accion;
 import modelo.genes.GenNodoJardin;
 import modelo.individuo.Individuo;
 import modelo.individuo.IndividuoJardin;
+import modelo.inicializaciones.IniCreciente;
+import modelo.mutacion.MutacionTerminal;
+import modelo.seleccion.SelRanking;
 import vista.ConfigPanel.Option;
 import vista.ConfigPanel.StrategyOption;
 
@@ -24,7 +29,11 @@ public class Cortacesped extends AlgGenetico<Accion> {
 	private ControlBloating controlBloating;
 	
 	public Cortacesped() {
-		super();
+		inicializacion = new IniCreciente<>();
+		seleccion = new SelRanking();
+		mutacion = new MutacionTerminal<>();
+		cruce = new CruceSubArbol<>();
+		controlBloating = new BloatingTarpeian();
 	}
 
 	public Cortacesped(AlgGenetico<Accion> otro) {
@@ -44,7 +53,7 @@ public class Cortacesped extends AlgGenetico<Accion> {
 	@Override
 	public Individuo<Accion> ejecutar() {
 		initJardin();
-		fitness = new FitJardin(jardin);
+		fitness = new FitJardin(getJardin());
 		
 		return super.ejecutar();
 	}
@@ -88,6 +97,21 @@ public class Cortacesped extends AlgGenetico<Accion> {
 		return alto;
 	}
 
+	public void setAncho(Integer ancho) {
+		this.ancho = ancho;
+	}
+
+	public void setAlto(Integer alto) {
+		this.alto = alto;
+	}
+	
+	public List<List<Casilla>> getJardin() {
+		List<List<Casilla>> copia = new ArrayList<>();
+		for (List<Casilla> fila : jardin)
+			copia.add(new ArrayList<>(fila));
+		return copia;
+	}
+
 	@Override
 	public Class<?> getIndividuoClass() {
 		return IndividuoJardin.class;
@@ -96,5 +120,18 @@ public class Cortacesped extends AlgGenetico<Accion> {
 	@Override
 	public Class<?> getGenClass() {
 		return GenNodoJardin.class;
+	}
+
+	public ControlBloating getControlBloating() {
+		return controlBloating;
+	}
+
+	public void setControlBloating(ControlBloating controlBloating) {
+		this.controlBloating = controlBloating;
+	}
+	
+	@Override
+	public String toString() {
+		return "Cortacésped";
 	}
 }
