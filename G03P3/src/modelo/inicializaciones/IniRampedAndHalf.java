@@ -13,7 +13,7 @@ public class IniRampedAndHalf<T> implements Inicializacion<T> {
 	
 	private Individuo<T> ejemploInd;
 	private GenNodo<T> ejemploNodo;
-	private int prof;
+	private Integer prof = 5;
 
 	public IniRampedAndHalf() {
 	}
@@ -78,8 +78,8 @@ public class IniRampedAndHalf<T> implements Inicializacion<T> {
 
 	@Override
 	public void setInstances(Individuo<T> ind, Gen<T> gen) {
-		ejemploInd = ind.clone();
-		ejemploNodo = (GenNodo<T>) gen.clone();
+		ejemploInd = ind;
+		ejemploNodo = (GenNodo<T>) gen;
 	}
 	
 	@Override
@@ -90,5 +90,13 @@ public class IniRampedAndHalf<T> implements Inicializacion<T> {
 	@Override
 	public String toString() {
 		return "Ramped and Half";
+	}
+
+	public Integer getProf() {
+		return prof;
+	}
+
+	public void setProf(Integer prof) {
+		this.prof = prof;
 	}
 }

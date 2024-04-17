@@ -42,6 +42,7 @@ public class Cortacesped extends AlgGenetico<Accion> {
 	}
 	
 	private void initJardin() {
+		GenNodoJardin.setDominio(alto, ancho);
 		jardin = new ArrayList<>();
 		for (int i = 0; i < alto; ++i) {
 			jardin.add(new ArrayList<>());

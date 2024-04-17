@@ -1,13 +1,33 @@
 package modelo.genes;
 
+import java.util.Random;
+
 public class GenNodoJardin extends GenNodo<Accion> {
+	
+	private static int nFilas, nCols;
+	public static class Coord {
+		int fila, col;
+		public Coord(int f, int c) {
+			fila = f;
+			col = c;
+		}
+		public int fila() {return fila;}
+		public int columna() {return col;}
+		@Override
+		public String toString() {
+			return String.format("%d,%d", fila, col);
+		}
+	}
+	private Coord coord;
 	
 	public GenNodoJardin(GenNodoJardin padre, boolean terminal) {
 		super(padre, terminal);
+		coord = new Coord(new Random().nextInt(nFilas), new Random().nextInt(nCols));
 	}
 	
 	public GenNodoJardin(GenNodoJardin padre) {
 		super(padre);
+		coord = new Coord(new Random().nextInt(nFilas), new Random().nextInt(nCols));
 	}
 
 	@Override
@@ -38,10 +58,19 @@ public class GenNodoJardin extends GenNodo<Accion> {
 	@Override
 	public String toString() {
 		String str = "(";
-		str += valor.toString();
+		str += valor == Accion.CONST ? coord.toString() : valor.toString();
 		for (GenNodo<Accion> g : hijos)
 			str += " " + g.toString();
 		str += ")";
 		return str;
+	}
+	
+	public static void setDominio(int filas, int cols) {
+		nFilas = filas;
+		nCols = cols;
+	}
+
+	public Coord getCoord() {
+		return coord;
 	}
 }

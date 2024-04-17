@@ -11,8 +11,8 @@ import modelo.Cortacesped;
 import modelo.Cortacesped.Casilla;
 import modelo.fitness.FitJardin;
 import modelo.genes.Accion;
-import modelo.genes.Accion.Coord;
 import modelo.genes.GenNodoJardin;
+import modelo.genes.GenNodoJardin.Coord;
 import modelo.individuo.Individuo;
 
 public class RecorridoPanel extends JPanel {

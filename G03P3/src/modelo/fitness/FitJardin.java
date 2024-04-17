@@ -7,9 +7,9 @@ import javax.naming.OperationNotSupportedException;
 
 import modelo.Cortacesped.Casilla;
 import modelo.genes.Accion;
-import modelo.genes.Accion.Coord;
 import modelo.genes.GenNodo;
 import modelo.genes.GenNodoJardin;
+import modelo.genes.GenNodoJardin.Coord;
 import modelo.individuo.Individuo;
 import modelo.individuo.IndividuoJardin;
 
@@ -73,7 +73,7 @@ public class FitJardin implements Fitness<Accion> {
 			count++;
 			break;
 		case CONST:
-			c = arbol.getValor().getCoord();
+			c = arbol.getCoord();
 			break;
 		case SALTA:
 			c = recorrer((GenNodoJardin) arbol.getHijos().get(0), copiaJardin, estado);
