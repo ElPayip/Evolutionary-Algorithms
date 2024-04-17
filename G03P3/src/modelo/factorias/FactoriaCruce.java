@@ -7,6 +7,7 @@ import java.util.Map;
 
 import modelo.CategoriaCrom;
 import modelo.cruce.Cruce;
+import modelo.cruce.CruceSubArbol;
 
 
 public class FactoriaCruce {
@@ -23,11 +24,15 @@ public class FactoriaCruce {
 		
 		List<Cruce<?>> permutaciones = new ArrayList<>();
 		
+		List<Cruce<?>> arboles = new ArrayList<>();
+		arboles.add(new CruceSubArbol<>());
+		
 		cruces = new HashMap<>();
 		cruces.put(CategoriaCrom.GENERICA, genericos);
 		cruces.put(CategoriaCrom.BINARIO, binarios);
 		cruces.put(CategoriaCrom.REAL, reales);
 		cruces.put(CategoriaCrom.PERMUTACION, permutaciones);
+		cruces.put(CategoriaCrom.ARBOL, arboles);
 	}
 	
 	public Cruce<?>[] getCruces(CategoriaCrom categoria) {
