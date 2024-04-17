@@ -15,11 +15,14 @@ public class MutacionContraccion<T> implements Mutacion<T> {
 		List<GenNodo<T>> noTerms = new ArrayList<>();
 		for (Gen<T> g : crom)
 			if (!((GenNodo<T>) g).isTerminal()) noTerms.add((GenNodo<T>) g);
+		if (noTerms.size() == 0)
+			return;
 		
 		GenNodo<T> old = noTerms.get(new Random().nextInt(noTerms.size())), nuevo = old.createInstance(old.getPadre(), true);
 		int pos = crom.indexOf(old);
 		
-		old.getPadre().getHijos().set(old.getPadre().getHijos().indexOf(old), nuevo);
+		if (old.getPadre() != null)
+			old.getPadre().getHijos().set(old.getPadre().getHijos().indexOf(old), nuevo);
 		crom.removeAll(old.getPreorder());
 		crom.add(pos, nuevo);
 	}

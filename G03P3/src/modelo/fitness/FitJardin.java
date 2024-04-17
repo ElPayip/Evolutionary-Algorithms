@@ -27,13 +27,13 @@ public class FitJardin implements Fitness<Accion> {
 			switch (orientacion) {
 			case 0: col = (nCols + col - 1) % nCols; break;
 			case 1: fila = (nFilas + fila - 1) % nFilas; break;
-			case 2: col = (nCols + col + 1) % nCols; break;
-			case 3: fila = (nFilas + fila + 1) % nFilas; break;
+			case 2: col = (col + 1) % nCols; break;
+			case 3: fila = (fila + 1) % nFilas; break;
 			}
 		}
-		public void setPos(int f, int c) {
-			fila = f;
-			col = c;
+		public void salta(int f, int c) {
+			fila = (fila + f) % jardin.size();
+			col = (col + c) % jardin.size();
 		}
 		public int fila() {return fila;}
 		public int columna() {return col;}
@@ -51,8 +51,9 @@ public class FitJardin implements Fitness<Accion> {
 			copiaJardin.add(new ArrayList<>(lista));
 		
 		try {
+			Estado estado = new Estado();
 			while (count < 100) {
-				recorrer(((IndividuoJardin) ind).getRaiz(), copiaJardin, new Estado());
+				recorrer(((IndividuoJardin) ind).getRaiz(), copiaJardin, estado);
 				if (count == 0) break;
 			}
 		} catch (OperationNotSupportedException | IndexOutOfBoundsException e) {
@@ -63,9 +64,11 @@ public class FitJardin implements Fitness<Accion> {
 	
 	protected Coord recorrer(GenNodoJardin arbol, List<List<Casilla>> copiaJardin, Estado estado) throws OperationNotSupportedException {
 		Coord c = new Coord(0,0);
+		boolean corta = false;
 		switch (arbol.getValor()) {
 		case AVANZA:
 			estado.avanza();
+			corta = true;
 			count++;
 			break;
 		case IZQUIERDA:
@@ -77,7 +80,8 @@ public class FitJardin implements Fitness<Accion> {
 			break;
 		case SALTA:
 			c = recorrer((GenNodoJardin) arbol.getHijos().get(0), copiaJardin, estado);
-			estado.setPos(c.fila(), c.columna());
+			estado.salta(c.fila(), c.columna());
+			corta = true;
 			count++;
 			break;
 		case SUMA: 
@@ -95,7 +99,7 @@ public class FitJardin implements Fitness<Accion> {
 			break;
 		} 
 		
-		if (copiaJardin.get(estado.fila).get(estado.col) == Casilla.CESPED) {
+		if (corta && copiaJardin.get(estado.fila).get(estado.col) == Casilla.CESPED) {
 			copiaJardin.get(estado.fila).set(estado.col, Casilla.CORTADO);
 			fitness++;
 		}
