@@ -20,4 +20,9 @@ public class MutacionPermutacion<T> implements Mutacion<T> {
 	public Mutacion<T> clone(){
 		return new MutacionPermutacion<>();
 	}
+	
+	@Override
+	public String toString() {
+		return "Permutación";
+	}
 }

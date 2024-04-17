@@ -28,4 +28,9 @@ public class MutacionTerminal<T> implements Mutacion<T> {
 	public Mutacion<T> clone(){
 		return new MutacionTerminal<>();
 	}
+	
+	@Override
+	public String toString() {
+		return "Terminal";
+	}
 }

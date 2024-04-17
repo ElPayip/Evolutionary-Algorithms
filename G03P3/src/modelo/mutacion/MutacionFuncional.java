@@ -28,4 +28,9 @@ public class MutacionFuncional<T> implements Mutacion<T> {
 	public Mutacion<T> clone(){
 		return new MutacionFuncional<>();
 	}
+	
+	@Override
+	public String toString() {
+		return "Funcional";
+	}
 }

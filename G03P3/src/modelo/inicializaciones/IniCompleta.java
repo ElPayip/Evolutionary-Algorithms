@@ -66,5 +66,9 @@ public class IniCompleta<T> implements Inicializacion<T> {
 	public Inicializacion<T> clone() {
 		return new IniCompleta<>(ejemploInd, ejemploNodo, prof);
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Completa";
+	}
 }

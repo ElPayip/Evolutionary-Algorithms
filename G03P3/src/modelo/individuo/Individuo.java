@@ -72,4 +72,9 @@ public abstract class Individuo<T> implements Cloneable {
 	public abstract Individuo<T> createInstance(List<Gen<T>> crom);
 	
 	public abstract Individuo<T> clone();
+	
+	@Override
+	public String toString() {
+		return getValores().toString();
+	}
 }

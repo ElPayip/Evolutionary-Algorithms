@@ -34,4 +34,9 @@ public class MutacionExpansion<T> implements Mutacion<T> {
 	public Mutacion<T> clone(){
 		return new MutacionExpansion<>();
 	}
+	
+	@Override
+	public String toString() {
+		return "Expansión";
+	}
 }

@@ -28,4 +28,9 @@ public class MutacionSubarbol<T> implements Mutacion<T> {
 	public <O> List<Option<O>> getExtraOpts() {
 		return null;
 	}
+	
+	@Override
+	public String toString() {
+		return "Subárbol";
+	}
 }

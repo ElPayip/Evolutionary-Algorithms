@@ -41,5 +41,9 @@ public class CruceSubArbol<T> implements Cruce<T> {
 	public Cruce<T> clone() {
 		return new CruceSubArbol<>();
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Cruce de subárboles";
+	}
 }

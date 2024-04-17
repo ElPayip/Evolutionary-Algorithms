@@ -86,4 +86,9 @@ public class IniRampedAndHalf<T> implements Inicializacion<T> {
 	public Inicializacion<T> clone() {
 		return new IniRampedAndHalf<>(ejemploInd, ejemploNodo, prof);
 	}
+	
+	@Override
+	public String toString() {
+		return "Ramped and Half";
+	}
 }

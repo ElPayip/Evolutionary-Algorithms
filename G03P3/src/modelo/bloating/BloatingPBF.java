@@ -70,4 +70,9 @@ public class BloatingPBF implements ControlBloating { // Penalización bien fund
 	public <T> List<Option<T>> getExtraOpts() {
 		return null;
 	}
+	
+	@Override
+	public String toString() {
+		return "Penalización bien fundamentada";
+	}
 }

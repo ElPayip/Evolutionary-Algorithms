@@ -18,7 +18,6 @@ public class IniCreciente<T> implements Inicializacion<T> {
 	public IniCreciente() {}
 	
 	public IniCreciente(Individuo<T> ejemploInd, GenNodo<T> ejemploNodo, Integer prof) {
-		super();
 		this.ejemploInd = ejemploInd;
 		this.ejemploNodo = ejemploNodo;
 		this.prof = prof;
@@ -58,8 +57,8 @@ public class IniCreciente<T> implements Inicializacion<T> {
 
 	@Override
 	public void setInstances(Individuo<T> ind, Gen<T> gen) {
-		ejemploInd = ind.clone();
-		ejemploNodo = (GenNodo<T>) gen.clone();
+		ejemploInd = ind;
+		ejemploNodo = (GenNodo<T>) gen;
 	}
 	
 	@Override
@@ -73,5 +72,10 @@ public class IniCreciente<T> implements Inicializacion<T> {
 
 	public void setProf(Integer prof) {
 		this.prof = prof;
+	}
+	
+	@Override
+	public String toString() {
+		return "Creciente";
 	}
 }

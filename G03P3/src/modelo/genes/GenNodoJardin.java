@@ -34,4 +34,14 @@ public class GenNodoJardin extends GenNodo<Accion> {
 	Accion[] noTerminales() {
 		return Accion.noTerminales();
 	}
+	
+	@Override
+	public String toString() {
+		String str = "(";
+		str += valor.toString();
+		for (GenNodo<Accion> g : hijos)
+			str += " " + g.toString();
+		str += ")";
+		return str;
+	}
 }

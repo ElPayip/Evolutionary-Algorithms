@@ -22,4 +22,9 @@ public class MutacionHoist<T> implements Mutacion<T> {
 	public Mutacion<T> clone(){
 		return new MutacionHoist<>();
 	}
+	
+	@Override
+	public String toString() {
+		return "Hoist";
+	}
 }

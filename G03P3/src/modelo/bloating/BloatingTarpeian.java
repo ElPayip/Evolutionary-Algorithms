@@ -29,4 +29,9 @@ public class BloatingTarpeian implements ControlBloating {
 	public <T> List<Option<T>> getExtraOpts() {
 		return null;
 	}
+	
+	@Override
+	public String toString() {
+		return "Tarpeian";
+	}
 }

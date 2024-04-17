@@ -4,6 +4,7 @@ import java.util.List;
 
 import modelo.genes.Accion;
 import modelo.genes.Gen;
+import modelo.genes.GenNodo;
 import modelo.genes.GenNodoJardin;
 
 public class IndividuoJardin extends Individuo<Accion> {
@@ -17,7 +18,7 @@ public class IndividuoJardin extends Individuo<Accion> {
 	}
 
 	public IndividuoJardin(List<Gen<Accion>> cromosoma) {
-		super(cromosoma);
+		this.cromosoma = ((GenNodo<Accion>) cromosoma.get(0).clone()).getInorden();
 	}
 
 	@Override
@@ -37,5 +38,10 @@ public class IndividuoJardin extends Individuo<Accion> {
 	
 	public GenNodoJardin getRaiz() {
 		return (GenNodoJardin) cromosoma.get(0);
+	}
+	
+	@Override
+	public String toString() {
+		return cromosoma.get(0).toString();
 	}
 }
