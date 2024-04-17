@@ -16,7 +16,7 @@ public class MutacionSubarbol<T> implements Mutacion<T> {
 		GenNodo<T> nodo = (GenNodo<T>) crom.get(pos);
 		List<Gen<T>> arbol = new IniCreciente<T>().generar(nodo.createInstance(nodo.getPadre(), false), crom.size());
 
-		crom.removeAll(nodo.getInorden());
+		crom.removeAll(nodo.getPreorder());
 		crom.addAll(pos, arbol);
 	}
 

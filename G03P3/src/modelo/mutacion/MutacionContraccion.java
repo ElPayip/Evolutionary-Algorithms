@@ -20,7 +20,7 @@ public class MutacionContraccion<T> implements Mutacion<T> {
 		int pos = crom.indexOf(old);
 		
 		old.getPadre().getHijos().set(old.getPadre().getHijos().indexOf(old), nuevo);
-		crom.removeAll(old.getInorden());
+		crom.removeAll(old.getPreorder());
 		crom.add(pos, nuevo);
 	}
 

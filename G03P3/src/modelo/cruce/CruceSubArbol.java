@@ -23,11 +23,11 @@ public class CruceSubArbol<T> implements Cruce<T> {
 		
 		GenNodo<T> inter1 = (GenNodo<T>) hijo1.get(pos1), inter2 = (GenNodo<T>) hijo2.get(pos2);
 		
-		hijo1.removeAll(inter1.getInorden());
-		hijo2.removeAll(inter2.getInorden());
+		hijo1.removeAll(inter1.getPreorder());
+		hijo2.removeAll(inter2.getPreorder());
 		
-		hijo1.addAll(pos1, inter2.getInorden());
-		hijo2.addAll(pos2, inter1.getInorden());
+		hijo1.addAll(pos1, inter2.getPreorder());
+		hijo2.addAll(pos2, inter1.getPreorder());
 		
 		return new Pair<>(hijo1, hijo2);
 	}

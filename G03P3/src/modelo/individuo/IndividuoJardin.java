@@ -18,7 +18,7 @@ public class IndividuoJardin extends Individuo<Accion> {
 	}
 
 	public IndividuoJardin(List<Gen<Accion>> cromosoma) {
-		this.cromosoma = ((GenNodo<Accion>) cromosoma.get(0).clone()).getInorden();
+		this.cromosoma = ((GenNodo<Accion>) cromosoma.get(0).clone()).getPreorder();
 	}
 
 	@Override

@@ -1,22 +1,21 @@
 package modelo.mutacion;
 
 import java.util.List;
+import java.util.Random;
 
 import modelo.genes.Gen;
+import modelo.genes.GenNodo;
 import vista.ConfigPanel.Option;
 
 public class MutacionHoist<T> implements Mutacion<T> {
 
 	@Override
-	public <O> List<Option<O>> getExtraOpts() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void mutar(List<Gen<T>> crom) {
-		// TODO Auto-generated method stub
+		int pos = new Random().nextInt(crom.size());
+		GenNodo<T> nodo = (GenNodo<T>) crom.get(pos);
 		
+		crom.removeAll(crom);
+		crom.addAll(nodo.getPreorder());
 	}
 
 	public Mutacion<T> clone(){
@@ -26,5 +25,10 @@ public class MutacionHoist<T> implements Mutacion<T> {
 	@Override
 	public String toString() {
 		return "Hoist";
+	}
+	
+	@Override
+	public <O> List<Option<O>> getExtraOpts() {
+		return null;
 	}
 }
