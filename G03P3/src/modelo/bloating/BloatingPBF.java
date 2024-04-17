@@ -6,7 +6,7 @@ import java.util.List;
 import modelo.individuo.Individuo;
 import vista.ConfigPanel.Option;
 
-public class BloatingPBF implements ControlBloating {
+public class BloatingPBF implements ControlBloating { // Penalización bien fundamentada
 
 	@Override
 	public <T> void controlar(List<Individuo<T>> poblacion) {
