@@ -32,9 +32,8 @@ public class BloatingPBF implements ControlBloating { // Penalización bien fund
 		double mediaSizes = media(sizesL), mediaFitness = media(fitnessL);
 		int n = sizesL.size();
 		
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i < n; i++)
             suma += (sizesL.get(i) - mediaSizes) * (fitnessL.get(i) - mediaFitness);
-        }
 		
 		return suma / (n - 1);
 	}
@@ -44,9 +43,8 @@ public class BloatingPBF implements ControlBloating { // Penalización bien fund
         double media = media(sizesL);
         int n = sizesL.size();
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) 
             suma += Math.pow(sizesL.get(i) - media, 2);
-        }
 
         return suma / (n - 1);
 	}
@@ -55,9 +53,8 @@ public class BloatingPBF implements ControlBloating { // Penalización bien fund
 		double suma = 0;
 		int n = poblacion.size();
 		
-		for (int i = 0; i < poblacion.size(); ++i) {
+		for (int i = 0; i < poblacion.size(); ++i)
 			suma += poblacion.get(i);
-		}
 		
 		return suma / n;
 	}
