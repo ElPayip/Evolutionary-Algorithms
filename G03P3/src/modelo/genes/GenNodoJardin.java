@@ -73,4 +73,11 @@ public class GenNodoJardin extends GenNodo<Accion> {
 	public Coord getCoord() {
 		return coord;
 	}
+
+	@Override
+	public Gen<Accion> clone() {
+		GenNodoJardin nuevo = (GenNodoJardin) super.clone();
+		nuevo.coord = new Coord(coord.fila, coord.col);
+		return nuevo;
+	}
 }
