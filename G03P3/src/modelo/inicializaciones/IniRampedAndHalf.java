@@ -53,7 +53,20 @@ public class IniRampedAndHalf<T> implements Inicializacion<T> {
 	}
 	
 	public List<Gen<T>> generarCompleta(GenNodo<T> padre, int profRestante) {
-		return null; //TODO
+		if (profRestante == 0)
+			return new ArrayList<>();
+		
+		List<Gen<T>> inorden = new ArrayList<>();
+		List<GenNodo<T>> hijos = new ArrayList<>();
+		inorden.add(padre);
+		for (int i = 0; i < padre.getAridad(); ++i) {
+			GenNodo<T> hijo = profRestante > 1 ? padre.createInstance(padre, false) 
+											   : padre.createInstance(padre, true);
+			hijos.add(hijo);
+			inorden.addAll(generarCompleta(hijo, profRestante-1));
+		}
+		padre.setHijos(hijos);
+		return inorden;
 	}
 
 	@Override
