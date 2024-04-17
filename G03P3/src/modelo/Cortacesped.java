@@ -9,6 +9,7 @@ import modelo.cruce.CruceSubArbol;
 import modelo.factorias.FactoriaBloating;
 import modelo.fitness.FitJardin;
 import modelo.genes.Accion;
+import modelo.genes.Gen;
 import modelo.genes.GenNodoJardin;
 import modelo.individuo.Individuo;
 import modelo.individuo.IndividuoJardin;
@@ -24,7 +25,7 @@ public class Cortacesped extends AlgGenetico<Accion> {
 		CESPED, CORTADO
 	}
 	
-	private Integer ancho, alto;
+	private Integer ancho = 8, alto = 8;
 	private List<List<Casilla>> jardin;
 	private ControlBloating controlBloating;
 	
@@ -96,30 +97,12 @@ public class Cortacesped extends AlgGenetico<Accion> {
 	public Integer getAlto() {
 		return alto;
 	}
-
-	public void setAncho(Integer ancho) {
-		this.ancho = ancho;
-	}
-
-	public void setAlto(Integer alto) {
-		this.alto = alto;
-	}
 	
 	public List<List<Casilla>> getJardin() {
 		List<List<Casilla>> copia = new ArrayList<>();
 		for (List<Casilla> fila : jardin)
 			copia.add(new ArrayList<>(fila));
 		return copia;
-	}
-
-	@Override
-	public Class<?> getIndividuoClass() {
-		return IndividuoJardin.class;
-	}
-
-	@Override
-	public Class<?> getGenClass() {
-		return GenNodoJardin.class;
 	}
 
 	public ControlBloating getControlBloating() {
@@ -133,5 +116,15 @@ public class Cortacesped extends AlgGenetico<Accion> {
 	@Override
 	public String toString() {
 		return "Cortacésped";
+	}
+
+	@Override
+	public Individuo<Accion> getIndividuoDefault() {
+		return new IndividuoJardin();
+	}
+
+	@Override
+	public Gen<Accion> getGenDefault() {
+		return new GenNodoJardin(null);
 	}
 }

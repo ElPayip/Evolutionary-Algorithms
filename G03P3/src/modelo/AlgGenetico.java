@@ -8,6 +8,7 @@ import java.util.Random;
 
 import modelo.cruce.Cruce;
 import modelo.fitness.Fitness;
+import modelo.genes.Gen;
 import modelo.individuo.Individuo;
 import modelo.inicializaciones.Inicializacion;
 import modelo.mutacion.Mutacion;
@@ -160,6 +161,7 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	}
 	
 	protected void initPoblacion() {
+		inicializacion.setInstances(getIndividuoDefault(), getGenDefault());
 		poblacion = inicializacion.init(tamPoblacion);
 	}
 	
@@ -231,9 +233,9 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	
 	public abstract Boolean maximizacion();
 	
-	public abstract Class<?> getIndividuoClass();
+	public abstract Individuo<T> getIndividuoDefault();
 
-	public abstract Class<?> getGenClass();
+	public abstract Gen<T> getGenDefault();
 	
 	/* ----------------------------------------------------
 	 

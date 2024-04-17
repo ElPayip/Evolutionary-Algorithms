@@ -15,7 +15,7 @@ import modelo.individuo.IndividuoJardin;
 
 public class FitJardin implements Fitness<Accion> {
 	
-	Integer fitness;
+	Integer fitness, count;
 	List<List<Casilla>> jardin;
 	protected class Estado {
 		private int orientacion = 0, fila = 4, col = 4;
@@ -23,11 +23,12 @@ public class FitJardin implements Fitness<Accion> {
 			orientacion++;
 		}
 		public void avanza() {
+			int nFilas = jardin.size(), nCols = jardin.get(0).size();
 			switch (orientacion) {
-			case 0: col = (col - 1) % jardin.get(0).size(); break;
-			case 1: fila = (fila - 1) % jardin.size(); break;
-			case 2: col = (col + 1) % jardin.get(0).size(); break;
-			case 3: fila = (fila + 1) % jardin.size(); break;
+			case 0: col = (nCols + col - 1) % nCols; break;
+			case 1: fila = (nFilas + fila - 1) % nFilas; break;
+			case 2: col = (nCols + col + 1) % nCols; break;
+			case 3: fila = (nFilas + fila + 1) % nFilas; break;
 			}
 		}
 		public void setPos(int f, int c) {
@@ -44,17 +45,20 @@ public class FitJardin implements Fitness<Accion> {
 
 	@Override
 	public double eval(Individuo<Accion> ind) {
-		fitness = 0;
+		fitness = count = 0;
 		List<List<Casilla>> copiaJardin = new ArrayList<>();
 		for (List<Casilla> lista : jardin)
 			copiaJardin.add(new ArrayList<>(lista));
 		
 		try {
-			recorrer(((IndividuoJardin) ind).getRaiz(), copiaJardin, new Estado());
-		} catch (OperationNotSupportedException e) {
+			while (count < 100) {
+				recorrer(((IndividuoJardin) ind).getRaiz(), copiaJardin, new Estado());
+				if (count == 0) break;
+			}
+		} catch (OperationNotSupportedException | IndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}
-		return 0;
+		return fitness;
 	}
 	
 	protected Coord recorrer(GenNodoJardin arbol, List<List<Casilla>> copiaJardin, Estado estado) throws OperationNotSupportedException {
@@ -62,9 +66,11 @@ public class FitJardin implements Fitness<Accion> {
 		switch (arbol.getValor()) {
 		case AVANZA:
 			estado.avanza();
+			count++;
 			break;
 		case IZQUIERDA:
 			estado.gira();
+			count++;
 			break;
 		case CONST:
 			c = arbol.getValor().getCoord();
@@ -72,6 +78,7 @@ public class FitJardin implements Fitness<Accion> {
 		case SALTA:
 			c = recorrer((GenNodoJardin) arbol.getHijos().get(0), copiaJardin, estado);
 			estado.setPos(c.fila(), c.columna());
+			count++;
 			break;
 		case SUMA: 
 			for (GenNodo<Accion> g : arbol.getHijos()) {

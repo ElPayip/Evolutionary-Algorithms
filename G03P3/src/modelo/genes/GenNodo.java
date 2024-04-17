@@ -8,16 +8,12 @@ import java.util.Random;
 public abstract class GenNodo<T> extends Gen<T> {
 	
 	GenNodo<T> padre;
-	List<GenNodo<T>> hijos;
+	List<GenNodo<T>> hijos = new ArrayList<>();
 	int terminal = 0;
 	
 	public GenNodo(GenNodo<T> padre, boolean terminal) {
 		this.padre = padre;
-		if (terminal)
-			this.terminal = 1;
-		else 
-			this.terminal = -1;
-		setRandomVal();
+		setRandomVal(terminal);
 	}
 	
 	public GenNodo(GenNodo<T> padre) {
@@ -32,10 +28,16 @@ public abstract class GenNodo<T> extends Gen<T> {
 		else if (terminal < 0)
 			return randomNodo(noTerminales());
 		else {
-			List<T> aux = Arrays.asList(noTerminales());
+			List<T> aux = new ArrayList<>(Arrays.asList(noTerminales()));
 			aux.addAll(Arrays.asList(terminales()));
 			return randomNodo((T[]) aux.toArray());
 		}
+	}
+	
+	public void setRandomVal(boolean terminal) {
+		if (terminal) this.terminal = 1;
+		else  		  this.terminal = -1;
+		setRandomVal();
 	}
 	
 	private T randomNodo(T[] terms) {

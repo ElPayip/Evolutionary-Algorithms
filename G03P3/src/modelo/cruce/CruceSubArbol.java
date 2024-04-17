@@ -1,7 +1,6 @@
 package modelo.cruce;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -15,19 +14,23 @@ public class CruceSubArbol<T> implements Cruce<T> {
 	@Override
 	public Pair<List<Gen<T>>, List<Gen<T>>> cruzar(List<Gen<T>> crom1, List<Gen<T>> crom2) {
 		
-		List<Gen<T>> hijo1 = new ArrayList<>(crom1); Collections.fill(hijo1, null);
-		List<Gen<T>> hijo2 = new ArrayList<>(crom2); Collections.fill(hijo2, null);
+		List<Gen<T>> hijo1 = new ArrayList<>(((GenNodo<T>) crom1.get(0).clone()).getPreorder());
+		List<Gen<T>> hijo2 = new ArrayList<>(((GenNodo<T>) crom2.get(0).clone()).getPreorder());
 		
 		Random rand = new Random();
 		int pos1 = rand.nextInt(hijo1.size()), pos2 = rand.nextInt(hijo2.size());
 		
-		GenNodo<T> inter1 = (GenNodo<T>) hijo1.get(pos1), inter2 = (GenNodo<T>) hijo2.get(pos2);
+		GenNodo<T> inter1 = (GenNodo<T>) hijo1.get(pos1), inter2 = (GenNodo<T>) hijo2.get(pos2), aux;
 		
 		hijo1.removeAll(inter1.getPreorder());
 		hijo2.removeAll(inter2.getPreorder());
 		
 		hijo1.addAll(pos1, inter2.getPreorder());
 		hijo2.addAll(pos2, inter1.getPreorder());
+		
+		aux = inter1.getPadre();
+		inter1.setPadre(inter2.getPadre());
+		inter2.setPadre(aux);
 		
 		return new Pair<>(hijo1, hijo2);
 	}

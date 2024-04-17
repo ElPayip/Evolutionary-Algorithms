@@ -3,6 +3,7 @@ package modelo.inicializaciones;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.genes.Accion;
 import modelo.genes.Gen;
 import modelo.genes.GenNodo;
 import modelo.individuo.Individuo;
@@ -13,7 +14,7 @@ public class IniCreciente<T> implements Inicializacion<T> {
 
 	private Individuo<T> ejemploInd;
 	private GenNodo<T> ejemploNodo;
-	private Integer prof = 20;
+	private Integer prof = 5;
 	
 	public IniCreciente() {}
 	
@@ -27,7 +28,7 @@ public class IniCreciente<T> implements Inicializacion<T> {
 	public List<Individuo<T>> init(int n) {
 		List<Individuo<T>> poblacion = new ArrayList<>();
 		for (int i = 0; i < n; ++i)
-			poblacion.add(ejemploInd.createInstance(generar(ejemploNodo.createInstance(null, false), prof)));
+			poblacion.add(ejemploInd.createInstance(generar(ejemploNodo.createInstance(null, false), prof-1)));
 		return poblacion;
 	}
 
@@ -45,6 +46,8 @@ public class IniCreciente<T> implements Inicializacion<T> {
 			inorden.addAll(generar(hijo, profRestante-1));
 		}
 		padre.setHijos(hijos);
+		if (padre.getValor() == Accion.SALTA && padre.getHijos().size() == 0)
+			System.out.println("culo");
 		return inorden;
 	}
 

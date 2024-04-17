@@ -17,7 +17,7 @@ public class MutacionTerminal<T> implements Mutacion<T> {
 			if (((GenNodo<T>) g).isTerminal()) terms.add(g);
 		
 		int pos = new Random().nextInt(terms.size());
-		terms.get(pos).setRandomVal();
+		((GenNodo<T>) terms.get(pos)).setRandomVal(true);
 	}
 
 	@Override
