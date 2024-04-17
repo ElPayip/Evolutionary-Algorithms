@@ -15,8 +15,7 @@ public class IniCreciente<T> implements Inicializacion<T> {
 	private GenNodo<T> ejemploNodo;
 	private Integer prof;
 	
-	public IniCreciente() {
-	}
+	public IniCreciente() {}
 	
 	public IniCreciente(Individuo<T> ejemploInd, GenNodo<T> ejemploNodo, Integer prof) {
 		super();
