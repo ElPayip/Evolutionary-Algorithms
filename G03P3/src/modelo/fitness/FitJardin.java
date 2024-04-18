@@ -6,7 +6,6 @@ import java.util.List;
 import javax.naming.OperationNotSupportedException;
 
 import modelo.Cortacesped.Casilla;
-import modelo.genes.Accion;
 import modelo.genes.GenNodo;
 import modelo.genes.GenNodoJardin;
 import modelo.genes.GenNodoJardin.Coord;
@@ -20,15 +19,15 @@ public class FitJardin implements Fitness<Accion> {
 	protected class Estado {
 		private int orientacion = 0, fila = 4, col = 4;
 		public void gira() {
-			orientacion++;
+			orientacion = (orientacion + 1) % 4;
 		}
 		public void avanza() {
 			int nFilas = jardin.size(), nCols = jardin.get(0).size();
 			switch (orientacion) {
-			case 0: col = (nCols + col - 1) % nCols; break;
-			case 1: fila = (nFilas + fila - 1) % nFilas; break;
-			case 2: col = (col + 1) % nCols; break;
-			case 3: fila = (fila + 1) % nFilas; break;
+			case 0: fila = (nFilas + fila - 1) % nFilas; break;
+			case 1: col = (nCols + col - 1) % nCols; break;
+			case 2: fila = (fila + 1) % nFilas; break;
+			case 3: col = (col + 1) % nCols; break;
 			}
 		}
 		public void salta(int f, int c) {
@@ -37,6 +36,7 @@ public class FitJardin implements Fitness<Accion> {
 		}
 		public int fila() {return fila;}
 		public int columna() {return col;}
+		public int orientacion() {return orientacion;}
 	}
 	
 	public FitJardin(List<List<Casilla>> jardin) {

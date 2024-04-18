@@ -1,4 +1,4 @@
-package modelo.genes;
+package modelo.fitness;
 
 import java.util.ArrayList;
 import java.util.List;

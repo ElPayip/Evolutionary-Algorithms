@@ -72,7 +72,7 @@ public class IniRampedAndHalf<T> implements Inicializacion<T> {
 	@Override
 	public <O> List<Option<O>> getExtraOpts() {
 		List<Option<O>> extras = new ArrayList<>();
-		extras.add(new IntegerOption<O>("Profundidad", "Profundidad", "prof", 0, 1000));
+		extras.add(new IntegerOption<O>("Profundidad", "Profundidad", "prof", 2, 5));
 		return extras;
 	}
 

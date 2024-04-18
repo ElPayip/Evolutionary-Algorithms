@@ -2,7 +2,7 @@ package modelo.individuo;
 
 import java.util.List;
 
-import modelo.genes.Accion;
+import modelo.fitness.Accion;
 import modelo.genes.Gen;
 import modelo.genes.GenNodo;
 import modelo.genes.GenNodoJardin;

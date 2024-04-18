@@ -3,7 +3,7 @@ package modelo.inicializaciones;
 import java.util.ArrayList;
 import java.util.List;
 
-import modelo.genes.Accion;
+import modelo.fitness.Accion;
 import modelo.genes.Gen;
 import modelo.genes.GenNodo;
 import modelo.individuo.Individuo;
@@ -54,7 +54,7 @@ public class IniCreciente<T> implements Inicializacion<T> {
 	@Override
 	public <O> List<Option<O>> getExtraOpts() {
 		List<Option<O>> extras = new ArrayList<>();
-		extras.add(new IntegerOption<O>("Profundidad", "Profundidad", "prof", 0, 1000));
+		extras.add(new IntegerOption<O>("Profundidad", "Profundidad", "prof", 2, 5));
 		return extras;
 	}
 

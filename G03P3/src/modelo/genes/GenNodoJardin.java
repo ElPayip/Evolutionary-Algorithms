@@ -2,6 +2,8 @@ package modelo.genes;
 
 import java.util.Random;
 
+import modelo.fitness.Accion;
+
 public class GenNodoJardin extends GenNodo<Accion> {
 	
 	private static int nFilas, nCols;

@@ -91,7 +91,7 @@ public class GraphPanel extends JPanel {
 		individuoPanel.add(recorrido);
 		individuoPanel.add(Box.createVerticalStrut(20));
 		this.validate();
-		resultadoLabel.setText("Solución: "+mejor.getFitness());
+		resultadoLabel.setText("Fitness: "+mejor.getFitness());
 		recorrido.reproducir();
 	}
 }
