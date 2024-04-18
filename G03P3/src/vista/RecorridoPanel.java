@@ -131,15 +131,15 @@ public class RecorridoPanel extends JPanel {
 
 		private static final long serialVersionUID = 1L;
 		
-		private List<List<Casilla>> jardin;
+		private List<List<Casilla>> copiaJardin;
 		private int fila = 4, col = 4, orientacion = 0;
 		
 		public JardinTableModel(List<List<Casilla>> jardin) {
-			this.jardin = jardin;
+			this.copiaJardin = jardin;
 		}
 		
 		public void setJardin(List<List<Casilla>> jardin) {
-			this.jardin = jardin;
+			this.copiaJardin = jardin;
 		}
 		
 		public void actualizar(int fila, int col, int orient) {
@@ -151,12 +151,12 @@ public class RecorridoPanel extends JPanel {
 		
 		@Override
 		public int getRowCount() {
-			return jardin.size();
+			return copiaJardin.size();
 		}
 
 		@Override
 		public int getColumnCount() {
-			return jardin.get(0).size();
+			return copiaJardin.get(0).size();
 		}
 
 		@Override
@@ -168,8 +168,21 @@ public class RecorridoPanel extends JPanel {
 				case 2: return "\\█/";
 				case 3: return "█>";
 				}
-			if (jardin.get(rowIndex).get(columnIndex) == Casilla.CESPED)
+			
+			switch (jardin.get(rowIndex).get(columnIndex)) {
+			case FLORES:
+				return ":▒:";
+			default:
+				break;
+			}
+			
+			switch (copiaJardin.get(rowIndex).get(columnIndex)) {
+			case CESPED:
 				return " : · :";
+			default:
+				break;
+			}
+			
 			return "";
 		}
 		
@@ -184,16 +197,26 @@ public class RecorridoPanel extends JPanel {
 
 		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 			JLabel lbl = ((JLabel)super.getTableCellRendererComponent(table,value,isSelected,hasFocus,row,column));
-			switch(((JardinTableModel) table.getModel()).jardin.get(row).get(column)) {
-			case CESPED:
-				lbl.setBackground(new Color(0,180,0));
-				break;
+			Casilla actual = ((JardinTableModel) table.getModel()).copiaJardin.get(row).get(column);
+			
+			switch(actual) {
 			case CORTADO:
 				lbl.setBackground(new Color(100,255,100));
 				break;
 			default:
+				lbl.setBackground(new Color(0,180,0));
 				break;
 			}
+			
+			switch(jardin.get(row).get(column)) {
+			case FLORES:
+				lbl.setForeground(actual == Casilla.CORTADO ? new Color(100,150,100) : Color.MAGENTA);
+				break;
+			default:
+				lbl.setForeground(Color.BLACK);
+				break;
+			}
+			
 			lbl.setFont(new Font(null, Font.PLAIN, 14));
 			return lbl;
 		}

@@ -17,6 +17,7 @@ public class FitJardin implements Fitness<Accion> {
 	Integer fitness, count;
 	List<List<Casilla>> jardin;
 	protected class Estado {
+		private Coord old;
 		private int orientacion = 0, fila = 4, col = 4;
 		public void gira() {
 			orientacion = (orientacion + 1) % 4;
@@ -29,14 +30,18 @@ public class FitJardin implements Fitness<Accion> {
 			case 2: fila = (fila + 1) % nFilas; break;
 			case 3: col = (col + 1) % nCols; break;
 			}
+			save();
 		}
 		public void salta(int f, int c) {
 			fila = (fila + f) % jardin.size();
 			col = (col + c) % jardin.size();
+			save();
 		}
 		public int fila() {return fila;}
 		public int columna() {return col;}
 		public int orientacion() {return orientacion;}
+		private void save() {old = new Coord(fila, col);}
+		public void undo() {fila = old.fila(); col = old.columna();}
 	}
 	
 	public FitJardin(List<List<Casilla>> jardin) {
@@ -103,11 +108,14 @@ public class FitJardin implements Fitness<Accion> {
 		default:
 			break;
 		} 
-		
-		if (corta && copiaJardin.get(estado.fila).get(estado.col) == Casilla.CESPED) {
+		Casilla actual = copiaJardin.get(estado.fila).get(estado.col);
+		if (!actual.isTransitable())
+			estado.undo();
+		else if (corta && actual.isCortable()) {
 			copiaJardin.get(estado.fila).set(estado.col, Casilla.CORTADO);
-			fitness++;
+			fitness += actual.getValor();
 		}
+		
 		return c;
 	}
 }
