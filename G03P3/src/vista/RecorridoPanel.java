@@ -2,6 +2,8 @@ package vista;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.List;
@@ -10,6 +12,8 @@ import javax.naming.OperationNotSupportedException;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -33,6 +37,7 @@ public class RecorridoPanel extends JPanel {
 	private List<List<Casilla>> jardin;
 	private Individuo<Accion> mejor;
 	private FitJardinVista fit;
+	private static boolean omitir = true;
 
 	public RecorridoPanel(Cortacesped alg) {
 		jardin = alg.getJardin();
@@ -57,9 +62,20 @@ public class RecorridoPanel extends JPanel {
 		tablero.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		fit = new FitJardinVista(jardin, (JardinTableModel) tablero.getModel());
 		
+		JCheckBox boxOmitir = new JCheckBox("Omitir animaciones");
+		boxOmitir.setSelected(omitir);
+		boxOmitir.addActionListener((e) -> {
+			omitir = !omitir;
+		});
+		JPanel panelParams = new JPanel();
+		panelParams.setLayout(new BoxLayout(panelParams, BoxLayout.Y_AXIS));
+		panelParams.add(boxOmitir);
+		
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.add(Box.createHorizontalStrut(20));
 		this.add(tablero);
+		this.add(Box.createHorizontalStrut(20));
+		this.add(panelParams);
 		this.add(Box.createHorizontalGlue());
 		this.setOpaque(false);
 	}
@@ -82,6 +98,7 @@ public class RecorridoPanel extends JPanel {
 		public List<List<Casilla>> copiarJardin() {
 			List<List<Casilla>> copia = super.copiarJardin();
 			tabla.setJardin(copia);
+			tabla.fireTableDataChanged();
 			return copia;
 		}
 		
@@ -89,11 +106,12 @@ public class RecorridoPanel extends JPanel {
 		protected Coord recorrer(GenNodoJardin arbol, List<List<Casilla>> copiaJardin, Estado estado)
 				throws OperationNotSupportedException {
 			Coord c = super.recorrer(arbol, copiaJardin, estado);
-			try {
-				Thread.sleep(20);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			if (!omitir)
+				try {
+					Thread.sleep(20);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			tabla.actualizar(estado.fila(), estado.columna());
 			return c;
 		}
