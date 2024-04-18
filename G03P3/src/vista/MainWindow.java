@@ -21,7 +21,7 @@ public class MainWindow extends JFrame {
 	Thread thread;
 
     public MainWindow(FactoriaAlgGenetico factoria) {
-        super ("Control de tráfico aéreo");
+        super ("Cortacésped");
         this.factoria = factoria;
         initGUI();
     }
