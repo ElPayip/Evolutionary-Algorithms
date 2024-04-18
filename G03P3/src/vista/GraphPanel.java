@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,6 +17,7 @@ import javax.swing.JTextArea;
 import org.math.plot.Plot2DPanel;
 
 import modelo.AlgGenetico;
+import modelo.Cortacesped;
 import modelo.individuo.Individuo;
 
 public class GraphPanel extends JPanel {
@@ -53,7 +55,7 @@ public class GraphPanel extends JPanel {
 		JScrollPane indPanel = new JScrollPane(individuoPanel);
 		indPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		indPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		indPanel.setPreferredSize(new Dimension(800, 160));
+		indPanel.setPreferredSize(new Dimension(800, 300));
 		
 		resultadoLabel = new JLabel("");
 		mejorPanel.add(indPanel);
@@ -62,7 +64,7 @@ public class GraphPanel extends JPanel {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(plot);
 		this.add(mejorPanel);
-		this.setPreferredSize(new Dimension(600, 600));
+		this.setPreferredSize(new Dimension(600, 900));
 	}
 	
 	public void update(AlgGenetico<?> alg) {
@@ -84,7 +86,12 @@ public class GraphPanel extends JPanel {
 		
 		individuoPanel.removeAll();
 		individuoPanel.add(individuoLabel);
+		individuoPanel.add(Box.createVerticalStrut(5));
+		RecorridoPanel recorrido = new RecorridoPanel((Cortacesped) alg);
+		individuoPanel.add(recorrido);
+		individuoPanel.add(Box.createVerticalStrut(20));
 		this.validate();
 		resultadoLabel.setText("Solución: "+mejor.getFitness());
+		recorrido.reproducir();
 	}
 }

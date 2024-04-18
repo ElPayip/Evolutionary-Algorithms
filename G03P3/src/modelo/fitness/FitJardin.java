@@ -46,9 +46,7 @@ public class FitJardin implements Fitness<Accion> {
 	@Override
 	public double eval(Individuo<Accion> ind) {
 		fitness = count = 0;
-		List<List<Casilla>> copiaJardin = new ArrayList<>();
-		for (List<Casilla> lista : jardin)
-			copiaJardin.add(new ArrayList<>(lista));
+		List<List<Casilla>> copiaJardin = copiarJardin();
 		
 		try {
 			Estado estado = new Estado();
@@ -60,6 +58,13 @@ public class FitJardin implements Fitness<Accion> {
 			e.printStackTrace();
 		}
 		return fitness;
+	}
+	
+	public List<List<Casilla>> copiarJardin() {
+		List<List<Casilla>> copiaJardin = new ArrayList<>();
+		for (List<Casilla> lista : jardin)
+			copiaJardin.add(new ArrayList<>(lista));
+		return copiaJardin;
 	}
 	
 	protected Coord recorrer(GenNodoJardin arbol, List<List<Casilla>> copiaJardin, Estado estado) throws OperationNotSupportedException {
