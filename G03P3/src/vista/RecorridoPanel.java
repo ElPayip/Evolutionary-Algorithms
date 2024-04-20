@@ -172,6 +172,8 @@ public class RecorridoPanel extends JPanel {
 			switch (jardin.get(rowIndex).get(columnIndex)) {
 			case FLORES:
 				return ":▒:";
+			case ROCA:
+				return " /¯\\";
 			default:
 				break;
 			}
@@ -200,6 +202,9 @@ public class RecorridoPanel extends JPanel {
 			Casilla actual = ((JardinTableModel) table.getModel()).copiaJardin.get(row).get(column);
 			
 			switch(actual) {
+			case ROCA:
+				lbl.setBackground(new Color(100,100,100));
+				break;
 			case CORTADO:
 				lbl.setBackground(new Color(100,255,100));
 				break;

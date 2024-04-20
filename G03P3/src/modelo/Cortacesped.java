@@ -52,7 +52,7 @@ public class Cortacesped extends AlgGenetico<Accion> {
 	private Integer ancho = 8, alto = 8;
 	private List<List<Casilla>> jardin;
 	private ControlBloating controlBloating;
-	private String file = "resources/flores.txt";
+	private String file = "resources/rocas.txt";
 	
 	public Cortacesped() {
 		inicializacion = new IniCreciente<>();

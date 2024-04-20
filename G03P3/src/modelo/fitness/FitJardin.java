@@ -23,6 +23,7 @@ public class FitJardin implements Fitness<Accion> {
 			orientacion = (orientacion + 1) % 4;
 		}
 		public void avanza() {
+			save();
 			int nFilas = jardin.size(), nCols = jardin.get(0).size();
 			switch (orientacion) {
 			case 0: fila = (nFilas + fila - 1) % nFilas; break;
@@ -30,12 +31,11 @@ public class FitJardin implements Fitness<Accion> {
 			case 2: fila = (fila + 1) % nFilas; break;
 			case 3: col = (col + 1) % nCols; break;
 			}
-			save();
 		}
 		public void salta(int f, int c) {
+			save();
 			fila = (fila + f) % jardin.size();
 			col = (col + c) % jardin.size();
-			save();
 		}
 		public int fila() {return fila;}
 		public int columna() {return col;}
