@@ -14,7 +14,7 @@ import modelo.individuo.IndividuoJardin;
 
 public class FitJardin implements Fitness<Accion> {
 	
-	Integer fitness, count;
+	Integer fitness, count, maxCount = 100;
 	List<List<Casilla>> jardin;
 	protected class Estado {
 		private Coord old;
@@ -42,10 +42,17 @@ public class FitJardin implements Fitness<Accion> {
 		public int orientacion() {return orientacion;}
 		private void save() {old = new Coord(fila, col);}
 		public void undo() {fila = old.fila(); col = old.columna();}
+		public Coord frente() { 
+			Coord aux = old, nuevo;
+			avanza(); nuevo = new Coord(fila, col);
+			undo(); old = aux;
+			return nuevo;
+		}
 	}
 	
-	public FitJardin(List<List<Casilla>> jardin) {
+	public FitJardin(List<List<Casilla>> jardin, int maxPasos) {
 		this.jardin = jardin;
+		maxCount = maxPasos;
 	}
 
 	@Override
@@ -55,9 +62,15 @@ public class FitJardin implements Fitness<Accion> {
 		
 		try {
 			Estado estado = new Estado();
-			while (count < 100) {
+			int abort = 10, countAnt = count;
+			while (count < maxCount && abort > 0) {
 				recorrer(((IndividuoJardin) ind).getRaiz(), copiaJardin, estado);
 				if (count == 0) break;
+				if (count == countAnt) abort--;	// Cuenta atrás para considerar que está en un bucle infinito
+				else {
+					abort = 10;
+					countAnt = count;
+				}
 			}
 		} catch (OperationNotSupportedException | IndexOutOfBoundsException e) {
 			e.printStackTrace();
@@ -85,6 +98,12 @@ public class FitJardin implements Fitness<Accion> {
 			estado.gira();
 			count++;
 			break;
+		case DERECHA:
+			estado.gira();
+			estado.gira();
+			estado.gira();
+			count++;
+			break;
 		case CONST:
 			c = arbol.getCoord();
 			break;
@@ -104,6 +123,13 @@ public class FitJardin implements Fitness<Accion> {
 		case PROGN:
 			for (GenNodo<Accion> g : arbol.getHijos())
 				c = recorrer((GenNodoJardin) g, copiaJardin, estado);
+			break;
+		case IF_DIRTY:
+			Coord frente = estado.frente();
+			if (copiaJardin.get(frente.fila()).get(frente.columna()).getValor() > 0) 		// Comprueba si cortar la casilla le aporta fitness
+				c = recorrer((GenNodoJardin) arbol.getHijos().get(0), copiaJardin, estado); // Es importante que sea así, puesto que hay más casillas cortables aparte del césped
+			else 
+				c = recorrer((GenNodoJardin) arbol.getHijos().get(1), copiaJardin, estado);
 			break;
 		default:
 			break;

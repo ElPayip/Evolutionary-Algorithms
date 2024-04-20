@@ -37,6 +37,7 @@ public class RecorridoPanel extends JPanel {
 	private List<List<Casilla>> jardin;
 	private Individuo<Accion> mejor;
 	private FitJardinVista fit;
+	private Integer maxPasos;
 	private static boolean omitir = false;
 	
 	private static JSpinner delay;
@@ -44,6 +45,7 @@ public class RecorridoPanel extends JPanel {
 	public RecorridoPanel(Cortacesped alg) {
 		jardin = alg.getJardin();
 		mejor = alg.getMejor();
+		maxPasos = alg.getMaxPasos();
 		
 		initGUI();
 	}
@@ -62,7 +64,7 @@ public class RecorridoPanel extends JPanel {
 		    }
 		});
 		tablero.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		fit = new FitJardinVista(jardin, (JardinTableModel) tablero.getModel());
+		fit = new FitJardinVista(jardin, maxPasos, (JardinTableModel) tablero.getModel());
 		
 		JCheckBox boxOmitir = new JCheckBox("Omitir animaciones");
 		boxOmitir.setOpaque(false);
@@ -99,8 +101,8 @@ public class RecorridoPanel extends JPanel {
 
 		private JardinTableModel tabla;
 
-		public FitJardinVista(List<List<Casilla>> jardin, JardinTableModel tabla) {
-			super(jardin);
+		public FitJardinVista(List<List<Casilla>> jardin, int maxPasos, JardinTableModel tabla) {
+			super(jardin, maxPasos);
 			this.tabla = tabla;
 		}
 		

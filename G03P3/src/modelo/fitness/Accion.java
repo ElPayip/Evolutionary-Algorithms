@@ -5,7 +5,7 @@ import java.util.List;
 
 public enum Accion {
 	
-	AVANZA(0), IZQUIERDA(0), CONST(0), SALTA(1), SUMA(2), PROGN(2);
+	AVANZA(0), IZQUIERDA(0), CONST(0), SALTA(1), SUMA(2), PROGN(2), IF_DIRTY(2), DERECHA(0);
 
 	private int aridad;
 	

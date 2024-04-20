@@ -19,6 +19,7 @@ import modelo.individuo.IndividuoJardin;
 import modelo.inicializaciones.IniCreciente;
 import modelo.mutacion.MutacionTerminal;
 import modelo.seleccion.SelRanking;
+import vista.ConfigPanel.IntegerOption;
 import vista.ConfigPanel.Option;
 import vista.ConfigPanel.StrategyOption;
 import vista.ConfigPanel.TextOption;
@@ -49,7 +50,7 @@ public class Cortacesped extends AlgGenetico<Accion> {
 		}
 	}
 	
-	private Integer ancho = 8, alto = 8;
+	private Integer ancho = 8, alto = 8, maxPasos = 100;
 	private List<List<Casilla>> jardin;
 	private ControlBloating controlBloating;
 	private String file = "resources/rocas.txt";
@@ -96,7 +97,7 @@ public class Cortacesped extends AlgGenetico<Accion> {
 	@Override
 	public Individuo<Accion> ejecutar() {
 		initJardin();
-		fitness = new FitJardin(getJardin());
+		fitness = new FitJardin(getJardin(), maxPasos);
 		
 		return super.ejecutar();
 	}
@@ -130,6 +131,7 @@ public class Cortacesped extends AlgGenetico<Accion> {
 				"controlBloating",
 				new FactoriaBloating().getControlesBloating()));
 		extras.add(new TextOption<T>("archivo del jardin", "archivo del jardin", "file"));
+		extras.add(new IntegerOption<T>("máximo número de pasos", "máximo número de pasos", "maxPasos", 1, 1000));
 		return extras;
 	}
 
@@ -177,5 +179,13 @@ public class Cortacesped extends AlgGenetico<Accion> {
 
 	public void setFile(String file) {
 		this.file = file;
+	}
+
+	public Integer getMaxPasos() {
+		return maxPasos;
+	}
+
+	public void setMaxPasos(Integer maxPasos) {
+		this.maxPasos = maxPasos;
 	}
 }
