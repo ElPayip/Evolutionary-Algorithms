@@ -15,6 +15,7 @@ public class GenNodoJardin extends GenNodo<Accion> {
 		}
 		public int fila() {return fila;}
 		public int columna() {return col;}
+		public int modulo() {return (int) Math.sqrt(Math.pow(fila, 2) + Math.pow(col, 2)); }
 		@Override
 		public String toString() {
 			return String.format("%d,%d", fila, col);

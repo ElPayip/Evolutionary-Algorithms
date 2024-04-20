@@ -131,7 +131,10 @@ public class FitJardin implements Fitness<Accion> {
 			else 
 				c = recorrer((GenNodoJardin) arbol.getHijos().get(1), copiaJardin, estado);
 			break;
-		default:
+		case REPEAT: // Similar al planteado en el enunciado, recorre un primer hijo y en base al módulo de la coordenada devuelta repite el segundo
+			int reps = recorrer((GenNodoJardin) arbol.getHijos().get(0), copiaJardin, estado).modulo();
+			for (int i = 0; i < reps; ++i)
+				c = recorrer((GenNodoJardin) arbol.getHijos().get(1), copiaJardin, estado);
 			break;
 		} 
 		Casilla actual = copiaJardin.get(estado.fila).get(estado.col);
