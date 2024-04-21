@@ -1,5 +1,7 @@
 package modelo.genes;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import modelo.fitness.Accion;
@@ -61,7 +63,11 @@ public class GenNodoJardin extends GenNodo<Accion> {
 
 	@Override
 	Accion[] noTerminales() {
-		return Accion.noTerminales();
+		List<Accion> noterms = new ArrayList<>();
+		for (Accion a : Accion.values())
+			if (valor == null || a.getAridad() == valor.getAridad())
+				noterms.add(a);
+		return noterms.toArray(new Accion[0]);
 	}
 	
 	@Override
