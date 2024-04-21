@@ -50,10 +50,11 @@ public class Cortacesped extends AlgGenetico<Accion> {
 		}
 	}
 	
-	private Integer ancho = 8, alto = 8, maxPasos = 100;
+	private Integer ancho = 8, alto = 8;
+	Integer maxPasos = 100;
 	private List<List<Casilla>> jardin;
-	private ControlBloating controlBloating;
-	private String file = "resources/rocas.txt";
+	ControlBloating controlBloating;
+	String file = "resources/rocas.txt";
 	
 	public Cortacesped() {
 		inicializacion = new IniCreciente<>();
@@ -67,7 +68,7 @@ public class Cortacesped extends AlgGenetico<Accion> {
 		super(otro);
 	}
 	
-	private void initJardin() {
+	void initJardin() {
 		try {
 			Scanner in = new Scanner(new File(file));
 			alto = in.nextInt();
@@ -133,14 +134,6 @@ public class Cortacesped extends AlgGenetico<Accion> {
 		extras.add(new TextOption<T>("archivo del jardin", "archivo del jardin", "file"));
 		extras.add(new IntegerOption<T>("máximo número de pasos", "máximo número de pasos", "maxPasos", 1, 1000));
 		return extras;
-	}
-
-	public Integer getAncho() {
-		return ancho;
-	}
-
-	public Integer getAlto() {
-		return alto;
 	}
 	
 	public List<List<Casilla>> getJardin() {

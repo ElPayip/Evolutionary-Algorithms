@@ -32,6 +32,12 @@ public class GenNodoJardin extends GenNodo<Accion> {
 		super(padre);
 		coord = new Coord(new Random().nextInt(nFilas), new Random().nextInt(nCols));
 	}
+	
+	public GenNodoJardin(GenNodoJardin padre, Accion accion) {
+		super(padre);
+		coord = new Coord(new Random().nextInt(nFilas), new Random().nextInt(nCols));
+		valor = accion;
+	}
 
 	@Override
 	public int getAridad() {
