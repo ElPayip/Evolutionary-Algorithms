@@ -21,7 +21,6 @@ public class MutacionPermutacion<T> implements Mutacion<T> {
 		GenNodo<T> funcion = (GenNodo<T>) funcs.get(pos);
 		
 		List<GenNodo<T>> hijos = funcion.getHijos();
-		
 		Collections.shuffle(hijos);
 	}
 	
