@@ -3,6 +3,7 @@ package modelo.factorias;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.bloating.BloatingPBF;
 import modelo.bloating.BloatingTarpeian;
 import modelo.bloating.ControlBloating;
 
@@ -13,7 +14,7 @@ public class FactoriaBloating {
 	public FactoriaBloating() {
 		controles = new ArrayList<>();
 		controles.add(new BloatingTarpeian());
-		//TODO
+		controles.add(new BloatingPBF());
 	}
 	
 	public ControlBloating[] getControlesBloating() {
