@@ -16,6 +16,8 @@ public class MutacionExpansion<T> implements Mutacion<T> {
 		List<GenNodo<T>> terms = new ArrayList<>();
 		for (Gen<T> g : crom)
 			if (((GenNodo<T>) g).isTerminal()) terms.add((GenNodo<T>) g);
+		if (terms.size() == 0)
+			return;
 		
 		GenNodo<T> old = terms.get(new Random().nextInt(terms.size()));
 		List<Gen<T>> nuevo = new IniCreciente<T>().generar(old.createInstance(old.getPadre(), false), crom.size());

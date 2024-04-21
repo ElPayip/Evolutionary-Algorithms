@@ -8,6 +8,10 @@ import java.util.Map;
 import modelo.CategoriaCrom;
 import modelo.mutacion.Mutacion;
 import modelo.mutacion.MutacionContraccion;
+import modelo.mutacion.MutacionExpansion;
+import modelo.mutacion.MutacionFuncional;
+import modelo.mutacion.MutacionHoist;
+import modelo.mutacion.MutacionPermutacion;
 import modelo.mutacion.MutacionSubarbol;
 import modelo.mutacion.MutacionTerminal;
 
@@ -24,8 +28,12 @@ public class FactoriaMutacion {
 
 		List<Mutacion<?>> arboles = new ArrayList<>();
 		arboles.add(new MutacionTerminal<>());
+		arboles.add(new MutacionFuncional<>());
+		arboles.add(new MutacionPermutacion<>());
 		arboles.add(new MutacionSubarbol<>());
+		arboles.add(new MutacionHoist<>());
 		arboles.add(new MutacionContraccion<>());
+		arboles.add(new MutacionExpansion<>());
 		
 		mutaciones = new HashMap<>();
 		mutaciones.put(CategoriaCrom.BINARIO, binarias);

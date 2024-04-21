@@ -16,6 +16,8 @@ public class MutacionPermutacion<T> implements Mutacion<T> {
 		List<Gen<T>> funcs = new ArrayList<>();
 		for (Gen<T> g : crom)
 			if (!((GenNodo<T>) g).isTerminal()) funcs.add(g);
+		if (funcs.size() == 0)
+			return;
 		
 		int pos = new Random().nextInt(funcs.size());
 		GenNodo<T> funcion = (GenNodo<T>) funcs.get(pos);

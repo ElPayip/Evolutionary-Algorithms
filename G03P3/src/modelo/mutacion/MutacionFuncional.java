@@ -15,9 +15,11 @@ public class MutacionFuncional<T> implements Mutacion<T> {
 		List<Gen<T>> funcs = new ArrayList<>();
 		for (Gen<T> g : crom)
 			if (!((GenNodo<T>) g).isTerminal()) funcs.add(g);
+		if (funcs.size() == 0)
+			return;
 		
 		int pos = new Random().nextInt(funcs.size());
-		funcs.get(pos).setRandomVal();
+		((GenNodo<T>) funcs.get(pos)).setRandomVal(false);
 	}
 	
 	@Override
