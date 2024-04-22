@@ -14,12 +14,15 @@ public class FitJardinGramatica implements Fitness<Integer> {
 	
 	private static int pos;
 	private FitJardin fit;
+	private int maxWraps;
 
-	public FitJardinGramatica(List<List<Casilla>> jardin, int maxPasos) {
+	public FitJardinGramatica(List<List<Casilla>> jardin, int maxPasos, int maxWraps) {
 		fit = new FitJardin(jardin, maxPasos);
+		this.maxWraps = maxWraps;
 	}
 
 	public Individuo<Accion> fromCodones(List<Integer> codones) {
+		pos = 0;
 		return new IndividuoJardin(noTerm(codones, null));
 	}
 
@@ -32,7 +35,8 @@ public class FitJardinGramatica implements Fitness<Integer> {
 		List<Gen<Accion>> crom = null;
 		int i = codones.get(pos % codones.size()) % 2;
 		pos++;
-		switch (i) {
+		if (pos / codones.size() >= maxWraps) i = 0;	// nº de wraps = posicion / nº de codones
+		switch (i) {									// (nº de veces que ha dado la vuelta)
 		case 0:
 			crom = term(codones, padre);
 			break;
@@ -89,42 +93,36 @@ public class FitJardinGramatica implements Fitness<Integer> {
 	}
 	
 	private List<Gen<Accion>> salta(List<Integer> codones, GenNodo<Accion> padre) {
-		List<Gen<Accion>> crom = new ArrayList<>();
-		crom.add(new GenNodoJardin((GenNodoJardin) padre, Accion.SALTA));
-		crom.addAll(nodo(codones, padre));
-		crom.addAll(nodo(codones, padre));
-		return crom;
+		GenNodo<Accion> gen = new GenNodoJardin((GenNodoJardin) padre, Accion.SALTA);
+		gen.getHijos().add((GenNodo<Accion>) nodo(codones, padre).get(0));
+		return gen.getPreorder();
 	}
 	
 	private List<Gen<Accion>> suma(List<Integer> codones, GenNodo<Accion> padre) {
-		List<Gen<Accion>> crom = new ArrayList<>();
-		crom.add(new GenNodoJardin((GenNodoJardin) padre, Accion.SUMA));
-		crom.addAll(nodo(codones, padre));
-		crom.addAll(nodo(codones, padre));
-		return crom;
+		GenNodo<Accion> gen = new GenNodoJardin((GenNodoJardin) padre, Accion.SUMA);
+		gen.getHijos().add((GenNodo<Accion>) nodo(codones, padre).get(0));
+		gen.getHijos().add((GenNodo<Accion>) nodo(codones, padre).get(0));
+		return gen.getPreorder();
 	}
 	
 	private List<Gen<Accion>> progn(List<Integer> codones, GenNodo<Accion> padre) {
-		List<Gen<Accion>> crom = new ArrayList<>();
-		crom.add(new GenNodoJardin((GenNodoJardin) padre, Accion.PROGN));
-		crom.addAll(nodo(codones, padre));
-		crom.addAll(nodo(codones, padre));
-		return crom;
+		GenNodo<Accion> gen = new GenNodoJardin((GenNodoJardin) padre, Accion.PROGN);
+		gen.getHijos().add((GenNodo<Accion>) nodo(codones, padre).get(0));
+		gen.getHijos().add((GenNodo<Accion>) nodo(codones, padre).get(0));
+		return gen.getPreorder();
 	}
 	
 	private List<Gen<Accion>> if_dirty(List<Integer> codones, GenNodo<Accion> padre) {
-		List<Gen<Accion>> crom = new ArrayList<>();
-		crom.add(new GenNodoJardin((GenNodoJardin) padre, Accion.IF_DIRTY));
-		crom.addAll(nodo(codones, padre));
-		crom.addAll(nodo(codones, padre));
-		return crom;
+		GenNodo<Accion> gen = new GenNodoJardin((GenNodoJardin) padre, Accion.IF_DIRTY);
+		gen.getHijos().add((GenNodo<Accion>) nodo(codones, padre).get(0));
+		gen.getHijos().add((GenNodo<Accion>) nodo(codones, padre).get(0));
+		return gen.getPreorder();
 	}
 	
 	private List<Gen<Accion>> repeat(List<Integer> codones, GenNodo<Accion> padre) {
-		List<Gen<Accion>> crom = new ArrayList<>();
-		crom.add(new GenNodoJardin((GenNodoJardin) padre, Accion.REPEAT));
-		crom.addAll(nodo(codones, padre));
-		crom.addAll(nodo(codones, padre));
-		return crom;
+		GenNodo<Accion> gen = new GenNodoJardin((GenNodoJardin) padre, Accion.REPEAT);
+		gen.getHijos().add((GenNodo<Accion>) nodo(codones, padre).get(0));
+		gen.getHijos().add((GenNodo<Accion>) nodo(codones, padre).get(0));
+		return gen.getPreorder();
 	}
 }

@@ -14,15 +14,21 @@ import modelo.mutacion.MutacionHoist;
 import modelo.mutacion.MutacionPermutacion;
 import modelo.mutacion.MutacionSubarbol;
 import modelo.mutacion.MutacionTerminal;
+import modelo.mutacion.MutacionUniforme;
 
 public class FactoriaMutacion {
 	
 	private Map<CategoriaCrom, List<Mutacion<?>>> mutaciones;
 
 	public FactoriaMutacion() {
+		List<Mutacion<?>> genericas = new ArrayList<>();
+		genericas.add(new MutacionUniforme<>());
+		
 		List<Mutacion<?>> binarias = new ArrayList<>();
+		binarias.addAll(genericas);
 
 		List<Mutacion<?>> reales = new ArrayList<>();
+		reales.addAll(genericas);
 
 		List<Mutacion<?>> permutaciones = new ArrayList<>();
 
@@ -36,6 +42,7 @@ public class FactoriaMutacion {
 		arboles.add(new MutacionExpansion<>());
 		
 		mutaciones = new HashMap<>();
+		mutaciones.put(CategoriaCrom.GENERICA, genericas);
 		mutaciones.put(CategoriaCrom.BINARIO, binarias);
 		mutaciones.put(CategoriaCrom.REAL, reales);
 		mutaciones.put(CategoriaCrom.PERMUTACION, permutaciones);

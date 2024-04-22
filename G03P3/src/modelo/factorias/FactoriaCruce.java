@@ -7,7 +7,10 @@ import java.util.Map;
 
 import modelo.CategoriaCrom;
 import modelo.cruce.Cruce;
+import modelo.cruce.CruceMonopunto;
+import modelo.cruce.CruceMultipunto;
 import modelo.cruce.CruceSubArbol;
+import modelo.cruce.CruceUniforme;
 
 
 public class FactoriaCruce {
@@ -16,6 +19,9 @@ public class FactoriaCruce {
 	
 	public <T> FactoriaCruce() {
 		List<Cruce<?>> genericos = new ArrayList<>();
+		genericos.add(new CruceMonopunto<>());
+		genericos.add(new CruceUniforme<>());
+		genericos.add(new CruceMultipunto<>());
 		
 		List<Cruce<?>> binarios = new ArrayList<>();
 		

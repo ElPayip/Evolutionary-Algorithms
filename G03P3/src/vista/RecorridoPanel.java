@@ -20,10 +20,13 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import modelo.AlgGenetico;
 import modelo.Cortacesped;
 import modelo.Cortacesped.Casilla;
+import modelo.CortacespedGramatica;
 import modelo.fitness.Accion;
 import modelo.fitness.FitJardin;
+import modelo.fitness.FitJardinGramatica;
 import modelo.genes.GenNodoJardin;
 import modelo.genes.GenNodoJardin.Coord;
 import modelo.individuo.Individuo;
@@ -42,10 +45,19 @@ public class RecorridoPanel extends JPanel {
 	
 	private static JSpinner delay;
 
-	public RecorridoPanel(Cortacesped alg) {
-		jardin = alg.getJardin();
-		mejor = alg.getMejor();
-		maxPasos = alg.getMaxPasos();
+	public RecorridoPanel(AlgGenetico<?> alg) {
+		if (alg.getClass() == Cortacesped.class) {
+			jardin = ((Cortacesped) alg).getJardin();
+			mejor = ((Cortacesped) alg).getMejor();
+			maxPasos = ((Cortacesped) alg).getMaxPasos();
+		}
+		else if (alg.getClass() == CortacespedGramatica.class) {
+			jardin = ((CortacespedGramatica) alg).getJardin();
+			mejor = new FitJardinGramatica(null,0,0).fromCodones(((CortacespedGramatica) alg).getMejor().getValores());
+			maxPasos = ((CortacespedGramatica) alg).getMaxPasos();
+		}
+		else
+			throw new UnsupportedOperationException("Recorrido panel debe recibir una clase Cortacesped");
 		
 		initGUI();
 	}

@@ -1,0 +1,17 @@
+16 24
+C C C C C C C C C C C C C C C C C C C C C C C C
+C C C C C C C C C C C C C C C C C C C C C C C C
+C C C C C C C C C C C C C C C C C C C C C C C C
+C C C C C C C C C C C C C C C C C C C C C C C C
+C C C C C C C C C C C C C C C C C C C C C C C C
+C C C C C C C C C C C C C C C C C C C C C C C C
+C C C C C C C C C C C C C C C C C C C C C C C C
+C C C C C C C C C C C C C C C C C C C C C C C C
+C C C C C C C C C C C C C C C C C C C C C C C C
+C C C C C C C C C C C C C C C C C C C C C C C C
+C C C C C C C C C C C C C C C C C C C C C C C C
+C C C C C C C C C C C C C C C C C C C C C C C C
+C C C C C C C C C C C C C C C C C C C C C C C C
+C C C C C C C C C C C C C C C C C C C C C C C C
+C C C C C C C C C C C C C C C C C C C C C C C C
+C C C C C C C C C C C C C C C C C C C C C C C C

@@ -87,7 +87,7 @@ public class GraphPanel extends JPanel {
 		individuoPanel.removeAll();
 		individuoPanel.add(individuoLabel);
 		individuoPanel.add(Box.createVerticalStrut(5));
-		RecorridoPanel recorrido = new RecorridoPanel((Cortacesped) alg);
+		RecorridoPanel recorrido = new RecorridoPanel(alg);
 		individuoPanel.add(recorrido);
 		individuoPanel.add(Box.createVerticalStrut(20));
 		this.validate();

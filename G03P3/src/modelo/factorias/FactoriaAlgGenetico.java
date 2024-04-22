@@ -4,6 +4,7 @@ import java.util.List;
 
 import modelo.AlgGenetico;
 import modelo.Cortacesped;
+import modelo.CortacespedGramatica;
 import modelo.cruce.Cruce;
 import modelo.inicializaciones.Inicializacion;
 import modelo.mutacion.Mutacion;
@@ -26,7 +27,7 @@ public class FactoriaAlgGenetico {
 	private FactoriaMutacion mutaciones;
 	private FactoriaInicializacion<?> inicializaciones;
 	private AlgGenetico<?> alg;
-	private AlgGenetico<?>[] algPosibles = {new Cortacesped()};
+	private AlgGenetico<?>[] algPosibles = {new Cortacesped(), new CortacespedGramatica()};
 	
 	public FactoriaAlgGenetico() {
 		cruces = new FactoriaCruce();
@@ -87,8 +88,8 @@ public class FactoriaAlgGenetico {
 					"metodo de inicializacion", 
 					"metodo de inicializacion", 
 					"inicializacion",
-					inicializaciones.getInicializaciones() ));
-			for (Inicializacion<?> inicializacion : inicializaciones.getInicializaciones())
+					inicializaciones.getInicializaciones(ag.getCategoria()) ));
+			for (Inicializacion<?> inicializacion : inicializaciones.getInicializaciones(ag.getCategoria()))
 				innerConfig(config, inicializacion.configuracion("inicializacion"));
 			
 			config.addInner(new StrategyOption<FactoriaAlgGenetico>(

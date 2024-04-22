@@ -1,23 +1,33 @@
 package modelo;
 
+import java.util.Arrays;
 import java.util.List;
 
+import modelo.Cortacesped.Casilla;
 import modelo.bloating.ControlBloating;
+import modelo.cruce.CruceMonopunto;
 import modelo.fitness.FitJardinGramatica;
 import modelo.genes.Gen;
+import modelo.genes.GenEntero;
 import modelo.individuo.Individuo;
+import modelo.individuo.IndividuoEntero;
+import modelo.inicializaciones.IniRandom;
+import modelo.mutacion.MutacionUniforme;
 import modelo.seleccion.SelRanking;
+import vista.ConfigPanel.IntegerOption;
 import vista.ConfigPanel.Option;
 
 public class CortacespedGramatica extends AlgGenetico<Integer> {
 
 	private Cortacesped cortacesped;
+	private Integer tamCodon = 10, maxWraps = 2;
 	
 	public CortacespedGramatica() {
-		inicializacion = null;	//TODO
+		inicializacion = new IniRandom<Integer>();
 		seleccion = new SelRanking();
-		mutacion = null;		//TODO
-		cruce = null;			//TODO
+		mutacion = new MutacionUniforme<>();
+		cruce = new CruceMonopunto<>();
+		cortacesped = new Cortacesped();
 	}
 
 	public CortacespedGramatica(AlgGenetico<Integer> otro) {
@@ -28,14 +38,18 @@ public class CortacespedGramatica extends AlgGenetico<Integer> {
 	@Override
 	public Individuo<Integer> ejecutar() {
 		cortacesped.initJardin();
-		fitness = new FitJardinGramatica(cortacesped.getJardin(), cortacesped.maxPasos);
+		fitness = new FitJardinGramatica(cortacesped.getJardin(), cortacesped.maxPasos, maxWraps);
 		
 		return super.ejecutar();
 	}
 
 	@Override
 	public <T> List<Option<T>> getExtraOpts() {
-		return cortacesped.getExtraOpts();
+		List<Option<T>> extras = cortacesped.getExtraOpts();
+		extras.remove(0);	// Elimina la opción del control de bloating
+		extras.add(new IntegerOption<T>("tamaño de codones", "tamaño de codones", "tamCodon", 1, 100));
+		extras.add(new IntegerOption<T>("máx de wraps", "máx de wraps", "maxWraps", 1, 100));
+		return extras;
 	}
 
 	@Override
@@ -55,19 +69,19 @@ public class CortacespedGramatica extends AlgGenetico<Integer> {
 
 	@Override
 	public Individuo<Integer> getIndividuoDefault() {
-		// TODO Auto-generated method stub
-		return null;
+		GenEntero[] crom = new GenEntero[tamCodon];
+		Arrays.fill(crom, getGenDefault());
+		return new IndividuoEntero(Arrays.asList(crom));
 	}
 
 	@Override
 	public Gen<Integer> getGenDefault() {
-		// TODO Auto-generated method stub
-		return null;
+		return new GenEntero(0, 1000, 1);
 	}
 	
 	@Override
 	public String toString() {
-		return "Cortacésped con gramática";
+		return cortacesped.toString() + " (gramática)";
 	}
 
 	public String getFile() {
@@ -92,5 +106,25 @@ public class CortacespedGramatica extends AlgGenetico<Integer> {
 
 	public void setControlBloating(ControlBloating controlBloating) {
 		cortacesped.controlBloating = controlBloating;
+	}
+
+	public Integer getTamCodon() {
+		return tamCodon;
+	}
+
+	public void setTamCodon(Integer tamCodon) {
+		this.tamCodon = tamCodon;
+	}
+
+	public Integer getMaxWraps() {
+		return maxWraps;
+	}
+
+	public void setMaxWraps(Integer maxWraps) {
+		this.maxWraps = maxWraps;
+	}
+	
+	public List<List<Casilla>> getJardin() {
+		return cortacesped.getJardin();
 	}
 }
