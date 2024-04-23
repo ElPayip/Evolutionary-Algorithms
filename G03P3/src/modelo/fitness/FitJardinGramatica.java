@@ -28,7 +28,7 @@ public class FitJardinGramatica implements Fitness<Integer> {
 
 	@Override
 	public double eval(Individuo<Integer> ind) {
-		return fit.eval(fromCodones(ind.getValores()));
+		return fit.eval(fromCodones(ind.clone().getValores()));
 	}
 	
 	private List<Gen<Accion>> nodo(List<Integer> codones, GenNodo<Accion> padre) {

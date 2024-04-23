@@ -131,8 +131,8 @@ public class Cortacesped extends AlgGenetico<Accion> {
 				"metodo de control del bloating", 
 				"controlBloating",
 				new FactoriaBloating().getControlesBloating()));
-		extras.add(new TextOption<T>("archivo del jardin", "archivo del jardin", "file"));
 		extras.add(new IntegerOption<T>("máximo número de pasos", "máximo número de pasos", "maxPasos", 1, 1000));
+		extras.add(new TextOption<T>("archivo del jardin", "archivo del jardin", "file"));
 		return extras;
 	}
 	

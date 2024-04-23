@@ -68,7 +68,7 @@ public class GraphPanel extends JPanel {
 	}
 	
 	public void update(AlgGenetico<?> alg) {
-		Individuo<?> mejor = alg.getMejor();
+		Individuo<?> mejor = alg.getMejor().clone();
 		List<Double[]> metricas = alg.getMetricas();
 		plot.removeAllPlots();
 		for (int i = 0; i < metricas.get(0).length; ++i)
@@ -90,8 +90,8 @@ public class GraphPanel extends JPanel {
 		RecorridoPanel recorrido = new RecorridoPanel(alg);
 		individuoPanel.add(recorrido);
 		individuoPanel.add(Box.createVerticalStrut(20));
-		this.validate();
 		resultadoLabel.setText("Fitness: "+mejor.getFitness());
+		this.validate();
 		recorrido.reproducir();
 	}
 }

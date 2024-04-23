@@ -10,7 +10,7 @@ public class IndividuoEntero extends Individuo<Integer> {
 	public IndividuoEntero() {
 	}
 
-	public IndividuoEntero(Individuo<Integer> otro) {
+	public IndividuoEntero(IndividuoEntero otro) {
 		super(otro);
 	}
 

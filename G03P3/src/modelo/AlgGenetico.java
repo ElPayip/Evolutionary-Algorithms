@@ -100,7 +100,7 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	}
 	
 	protected void mutar() {
-		mutacion.update(fitness, mejor);
+		mutacion.update(fitness, mejor.clone());
 		for (Individuo<T> ind : poblacion)
 			if (rand.nextDouble() < probMutacion)
 				ind.muta(mutacion);
@@ -190,16 +190,16 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	public Double mediaFitness() {
 		double acum = 0;
 		for (Individuo<T> ind : poblacion)
-			acum += fitness.eval(ind);
+			acum += fitness.eval(ind.clone());
 		return acum / poblacion.size();
 	}
 	
 	public Double maxFitnessActual() {
-		return fitness.eval(poblacion.get(0));
+		return fitness.eval(poblacion.get(0).clone());
 	}
 	
 	public Double maxFitnessGlobal() {
-		return fitness.eval(mejor);
+		return fitness.eval(mejor.clone());
 	}
 	
 	private void guardar() {
@@ -244,7 +244,7 @@ public abstract class AlgGenetico<T> implements Cloneable, Configurable {
 	---------------------------------------------------- */
 	
 	public Individuo<T> getMejor() {
-		return mejor;
+		return mejor.clone();
 	}
 
 	public Cruce<T> getCruce() {

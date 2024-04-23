@@ -42,19 +42,23 @@ public class RecorridoPanel extends JPanel {
 	private FitJardinVista fit;
 	private Integer maxPasos;
 	private static boolean omitir = false;
+	private boolean gram = false;
 	
 	private static JSpinner delay;
 
 	public RecorridoPanel(AlgGenetico<?> alg) {
 		if (alg.getClass() == Cortacesped.class) {
 			jardin = ((Cortacesped) alg).getJardin();
-			mejor = ((Cortacesped) alg).getMejor();
+			mejor = ((Cortacesped) alg).getMejor().clone();
 			maxPasos = ((Cortacesped) alg).getMaxPasos();
 		}
 		else if (alg.getClass() == CortacespedGramatica.class) {
 			jardin = ((CortacespedGramatica) alg).getJardin();
-			mejor = new FitJardinGramatica(null,0,0).fromCodones(((CortacespedGramatica) alg).getMejor().getValores());
+			mejor = new FitJardinGramatica(((CortacespedGramatica) alg).getJardin(), 
+							((CortacespedGramatica) alg).getMaxPasos(),
+							((CortacespedGramatica) alg).getMaxWraps()).fromCodones(((CortacespedGramatica) alg).getMejor().clone().getValores());
 			maxPasos = ((CortacespedGramatica) alg).getMaxPasos();
+			gram = true;
 		}
 		else
 			throw new UnsupportedOperationException("Recorrido panel debe recibir una clase Cortacesped");
@@ -95,13 +99,19 @@ public class RecorridoPanel extends JPanel {
 		panelParams.add(boxOmitir);
 		panelParams.add(delay);
 		
-		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		this.add(Box.createHorizontalStrut(20));
-		this.add(tablero);
-		this.add(Box.createHorizontalStrut(20));
-		this.add(panelParams);
-		this.add(Box.createHorizontalGlue());
+		JPanel panelRecorrido = new JPanel();
+		panelRecorrido.setLayout(new BoxLayout(panelRecorrido, BoxLayout.X_AXIS));
+		panelRecorrido.add(Box.createHorizontalStrut(20));
+		panelRecorrido.add(tablero);
+		panelRecorrido.add(Box.createHorizontalStrut(20));
+		panelRecorrido.add(panelParams);
+		panelRecorrido.add(Box.createHorizontalGlue());
+		panelRecorrido.setOpaque(false);
+
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setOpaque(false);
+		if (gram) this.add(new JLabel(mejor.toString()));
+		this.add(panelRecorrido);
 	}
 	
 	public void reproducir() {

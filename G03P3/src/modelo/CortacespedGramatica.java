@@ -23,7 +23,7 @@ public class CortacespedGramatica extends AlgGenetico<Integer> {
 	private Integer tamCodon = 10, maxWraps = 2;
 	
 	public CortacespedGramatica() {
-		inicializacion = new IniRandom<Integer>();
+		inicializacion = new IniRandom<>();
 		seleccion = new SelRanking();
 		mutacion = new MutacionUniforme<>();
 		cruce = new CruceMonopunto<>();
