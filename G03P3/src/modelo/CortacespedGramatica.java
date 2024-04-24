@@ -89,7 +89,7 @@ public class CortacespedGramatica extends AlgGenetico<Integer> {
 	}
 
 	public void setFile(String file) {
-		cortacesped.file = file;
+		cortacesped.file = "resources/"+file+".txt";
 	}
 
 	public Integer getMaxPasos() {
@@ -126,5 +126,21 @@ public class CortacespedGramatica extends AlgGenetico<Integer> {
 	
 	public List<List<Casilla>> getJardin() {
 		return cortacesped.getJardin();
+	}
+
+	public Boolean getExtraInstr() {
+		return cortacesped.extraInstr;
+	}
+
+	public void setExtraInstr(Boolean extras) {
+		cortacesped.extraInstr = extras;
+	}
+
+	public Boolean getEnableBloating() {
+		return cortacesped.enableBloating;
+	}
+
+	public void setEnableBloating(Boolean enableBloating) {
+		cortacesped.enableBloating = enableBloating;
 	}
 }

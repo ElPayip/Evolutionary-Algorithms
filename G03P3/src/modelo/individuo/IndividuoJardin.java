@@ -15,6 +15,7 @@ public class IndividuoJardin extends Individuo<Accion> {
 
 	public IndividuoJardin(Individuo<Accion> otro) {
 		super(otro);
+		cromosoma = ((GenNodoJardin) cromosoma.get(0)).getPreorder();
 	}
 
 	public IndividuoJardin(List<Gen<Accion>> cromosoma) {

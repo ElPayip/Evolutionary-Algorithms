@@ -13,7 +13,7 @@ public class IniCompleta<T> implements Inicializacion<T> {
 	
 	private Individuo<T> ejemploInd;
 	private GenNodo<T> ejemploNodo;
-	private Integer prof = 5;
+	private Integer prof = 3;
 
 	public IniCompleta() {}
 	
@@ -28,7 +28,7 @@ public class IniCompleta<T> implements Inicializacion<T> {
 	public List<Individuo<T>> init(int n) {
 		List<Individuo<T>> poblacion = new ArrayList<>();
 		for (int i = 0; i < n; ++i)
-			poblacion.add(ejemploInd.createInstance(generar(ejemploNodo.createInstance(null, false), prof)));
+			poblacion.add(ejemploInd.createInstance(generar(ejemploNodo.createInstance(null, false), prof-1)));
 		return poblacion;
 	}
 	
@@ -36,17 +36,15 @@ public class IniCompleta<T> implements Inicializacion<T> {
 		if (profRestante == 0)
 			return new ArrayList<>();
 		
-		List<Gen<T>> inorden = new ArrayList<>();
 		List<GenNodo<T>> hijos = new ArrayList<>();
-		inorden.add(padre);
 		for (int i = 0; i < padre.getAridad(); ++i) {
 			GenNodo<T> hijo = profRestante > 1 ? padre.createInstance(padre, false) 
 											   : padre.createInstance(padre, true);
 			hijos.add(hijo);
-			inorden.addAll(generar(hijo, profRestante-1));
+			generar(hijo, profRestante-1);
 		}
 		padre.setHijos(hijos);
-		return inorden;
+		return padre.getPreorder();
 	}
 
 	@Override

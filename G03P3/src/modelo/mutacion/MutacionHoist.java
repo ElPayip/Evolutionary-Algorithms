@@ -14,6 +14,7 @@ public class MutacionHoist<T> implements Mutacion<T> {
 		int pos = new Random().nextInt(crom.size());
 		GenNodo<T> nodo = (GenNodo<T>) crom.get(pos);
 		
+		nodo.setPadre(null);
 		crom.removeAll(crom);
 		crom.addAll(nodo.getPreorder());
 	}

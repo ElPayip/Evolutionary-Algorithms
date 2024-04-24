@@ -20,10 +20,10 @@ import modelo.inicializaciones.IniCompleta;
 import modelo.mutacion.MutacionTerminal;
 import modelo.seleccion.SelRanking;
 import vista.ConfigPanel.BooleanOption;
+import vista.ConfigPanel.ChoiceOption;
 import vista.ConfigPanel.IntegerOption;
 import vista.ConfigPanel.Option;
 import vista.ConfigPanel.StrategyOption;
-import vista.ConfigPanel.TextOption;
 
 public class Cortacesped extends AlgGenetico<Accion> {
 
@@ -51,12 +51,14 @@ public class Cortacesped extends AlgGenetico<Accion> {
 		}
 	}
 	
+	private static final String[] FILES = { "default", "rocas", "flores" };
+	
 	private Integer ancho = 8, alto = 8;
 	Integer maxPasos = 100;
 	private List<List<Casilla>> jardin;
 	ControlBloating controlBloating;
 	String file = "resources/default.txt";
-	private Boolean extraInstr = false;
+	Boolean extraInstr = false, enableBloating = true;
 	
 	public Cortacesped() {
 		inicializacion = new IniCompleta<>();
@@ -108,7 +110,8 @@ public class Cortacesped extends AlgGenetico<Accion> {
 	
 	@Override
 	protected void filtros() {
-		controlBloating.controlar(poblacion);
+		if (enableBloating)
+			controlBloating.controlar(poblacion);
 	}
 
 	@Override
@@ -135,8 +138,9 @@ public class Cortacesped extends AlgGenetico<Accion> {
 				"controlBloating",
 				new FactoriaBloating().getControlesBloating()));
 		extras.add(new IntegerOption<T>("máximo número de pasos", "máximo número de pasos", "maxPasos", 1, 1000));
-		extras.add(new TextOption<T>("archivo del jardin", "archivo del jardin", "file"));
+		extras.add(new ChoiceOption<T>("archivo del jardin", "archivo del jardin", "file", FILES));
 		extras.add(new BooleanOption<T>("Habilitar instrucciones extra", "Habilitar instrucciones extra", "extraInstr"));
+		extras.add(new BooleanOption<T>("Habilitar control del bloating", "Habilitar control del bloating", "enableBloating"));
 		return extras;
 	}
 	
@@ -175,7 +179,7 @@ public class Cortacesped extends AlgGenetico<Accion> {
 	}
 
 	public void setFile(String file) {
-		this.file = file;
+		this.file = "resources/"+file+".txt";
 	}
 
 	public Integer getMaxPasos() {
@@ -192,5 +196,13 @@ public class Cortacesped extends AlgGenetico<Accion> {
 
 	public void setExtraInstr(Boolean extras) {
 		this.extraInstr = extras;
+	}
+
+	public Boolean getEnableBloating() {
+		return enableBloating;
+	}
+
+	public void setEnableBloating(Boolean enableBloating) {
+		this.enableBloating = enableBloating;
 	}
 }

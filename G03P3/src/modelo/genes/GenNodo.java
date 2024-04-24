@@ -17,6 +17,7 @@ public abstract class GenNodo<T> extends Gen<T> {
 	}
 	
 	public GenNodo(GenNodo<T> padre) {
+		this.padre = padre;
 		setRandomVal();
 	}
 
@@ -51,8 +52,11 @@ public abstract class GenNodo<T> extends Gen<T> {
 		nuevo.valor = valor;
 		nuevo.terminal = terminal;
 		nuevo.hijos = new ArrayList<>();
-		for (GenNodo<T> g : hijos)
-			nuevo.hijos.add((GenNodo<T>) g.clone());
+		for (GenNodo<T> g : hijos) {
+			GenNodo<T> h = (GenNodo<T>) g.clone();
+			nuevo.hijos.add(h);
+			h.setPadre(nuevo);
+		}
 		return nuevo;
 	}
 	
