@@ -14,8 +14,13 @@ public class MutacionSubarbol<T> implements Mutacion<T> {
 	public void mutar(List<Gen<T>> crom) {
 		int pos = new Random().nextInt(crom.size());
 		GenNodo<T> nodo = (GenNodo<T>) crom.get(pos);
-		List<Gen<T>> arbol = new IniCreciente<T>().generar(nodo.createInstance(nodo.getPadre(), false), crom.size());
+		List<Gen<T>> arbol = new IniCreciente<T>().generar(nodo.createInstance(nodo.getPadre(), false), crom.size()/2+1);
 
+		if (nodo.getPadre() != null)
+			nodo.getPadre().getHijos().set(nodo.getPadre().getHijos().indexOf(nodo), (GenNodo<T>) arbol.get(0));
+		
+		if (arbol.size() == 0)
+			System.out.println();
 		crom.removeAll(nodo.getPreorder());
 		crom.addAll(pos, arbol);
 	}

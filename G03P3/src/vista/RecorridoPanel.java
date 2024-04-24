@@ -94,9 +94,10 @@ public class RecorridoPanel extends JPanel {
 		}
 		JPanel panelParams = new JPanel();
 		panelParams.setLayout(new BoxLayout(panelParams, BoxLayout.Y_AXIS));
-		panelParams.setMaximumSize(new Dimension(50,50));
+		panelParams.setMaximumSize(new Dimension(50,70));
 		panelParams.setOpaque(false);
 		panelParams.add(boxOmitir);
+		panelParams.add(new JLabel("Delay:"));
 		panelParams.add(delay);
 		
 		JPanel panelRecorrido = new JPanel();

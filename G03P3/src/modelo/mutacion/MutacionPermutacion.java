@@ -24,6 +24,9 @@ public class MutacionPermutacion<T> implements Mutacion<T> {
 		
 		List<GenNodo<T>> hijos = funcion.getHijos();
 		Collections.shuffle(hijos);
+		GenNodo<T> raiz = (GenNodo<T>) crom.get(0);
+		crom.clear();
+		crom.addAll(raiz.getPreorder());
 	}
 	
 	@Override

@@ -51,7 +51,7 @@ public class Cortacesped extends AlgGenetico<Accion> {
 		}
 	}
 	
-	private static final String[] FILES = { "default", "rocas", "flores" };
+	private static final String[] FILES = { "default", "rocas", "flores", "default16x24" };
 	
 	private Integer ancho = 8, alto = 8;
 	Integer maxPasos = 100;

@@ -13,7 +13,7 @@ public class BloatingTarpeian implements ControlBloating {
 		double media = 0;
 		for (Individuo<T> i : poblacion)
 			media += i.getValores().size();
-		media /= 2;
+		media /= poblacion.size();
 		
 		Random rand = new Random();
 		for (Individuo<T> i : poblacion)
