@@ -14,11 +14,14 @@ public class FitJardinGramatica implements Fitness<Integer> {
 	
 	private static int pos;
 	private FitJardin fit;
-	private int maxWraps;
+	private int maxWraps, nFilas, nCols;
+	private boolean extras = false;
 
 	public FitJardinGramatica(List<List<Casilla>> jardin, int maxPasos, int maxWraps) {
 		fit = new FitJardin(jardin, maxPasos);
 		this.maxWraps = maxWraps;
+		nFilas = jardin.size();
+		nCols = jardin.get(0).size();
 	}
 
 	public Individuo<Accion> fromCodones(List<Integer> codones) {
@@ -49,7 +52,7 @@ public class FitJardinGramatica implements Fitness<Integer> {
 	
 	private List<Gen<Accion>> term(List<Integer> codones, GenNodo<Accion> padre) {
 		List<Gen<Accion>> crom = new ArrayList<>();
-		int i = codones.get(pos % codones.size()) % 4;
+		int i = codones.get(pos % codones.size()) % (extras ? 4 : 3);
 		pos++;
 		switch (i) {
 		case 0:
@@ -59,7 +62,9 @@ public class FitJardinGramatica implements Fitness<Integer> {
 			crom.add(new GenNodoJardin((GenNodoJardin) padre, Accion.IZQUIERDA));
 			break;
 		case 2:
-			crom.add(new GenNodoJardin((GenNodoJardin) padre, Accion.CONST));
+			int fila = codones.get(pos % codones.size()) % nFilas; pos++;
+			int col = codones.get(pos % codones.size()) % nCols; pos++;
+			crom.add(new GenNodoJardin((GenNodoJardin) padre, fila, col));
 			break;
 		case 3:
 			crom.add(new GenNodoJardin((GenNodoJardin) padre, Accion.DERECHA));
@@ -70,7 +75,7 @@ public class FitJardinGramatica implements Fitness<Integer> {
 	
 	private List<Gen<Accion>> noTerm(List<Integer> codones, GenNodo<Accion> padre) {
 		List<Gen<Accion>> crom = null;
-		int i = codones.get(pos % codones.size()) % 5;
+		int i = codones.get(pos % codones.size()) % (extras ? 5 : 3);
 		pos++;
 		switch (i) {
 		case 0:

@@ -40,6 +40,12 @@ public class GenNodoJardin extends GenNodo<Accion> {
 		coord = new Coord(new Random().nextInt(nFilas), new Random().nextInt(nCols));
 		valor = accion;
 	}
+	
+	public GenNodoJardin(GenNodoJardin padre, int fila, int col) {
+		super(padre);
+		coord = new Coord(fila % nFilas, col % nCols);
+		valor = Accion.CONST;
+	}
 
 	@Override
 	public int getAridad() {
@@ -64,7 +70,7 @@ public class GenNodoJardin extends GenNodo<Accion> {
 	@Override
 	Accion[] noTerminales() {
 		List<Accion> noterms = new ArrayList<>();
-		for (Accion a : Accion.values())
+		for (Accion a : Accion.noTerminales())
 			if (valor == null || a.getAridad() == valor.getAridad())
 				noterms.add(a);
 		return noterms.toArray(new Accion[0]);

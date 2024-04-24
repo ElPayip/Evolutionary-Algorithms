@@ -16,9 +16,10 @@ import modelo.genes.Gen;
 import modelo.genes.GenNodoJardin;
 import modelo.individuo.Individuo;
 import modelo.individuo.IndividuoJardin;
-import modelo.inicializaciones.IniCreciente;
+import modelo.inicializaciones.IniCompleta;
 import modelo.mutacion.MutacionTerminal;
 import modelo.seleccion.SelRanking;
+import vista.ConfigPanel.BooleanOption;
 import vista.ConfigPanel.IntegerOption;
 import vista.ConfigPanel.Option;
 import vista.ConfigPanel.StrategyOption;
@@ -54,10 +55,11 @@ public class Cortacesped extends AlgGenetico<Accion> {
 	Integer maxPasos = 100;
 	private List<List<Casilla>> jardin;
 	ControlBloating controlBloating;
-	String file = "resources/rocas.txt";
+	String file = "resources/default.txt";
+	private Boolean extraInstr = false;
 	
 	public Cortacesped() {
-		inicializacion = new IniCreciente<>();
+		inicializacion = new IniCompleta<>();
 		seleccion = new SelRanking();
 		mutacion = new MutacionTerminal<>();
 		cruce = new CruceSubArbol<>();
@@ -98,6 +100,7 @@ public class Cortacesped extends AlgGenetico<Accion> {
 	@Override
 	public Individuo<Accion> ejecutar() {
 		initJardin();
+		Accion.enableExtras(extraInstr);
 		fitness = new FitJardin(getJardin(), maxPasos);
 		
 		return super.ejecutar();
@@ -133,6 +136,7 @@ public class Cortacesped extends AlgGenetico<Accion> {
 				new FactoriaBloating().getControlesBloating()));
 		extras.add(new IntegerOption<T>("máximo número de pasos", "máximo número de pasos", "maxPasos", 1, 1000));
 		extras.add(new TextOption<T>("archivo del jardin", "archivo del jardin", "file"));
+		extras.add(new BooleanOption<T>("Habilitar instrucciones extra", "Habilitar instrucciones extra", "extraInstr"));
 		return extras;
 	}
 	
@@ -180,5 +184,13 @@ public class Cortacesped extends AlgGenetico<Accion> {
 
 	public void setMaxPasos(Integer maxPasos) {
 		this.maxPasos = maxPasos;
+	}
+
+	public Boolean getExtraInstr() {
+		return extraInstr;
+	}
+
+	public void setExtraInstr(Boolean extras) {
+		this.extraInstr = extras;
 	}
 }
