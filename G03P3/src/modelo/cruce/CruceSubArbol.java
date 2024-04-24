@@ -17,11 +17,8 @@ public class CruceSubArbol<T> implements Cruce<T> {
 		List<Gen<T>> hijo1 = new ArrayList<>(((GenNodo<T>) crom1.get(0).clone()).getPreorder());
 		List<Gen<T>> hijo2 = new ArrayList<>(((GenNodo<T>) crom2.get(0).clone()).getPreorder());
 		
-		if (hijo1.size() <= 1 || hijo2.size() <= 1)
-			return new Pair<>(hijo1, hijo2);
-		
 		Random rand = new Random();
-		int pos1 = rand.nextInt(1, hijo1.size()), pos2 = rand.nextInt(1, hijo2.size());
+		int pos1 = rand.nextInt(hijo1.size()), pos2 = rand.nextInt(hijo2.size());
 		
 		GenNodo<T> inter1 = (GenNodo<T>) hijo1.get(pos1), inter2 = (GenNodo<T>) hijo2.get(pos2), aux;
 		
