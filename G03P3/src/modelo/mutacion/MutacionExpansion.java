@@ -23,7 +23,9 @@ public class MutacionExpansion<T> implements Mutacion<T> {
 		List<Gen<T>> nuevo = new IniCreciente<T>().generar(old.createInstance(old.getPadre(), false), crom.size());
 		int pos = crom.indexOf(old);
 		
-		old.getPadre().getHijos().set(old.getPadre().getHijos().indexOf(old), (GenNodo<T>) nuevo.get(0).clone());
+		if(old.getPadre() != null)
+			old.getPadre().getHijos().set(old.getPadre().getHijos().indexOf(old), (GenNodo<T>) nuevo.get(0).clone());
+		
 		crom.remove(old);
 		crom.addAll(pos, nuevo);
 	}
