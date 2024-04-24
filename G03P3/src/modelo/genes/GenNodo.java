@@ -57,12 +57,12 @@ public abstract class GenNodo<T> extends Gen<T> {
 	}
 	
 	public List<Gen<T>> getPreorder() {
-		List<Gen<T>> inorden = new ArrayList<>();
-		inorden.add(this);
+		List<Gen<T>> preorder = new ArrayList<>();
+		preorder.add(this);
 		
 		for (GenNodo<T> g : hijos)
-			inorden.addAll(g.getPreorder());
-		return inorden;
+			preorder.addAll(g.getPreorder());
+		return preorder;
 	}
 	
 	public void setHijos(List<GenNodo<T>> hijos) {
