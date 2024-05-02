@@ -132,6 +132,7 @@ public class Cortacesped extends AlgGenetico<Accion> {
 	@Override
 	public <T> List<Option<T>> getExtraOpts() {
 		List<Option<T>> extras = new ArrayList<>();
+		extras.add(new BooleanOption<T>("Habilitar control del bloating", "Habilitar control del bloating", "enableBloating"));
 		extras.add(new StrategyOption<T>(
 				"metodo de control del bloating", 
 				"metodo de control del bloating", 
@@ -140,7 +141,6 @@ public class Cortacesped extends AlgGenetico<Accion> {
 		extras.add(new IntegerOption<T>("máximo número de pasos", "máximo número de pasos", "maxPasos", 1, 1000));
 		extras.add(new ChoiceOption<T>("archivo del jardin", "archivo del jardin", "file", FILES));
 		extras.add(new BooleanOption<T>("Habilitar instrucciones extra", "Habilitar instrucciones extra", "extraInstr"));
-		extras.add(new BooleanOption<T>("Habilitar control del bloating", "Habilitar control del bloating", "enableBloating"));
 		return extras;
 	}
 	

@@ -20,7 +20,7 @@ import vista.ConfigPanel.Option;
 public class CortacespedGramatica extends AlgGenetico<Integer> {
 
 	private Cortacesped cortacesped;
-	private Integer tamCodon = 10, maxWraps = 2;
+	private Integer tamCodon = 15, maxWraps = 2;
 	
 	public CortacespedGramatica() {
 		inicializacion = new IniRandom<>();
@@ -46,7 +46,8 @@ public class CortacespedGramatica extends AlgGenetico<Integer> {
 	@Override
 	public <T> List<Option<T>> getExtraOpts() {
 		List<Option<T>> extras = cortacesped.getExtraOpts();
-		extras.remove(0);	// Elimina la opción del control de bloating
+		extras.remove(0);	// Elimina las opciónes del control de bloating
+		extras.remove(0);
 		extras.add(new IntegerOption<T>("tamaño de codones", "tamaño de codones", "tamCodon", 1, 100));
 		extras.add(new IntegerOption<T>("máx de wraps", "máx de wraps", "maxWraps", 1, 100));
 		return extras;
